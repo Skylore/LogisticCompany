@@ -29,15 +29,15 @@ public class Department {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
