@@ -4,12 +4,13 @@ import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import model.Department;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Departments {
 
-    private static Queue<Department> queue = new LinkedList<>();
+    private static Deque<Department> queue = new LinkedList<>();
 
     static {
 
@@ -37,7 +38,7 @@ public class Departments {
         queue.add(department4);
     }
 
-    public static Queue<Department> getQueue() {
+    public static Deque<Department> getQueue() {
         return queue;
     }
 }

@@ -7,7 +7,6 @@ import database.DataBase;
 import model.Product;
 import model.Request;
 
-
 public class ClientController implements IClientController{
 
     private static final int PRICE_BY_KILOMETER = 20;
@@ -21,11 +20,11 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public int sendProductRequest(Product product, Location from, Location to) {
+    public int sendProductRequest(Product product,String email, Location from, Location to) {
 
         double allDistance = googleMapsAPI.getDistance(from, to) / 1000;
 
-        dataBase.addRequest(new Request(id, product,
+        dataBase.addRequest(new Request(id, email, product,
                 ((int) (allDistance * PRICE_BY_KILOMETER)), from, to));
 
         return id++;

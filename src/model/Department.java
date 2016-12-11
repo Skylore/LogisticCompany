@@ -17,6 +17,10 @@ public class Department {
         this.next = next;
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     public Department getNext() {
         return next;
     }

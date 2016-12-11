@@ -5,15 +5,14 @@ import model.Request;
 
 import com.sun.istack.internal.NotNull;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class DataBase {
 
-    private List<Request> requests = new ArrayList<>();
+    private Queue<Request> requests = new LinkedList<>();
     private List<Department> departments = new LinkedList<>();
-
 
     public void addRequest(@NotNull Request request) {
         requests.add(request);
@@ -23,7 +22,7 @@ public class DataBase {
         departments.add(department);
     }
 
-    public List<Request> getRequests() {
+    public Queue<Request> getRequests() {
         return requests;
     }
 
