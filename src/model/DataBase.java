@@ -9,8 +9,13 @@ import java.util.List;
 public class DataBase {
 
     private List<Request> requests = new ArrayList<>();
+    private List<Department> departments = new ArrayList<>();
 
     public List<Request> getRequests() {
         return requests;
+    }
+
+    public List<Department> getDepartments() {
+        return departments;
     }
 }
