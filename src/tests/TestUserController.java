@@ -1,9 +1,5 @@
 package tests;
 
-import model.DataBase;
-
-import java.util.ArrayList;
-
 public class TestUserController {
 
     public static void main(String[] args) {

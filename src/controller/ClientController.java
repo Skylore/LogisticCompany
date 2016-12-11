@@ -3,7 +3,7 @@ package controller;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
-import model.DataBase;
+import database.DataBase;
 import model.Product;
 import model.Request;
 

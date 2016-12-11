@@ -1,4 +1,7 @@
-package model;
+package database;
+
+import model.Department;
+import model.Request;
 
 import com.sun.istack.internal.NotNull;
 
