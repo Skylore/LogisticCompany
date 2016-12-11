@@ -1,36 +1,40 @@
 package tests;
 
+import controller.ClientController;
+import geolocation.controller.GoogleMapsAPI;
+import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
+import database.DataBase;
+import model.Product;
+import model.Request;
+
 public class TestUserController {
 
     public static void main(String[] args) {
 
-       // System.out.println("testSendProductRequest() --> " + testSendProductRequest());
+        System.out.println("testSendProductRequest() --> " + testSendProductRequest());
     }
 
-    /*private static boolean testSendProductRequest() {
+    private static boolean testSendProductRequest() {
 
+        GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
         DataBase db = new DataBase();
-        UserController controller = new UserController(db);
+        ClientController controller = new ClientController(db);
 
-        for (int i = 0; i < 10; i++) {
-            controller.sendProductRequest(new Product());
-        }
+        Location location1 = googleMapsAPI.findLocation("Україна", "Київ", "Ревуцького", "7");
+        Location location2 = googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9");
 
-        for (int i = 0; i < 10; i++) {
-            if (!db.getProductRequests.get(i).equals(new Product())) {
-                return false;
-            }
-        }
+        controller.sendProductRequest(new Product("SomeProduct", 10, 10), location1, location2);
 
-        controller.sendProductRequest(null);
+        boolean res = db.getRequests().get(0).equals(new Request(0, new Product("SomeProduct", 10, 10),
+                ((int) ((googleMapsAPI.getDistance(location1, location2) / 1000) * 20)), location1, location2));
 
-        ArrayList products = db.getProductRequests();
-        return products.get(products.size() - 1) != null;
+        return res;
     }
 
 
 
-    private static boolean whereIsMyProduct() {
+/*    private static boolean whereIsMyProduct() {
 
         DataBase db = new DataBase();
         UserController controller = new UserController(db);
