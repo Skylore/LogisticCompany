@@ -1,5 +1,7 @@
 package controller;
 
+import geolocation.controller.GoogleMapsAPI;
+import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import model.DataBase;
 import model.Product;
@@ -8,6 +10,9 @@ import model.Request;
 
 public class ClientController implements IClientController{
 
+    public static final int PRICE_BY_KILOMETER = 20;
+
+    private GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
     private DataBase dataBase;
     private static int id = 0;
 
@@ -18,7 +23,11 @@ public class ClientController implements IClientController{
     @Override
     public int sendProductRequest(Product product, Location from, Location to) {
 
-        dataBase.getRequests().add(new Request(product, from, to, id));
+        double allDistance = googleMapsAPI.getDistance(from, to) / 1000;
+
+        dataBase.getRequests().add(new Request(id, product,
+                ((int) (allDistance * PRICE_BY_KILOMETER)), from, to));
+
         return id++;
     }
 
