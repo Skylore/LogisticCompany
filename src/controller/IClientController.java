@@ -1,5 +1,6 @@
 package controller;
 
+import geolocation.controller.Location;
 import model.Product;
 
 /**
@@ -7,7 +8,7 @@ import model.Product;
  */
 public interface IClientController {
 
-    int sendProductRequest(Product product, String from, String to, int id);
+    int sendProductRequest(Product product, Location from, Location to);
     String whereIsMyProduct(int id);
 
 }

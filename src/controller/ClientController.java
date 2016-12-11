@@ -1,5 +1,6 @@
 package controller;
 
+import geolocation.controller.Location;
 import model.DataBase;
 import model.Product;
 import model.Request;
@@ -8,18 +9,17 @@ import model.Request;
 public class ClientController implements IClientController{
 
     private DataBase dataBase;
-    private static int id;
+    private static int id = 0;
 
     public ClientController(DataBase dataBase) {
         this.dataBase = dataBase;
     }
 
     @Override
-    public int sendProductRequest(Product product, String from, String to, int id) {
+    public int sendProductRequest(Product product, Location from, Location to) {
 
         dataBase.getRequests().add(new Request(product, from, to, id));
-
-        return 0;
+        return id++;
     }
 
     @Override
