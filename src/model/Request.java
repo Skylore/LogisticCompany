@@ -5,15 +5,15 @@ package model;
  */
 public class Request {
 
-    private static int id = 0;
+    private int id;
     private Product product;
     private String from;
     private String to;
 
-    public Request(Product product, String from, String to) {
+    public Request(Product product, String from, String to, int id) {
         this.product = product;
         this.from = from;
         this.to = to;
-        id++;
+        this.id = id;
     }
 }

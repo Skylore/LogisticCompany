@@ -7,7 +7,7 @@ import model.Product;
  */
 public interface IClientController {
 
-    int sendProductRequest(Product product, String from, String to);
+    int sendProductRequest(Product product, String from, String to, int id);
     String whereIsMyProduct(int id);
 
 }

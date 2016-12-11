@@ -1,25 +1,25 @@
 package controller;
 
+import model.DataBase;
 import model.Product;
 import model.Request;
 
-/**
- * Created by Влад on 11.12.2016.
- */
+
 public class ClientController implements IClientController{
 
     private DataBase dataBase;
+    private static int id;
 
     public ClientController(DataBase dataBase) {
         this.dataBase = dataBase;
     }
 
     @Override
-    public int sendProductRequest(Product product, String from, String to) {
+    public int sendProductRequest(Product product, String from, String to, int id) {
 
-        dataBase.requests.add(new Request(product, from, to))
+        dataBase.getRequests().add(new Request(product, from, to, id));
 
-        return ;
+        return 0;
     }
 
     @Override

@@ -1,15 +1,17 @@
 package tests;
 
+import model.DataBase;
+
 import java.util.ArrayList;
 
 public class TestUserController {
 
     public static void main(String[] args) {
 
-        System.out.println("testSendProductRequest() --> " + testSendProductRequest());
+       // System.out.println("testSendProductRequest() --> " + testSendProductRequest());
     }
 
-    private static boolean testSendProductRequest() {
+    /*private static boolean testSendProductRequest() {
 
         DataBase db = new DataBase();
         UserController controller = new UserController(db);
@@ -40,5 +42,5 @@ public class TestUserController {
         controller.whereIsMyProduct();
 
         return false;
-    }
+    }*/
 }
