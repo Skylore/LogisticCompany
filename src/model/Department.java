@@ -2,14 +2,14 @@ package model;
 
 import geolocation.controller.Location;
 
-/**
- * Created by Влад on 11.12.2016.
- */
+import java.util.List;
+
 public class Department {
 
     private int id;
     private Location location;
     private Department next;
+    private List<Product> products;
 
     public Department(int id, Location location, Department next) {
         this.id = id;
