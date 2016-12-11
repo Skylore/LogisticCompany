@@ -25,7 +25,7 @@ public class ClientController implements IClientController{
 
         double allDistance = googleMapsAPI.getDistance(from, to) / 1000;
 
-        dataBase.getRequests().add(new Request(id, product,
+        dataBase.addRequest(new Request(id, product,
                 ((int) (allDistance * PRICE_BY_KILOMETER)), from, to));
 
         return id++;

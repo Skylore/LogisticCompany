@@ -1,15 +1,22 @@
 package model;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Влад on 11.12.2016.
- */
 public class DataBase {
 
     private List<Request> requests = new ArrayList<>();
     private List<Department> departments = new ArrayList<>();
+
+    public void addRequest(@NotNull Request request) {
+        requests.add(request);
+    }
+
+    public void addDepartment(@NotNull Department department) {
+        departments.add(department);
+    }
 
     public List<Request> getRequests() {
         return requests;
