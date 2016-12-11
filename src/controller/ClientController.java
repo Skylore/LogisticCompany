@@ -10,7 +10,7 @@ import model.Request;
 
 public class ClientController implements IClientController{
 
-    public static final int PRICE_BY_KILOMETER = 20;
+    private static final int PRICE_BY_KILOMETER = 20;
 
     private GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
     private DataBase dataBase;
@@ -33,6 +33,8 @@ public class ClientController implements IClientController{
 
     @Override
     public String whereIsMyProduct(int id) {
+
+
         return null;
     }
 }

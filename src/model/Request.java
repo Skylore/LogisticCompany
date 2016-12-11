@@ -12,6 +12,7 @@ public class Request {
     private int price;
     private Location from;
     private Location to;
+    private Department department;
 
     public Request(int id, Product product, int price, Location from, Location to) {
         this.id = id;
