@@ -51,4 +51,12 @@ public class Product {
         return name != null ? name.equals(product.name) : product.name == null;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                ", size=" + size +
+                '}';
+    }
 }

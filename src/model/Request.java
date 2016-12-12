@@ -2,24 +2,51 @@ package model;
 
 import geolocation.controller.Location;
 
-/**
- * Created by Влад on 11.12.2016.
- */
 public class Request {
 
     private int id;
+    private String email;
     private Product product;
     private int price;
     private Location from;
     private Location to;
     private Department department;
 
-    public Request(int id, Product product, int price, Location from, Location to) {
+    public Request(int id, String email, Product product, int price, Location from, Location to) {
         this.id = id;
+        this.email = email;
         this.product = product;
         this.price = price;
         this.from = from;
         this.to = to;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Location getFrom() {
+        return from;
+    }
+
+    public Location getTo() {
+        return to;
+    }
+
+    public Department getDepartment() {
+        return department;
     }
 
     @Override
