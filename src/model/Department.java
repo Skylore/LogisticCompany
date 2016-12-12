@@ -2,14 +2,11 @@ package model;
 
 import geolocation.controller.Location;
 
-import java.util.List;
-
 public class Department {
 
     private int id;
     private Location location;
     private Department next;
-    private List<Product> products;
 
     public Department(int id, Location location, Department next) {
         this.id = id;
@@ -31,13 +28,5 @@ public class Department {
 
     public Location getLocation() {
         return location;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 }
