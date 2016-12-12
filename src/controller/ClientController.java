@@ -7,6 +7,8 @@ import database.DataBase;
 import model.Product;
 import model.Request;
 
+import java.awt.*;
+
 public class ClientController implements IClientController{
 
     private static final int PRICE_BY_KILOMETER = 20;
@@ -33,7 +35,18 @@ public class ClientController implements IClientController{
     @Override
     public String whereIsMyProduct(int id) {
 
+        for (Request o : dataBase.getRequests()) {
+            if (o.getId() == id) {
+                return "Your product is awaiting";
+            }
+        }
 
-        return null;
+        for (Request o : dataBase.getDelivered()) {
+            if (o.getId() == id) {
+                return "Your product delivered";
+            }
+        }
+
+        return "Your product is delivering";
     }
 }
