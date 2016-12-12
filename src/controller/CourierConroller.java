@@ -27,12 +27,13 @@ public class CourierConroller {
                 Thread.sleep(timeForDeliver * 1000);
                 dataBase.deliver(last);
                 System.err.println("delivered");
+
+                SendMailSSL.sendLetter(last.getEmail(), "Delivery service", "product:\n" +
+                        last.getProduct().toString() + "\ndelivered by address:\n" + last.getTo());
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
-
-        SendMailSSL.sendLetter(last.getEmail(), "Delivery service", "product:\n" +
-                last.getProduct().toString() + "\ndelivered by address:\n" + last.getTo());
     }
 }
