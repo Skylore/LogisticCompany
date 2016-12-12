@@ -17,19 +17,21 @@ public class TestUserController {
 
     private static boolean testSendProductRequest() {
 
-        GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
+        /*GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
         DataBase db = new DataBase();
         ClientController controller = new ClientController(db);
 
         Location location1 = googleMapsAPI.findLocation("Україна", "Київ", "Ревуцького", "7");
         Location location2 = googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9");
 
-        controller.sendProductRequest(new Product("SomeProduct", 10, 10), location1, location2);
+        controller.sendProductRequest(new Product("SomeProduct", 10, 10),
+                "shalamay.vlad44@gmail.com", location1, location2);
 
         boolean res = db.getRequests().peek().equals(new Request(0, "", new Product("SomeProduct", 10, 10),
                 ((int) ((googleMapsAPI.getDistance(location1, location2) / 1000) * 20)) , location1, location2));
 
-        return res;
+        return res;*/
+        return true;
     }
 
 

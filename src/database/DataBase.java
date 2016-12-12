@@ -16,6 +16,18 @@ public class DataBase {
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
 
+    public static List<Department> getDepartments() {
+        return departments;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public List<Request> getDelivered() {
+        return delivered;
+    }
+
     public void addRequest(@NotNull Request request) {
         requests.add(request);
     }

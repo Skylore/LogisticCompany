@@ -9,7 +9,7 @@ public class CourierConroller {
 
     DataBase dataBase = new DataBase();
 
-    public void deliver() {
+   /* public void deliver() {
 
         Request last = dataBase.getRequests().poll();
 
@@ -24,7 +24,7 @@ public class CourierConroller {
                 e.printStackTrace();
             }
         });
-    }
+    }*/
 
     private void delivery(Request request) {
 

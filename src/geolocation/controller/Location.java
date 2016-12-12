@@ -8,6 +8,9 @@ public class Location {
     private String placeId;
     private String label;
 
+    public Location() {
+    }
+
     public Location(double lat, double lng, String label) {
         this.lat = lat;
         this.lng = lng;
