@@ -81,8 +81,8 @@ public class Request {
                 ", email='" + email + '\'' +
                 ", product=" + product.getName() +
                 ", price=" + price +
-                ", from=" + from +
-                ", to=" + to +
-                '\n';
+                ", \nfrom=" + from.getFormattedAddress() +
+                ", to=" + to.getFormattedAddress() +
+                "\n\n";
     }
 }

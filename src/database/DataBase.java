@@ -11,7 +11,7 @@ import java.util.*;
 
 public class DataBase {
 
-    public static final List<Department> departments = DepartmentList.getDepartments();
+    public static List<Department> departments = DepartmentList.getDepartments();
 
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
@@ -27,6 +27,7 @@ public class DataBase {
     public List<Request> getDelivered() {
         return delivered;
     }
+
 
     public void addRequest(@NotNull Request request) {
         requests.add(request);

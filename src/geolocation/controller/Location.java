@@ -67,4 +67,32 @@ public class Location {
         return String.format("[%s,%s]", lat, lng);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Location location = (Location) o;
+
+        if (Double.compare(location.lat, lat) != 0) return false;
+        if (Double.compare(location.lng, lng) != 0) return false;
+        if (formattedAddress != null ? !formattedAddress.equals(location.formattedAddress) : location.formattedAddress != null)
+            return false;
+        if (placeId != null ? !placeId.equals(location.placeId) : location.placeId != null) return false;
+        return label != null ? label.equals(location.label) : location.label == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = formattedAddress != null ? formattedAddress.hashCode() : 0;
+        temp = Double.doubleToLongBits(lat);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(lng);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (placeId != null ? placeId.hashCode() : 0);
+        result = 31 * result + (label != null ? label.hashCode() : 0);
+        return result;
+    }
 }

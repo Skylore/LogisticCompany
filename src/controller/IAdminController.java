@@ -7,7 +7,7 @@ import geolocation.controller.Location;
  */
 public interface IAdminController {
 
-    void addDepartment(int id, Location location);
+    void addDepartment(Location location);
     String showRequestsInTheDepartment(int id);
 
 }

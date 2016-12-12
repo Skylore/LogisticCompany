@@ -1,17 +1,11 @@
 package controller;
 
 import database.DataBase;
-import geolocation.controller.GoogleMapsAPI;
-import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import model.Department;
 
-/**
- * Created by Влад on 12.12.2016.
- */
 public class AdminController implements IAdminController{
 
-    private GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
     private DataBase dataBase;
 
     public AdminController(DataBase dataBase) {
@@ -19,9 +13,12 @@ public class AdminController implements IAdminController{
     }
 
     @Override
-    public void addDepartment(int id, Location location) {
+    public void addDepartment(Location location) {
 
-        
+        Department department = new Department(DataBase.getDepartments().size(), location, null);
+
+        DataBase.getDepartments().get(DataBase.getDepartments().size() - 1).setNext(department);
+        DataBase.getDepartments().add(department);
 
     }
 

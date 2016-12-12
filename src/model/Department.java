@@ -29,4 +29,12 @@ public class Department {
     public Location getLocation() {
         return location;
     }
+
+    @Override
+    public String toString() {
+        return "Department ->" +
+                "id=" + id +
+                ", location=" + location.getFormattedAddress() +
+                '\n';
+    }
 }
