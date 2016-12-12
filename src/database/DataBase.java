@@ -58,6 +58,21 @@ public class DataBase {
         throw new EmptyStackException();
     }
 
+    public Request removeDelivered(int id) {
+        for (Request request : delivered) {
+            if (request.getId() == id) {
+                try {
+                    delivered.remove(id);
+                    return request;
+                } catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new IndexOutOfBoundsException();
+    }
+
 
     private static class DepartmentList {
 

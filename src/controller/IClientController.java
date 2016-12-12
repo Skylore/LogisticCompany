@@ -9,4 +9,6 @@ public interface IClientController {
 
     String whereIsMyProduct(int id);
 
+    Product getProduct(int id);
+
 }

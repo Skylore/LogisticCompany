@@ -1,13 +1,12 @@
 package controller;
 
+import com.sun.xml.internal.ws.api.message.Message;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import database.DataBase;
 import model.Product;
 import model.Request;
-
-import java.awt.*;
 
 public class ClientController implements IClientController{
 
@@ -48,5 +47,10 @@ public class ClientController implements IClientController{
         }
 
         return "Your product is delivering";
+    }
+
+    @Override
+    public Product getProduct(int id) {
+        return dataBase.removeDelivered(id).getProduct();
     }
 }
