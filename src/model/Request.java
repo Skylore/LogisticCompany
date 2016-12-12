@@ -73,4 +73,17 @@ public class Request {
         result = 31 * result + (to != null ? to.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", product=" + product +
+                ", price=" + price +
+                ", from=" + from +
+                ", to=" + to +
+                ", department=" + department +
+                '}';
+    }
 }
