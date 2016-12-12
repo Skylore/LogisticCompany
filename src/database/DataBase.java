@@ -33,24 +33,41 @@ public class DataBase {
         requests.add(request);
     }
 
-    public void removeRequest() {
-        try {
+    public Request removeRequest() {
+
+        if (requests.size() != 0) {
+            Request res = requests.get(requests.size() - 1);
             requests.remove(requests.size() - 1);
-        } catch (EmptyStackException e) {
-            e.printStackTrace();
+            return res;
         }
+
+        throw new EmptyStackException();
     }
 
     public void deliver (@NotNull Request request) {
         delivered.add(request);
     }
 
-    public void removeDelivered() {
-        try {
+    public Request removeDelivered() {
+        if (delivered.size() != 0) {
+            Request res = delivered.get(delivered.size() - 1);
             delivered.remove(delivered.size() - 1);
-        } catch (EmptyStackException e) {
-            e.printStackTrace();
+            return res;
         }
+
+        throw new EmptyStackException();
+    }
+
+    public static List<Department> getDepartments() {
+        return departments;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public List<Request> getDelivered() {
+        return delivered;
     }
 
     private static class DepartmentList {

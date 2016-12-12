@@ -7,35 +7,34 @@ import model.Request;
 
 public class CourierConroller {
 
-    DataBase dataBase = new DataBase();
+    private static final int SPEED = 60;
+    private DataBase dataBase;
 
-   /* public void deliver() {
+    public CourierConroller(DataBase dataBase) {
+        this.dataBase = dataBase;
+    }
 
-        Request last = dataBase.getRequests().poll();
+   public void deliver() {
+
+        Request last = dataBase.removeRequest();
 
         long timeForDeliver = ((long) (new GoogleMapsAPIImpl().getDistance(last.getFrom(),
-                last.getTo()) / 100));
+                last.getTo()) / SPEED));
 
         new Thread(() -> {
+            System.err.println("startOfDelivery");
             try {
                 Thread.sleep(timeForDeliver * 1000);
-                delivery(last);
+                dataBase.deliver(last);
+                System.err.println("delivered");
+
+                SendMailSSL.sendLetter(last.getEmail(), "Delivery service", "product:\n" +
+                        last.getProduct().toString() + "\ndelivered by address:\n" + last.getTo());
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        });
-    }*/
 
-    private void delivery(Request request) {
-
-        if (request.getFrom() == request.getTo()) {
-            SendMailSSL.sendLetter(request.getEmail(),
-                    "Delivery center", "product\n" + request.getProduct().toString() +
-                            "\nhas been delivered");
-            System.out.println("\nproduct has been delivered");
-            return;
-        }
-
-        // TODO write here delivery logic
+        }).start();
     }
 }
