@@ -76,14 +76,13 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{" +
+        return "Request -> " +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", product=" + product +
+                ", product=" + product.getName() +
                 ", price=" + price +
-                ", from=" + from +
-                ", to=" + to +
-                ", department=" + department +
-                '}';
+                ", \nfrom=" + from.getFormattedAddress() +
+                ", to=" + to.getFormattedAddress() +
+                "\n\n";
     }
 }

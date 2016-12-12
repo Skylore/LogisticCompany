@@ -6,7 +6,7 @@ public class TestGmailApi {
 
     public static void main(String[] args) {
 
-        SendMailSSL.sendLetter("iturchin98@gmail.com", "some tittle", "some text");
+        SendMailSSL.sendLetter("shalamay.vlad44@gmail.com", "some tittle", "some text");
 
         try {
             SendMailSSL.sendLetter(null, null, null);

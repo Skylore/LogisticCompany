@@ -14,7 +14,7 @@ public class CourierConroller {
         this.dataBase = dataBase;
     }
 
-    public void deliver() {
+   public void deliver() {
 
         Request last = dataBase.removeRequest();
 
@@ -34,6 +34,7 @@ public class CourierConroller {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }).start();
     }
 }

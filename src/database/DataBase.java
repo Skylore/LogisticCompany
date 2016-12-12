@@ -11,10 +11,23 @@ import java.util.*;
 
 public class DataBase {
 
-    public static final List<Department> departments = DepartmentList.getDepartments();
+    public static List<Department> departments = DepartmentList.getDepartments();
 
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
+
+    public static List<Department> getDepartments() {
+        return departments;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public List<Request> getDelivered() {
+        return delivered;
+    }
+
 
     public void addRequest(@NotNull Request request) {
         requests.add(request);
@@ -45,17 +58,6 @@ public class DataBase {
         throw new EmptyStackException();
     }
 
-    public static List<Department> getDepartments() {
-        return departments;
-    }
-
-    public List<Request> getRequests() {
-        return requests;
-    }
-
-    public List<Request> getDelivered() {
-        return delivered;
-    }
 
     private static class DepartmentList {
 
@@ -66,19 +68,19 @@ public class DataBase {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             Department department4 = new Department(4, googleMapsAPI.
-                    findLocation("Україна", "Запоріжжя", "Перемоги", "40"), null);
+                    findLocation("Україна", "Запоріжжя", "Перемоги", "40"));
 
             Department department3 = new Department(3, googleMapsAPI.
-                    findLocation("Україна", "Вінниця", "Коцюбинського", "30"), department4);
+                    findLocation("Україна", "Вінниця", "Коцюбинського", "30"));
 
             Department department2 = new Department(2, googleMapsAPI.
-                    findLocation("Україна", "Харків", "Сумська", "126"), department3);
+                    findLocation("Україна", "Харків", "Сумська", "126"));
 
             Department department1 = new Department(1, googleMapsAPI.
-                    findLocation("Україна", "Львів", "Словацького", "1"), department2);
+                    findLocation("Україна", "Львів", "Словацького", "1"));
 
             Department department = new Department(0, googleMapsAPI.
-                    findLocation("Україна", "Київ", "Хрещатик", "22"), department1);
+                    findLocation("Україна", "Київ", "Хрещатик", "22"));
 
             departments.add(department);
             departments.add(department1);

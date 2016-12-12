@@ -26,6 +26,7 @@ public class TestUserController {
 
         controller.sendProductRequest(new Product("SomeProduct", 10, 10), "mail" ,location1, location2);
 
+
         boolean res = db.getRequests().get(0).equals(new Request(0, "", new Product("SomeProduct", 10, 10),
                 ((int) ((googleMapsAPI.getDistance(location1, location2) / 1000) * 20)) , location1, location2));
 
@@ -34,13 +35,13 @@ public class TestUserController {
 
 
 
-/*    private static boolean whereIsMyProduct() {
+        private static boolean whereIsMyProduct() {
 
         DataBase db = new DataBase();
-        UserController controller = new UserController(db);
+        ClientController controller = new ClientController(db);
 
-        controller.whereIsMyProduct();
+        //controller.whereIsMyProduct();
 
         return false;
-    }*/
+    }
 }
