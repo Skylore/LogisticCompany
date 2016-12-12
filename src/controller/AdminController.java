@@ -15,10 +15,7 @@ public class AdminController implements IAdminController{
     @Override
     public void addDepartment(Location location) {
 
-        Department department = new Department(DataBase.getDepartments().size(), location, null);
-
-        DataBase.getDepartments().get(DataBase.getDepartments().size() - 1).setNext(department);
-        DataBase.getDepartments().add(department);
+        DataBase.getDepartments().add(new Department(DataBase.getDepartments().size(), location));
 
     }
 

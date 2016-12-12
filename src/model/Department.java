@@ -6,20 +6,10 @@ public class Department {
 
     private int id;
     private Location location;
-    private Department next;
 
-    public Department(int id, Location location, Department next) {
+    public Department(int id, Location location) {
         this.id = id;
         this.location = location;
-        this.next = next;
-    }
-
-    public Department getNext() {
-        return next;
-    }
-
-    public void setNext(Department next) {
-        this.next = next;
     }
 
     public int getId() {

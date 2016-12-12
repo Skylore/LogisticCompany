@@ -31,7 +31,6 @@ public class TestUserController {
                 ((int) ((googleMapsAPI.getDistance(location1, location2) / 1000) * 20)) , location1, location2));
 
         return res;
-        return true;
     }
 
 
@@ -39,9 +38,9 @@ public class TestUserController {
         private static boolean whereIsMyProduct() {
 
         DataBase db = new DataBase();
-        UserController controller = new UserController(db);
+        ClientController controller = new ClientController(db);
 
-        controller.whereIsMyProduct();
+        //controller.whereIsMyProduct();
 
         return false;
     }
