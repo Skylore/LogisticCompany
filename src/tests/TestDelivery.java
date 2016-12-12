@@ -7,9 +7,6 @@ import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import model.Product;
-import model.Request;
-
-import javax.sound.midi.Track;
 
 public class TestDelivery {
 
