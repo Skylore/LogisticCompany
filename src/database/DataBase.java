@@ -70,7 +70,7 @@ public class DataBase {
             departments.add(department4);
         }
 
-        public static List<Department> getDepartments() {
+        private static List<Department> getDepartments() {
             return departments;
         }
     }
