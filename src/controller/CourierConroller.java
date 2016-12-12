@@ -21,7 +21,7 @@ public class CourierConroller {
         long timeForDeliver = ((long) (new GoogleMapsAPIImpl().getDistance(last.getFrom(),
                 last.getTo()) / SPEED));
 
-        new Thread(() -> {
+       new Thread(() -> {
             System.err.println("startOfDelivery");
             try {
                 Thread.sleep(timeForDeliver * 1000);
@@ -29,7 +29,7 @@ public class CourierConroller {
                 System.err.println("delivered");
 
                 SendMailSSL.sendLetter(last.getEmail(), "Delivery service", "product:\n" +
-                        last.getProduct().toString() + "\ndelivered by address:\n" + last.getTo());
+                        last.getProduct().getName() + "\ndelivered by address:\n" + last.getTo().getFormattedAddress());
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
