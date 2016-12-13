@@ -6,6 +6,7 @@ import model.Department;
 import model.Request;
 
 import com.sun.istack.internal.NotNull;
+import model.WorkRequest;
 
 import java.util.*;
 
@@ -15,6 +16,7 @@ public class DataBase {
 
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
+    private List<WorkRequest> workRequests = new ArrayList<>();
 
     public static List<Department> getDepartments() {
         return departments;
@@ -28,6 +30,21 @@ public class DataBase {
         return delivered;
     }
 
+    public void addWorkRequest(@NotNull WorkRequest request) {
+        workRequests.add(request);
+    }
+
+    public WorkRequest removeWorkRequest() {
+        if (workRequests.size() != 0) {
+            return workRequests.remove(workRequests.size() - 1);
+        }
+
+        throw new EmptyStackException();
+    }
+
+    public List<WorkRequest> getWorkRequests() {
+        return workRequests;
+    }
 
     public void addRequest(@NotNull Request request) {
         requests.add(request);
