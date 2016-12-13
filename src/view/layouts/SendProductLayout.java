@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
  * Created by Влад on 13.12.2016.
  */
 public class SendProductLayout {
+
     public static GridPane getLayout() {
         GridPane sendProductLayout = new GridPane();
         sendProductLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -61,10 +62,16 @@ public class SendProductLayout {
         calculateButton.setOnAction(e -> price.setText("1000"));
         GridPane.setConstraints(calculateButton, 0, 6);
 
+        Label submit = new Label();
+        GridPane.setConstraints(submit, 1, 7);
+        Button submitButton = new Button("submit");
+        submitButton.setOnAction((e) -> submit.setText("done"));
+        GridPane.setConstraints(submitButton, 0, 7);
+
 
         sendProductLayout.getChildren().addAll(nameLabel, nameInput, weightLabel, weightInput,
                 sizeLabel, sizeInput, emailLabel, emailInput, choiceFrom, choiceTo, fromLabel,
-                toLabel, price, calculateButton);
+                toLabel, price, calculateButton, submit, submitButton);
         return sendProductLayout;
     }
 }
