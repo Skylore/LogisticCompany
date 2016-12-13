@@ -2,13 +2,12 @@ package view.layouts;
 
 import database.DataBase;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Влад on 13.12.2016.
@@ -56,8 +55,16 @@ public class SendProductLayout {
                 addListener( (v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(choiceTo, 1, 5);
 
+        Label price = new Label();
+        GridPane.setConstraints(price, 1, 6);
+        Button calculateButton = new Button("Calculate price");
+        calculateButton.setOnAction(e -> price.setText("1000"));
+        GridPane.setConstraints(calculateButton, 0, 6);
+
+
         sendProductLayout.getChildren().addAll(nameLabel, nameInput, weightLabel, weightInput,
-                sizeLabel, sizeInput, emailLabel, emailInput, choiceFrom, choiceTo, fromLabel, toLabel);
+                sizeLabel, sizeInput, emailLabel, emailInput, choiceFrom, choiceTo, fromLabel,
+                toLabel, price, calculateButton);
         return sendProductLayout;
     }
 }

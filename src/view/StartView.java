@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import view.layouts.GetProductLayout;
 import view.layouts.SendProductLayout;
 
 /**
@@ -81,6 +82,8 @@ public class StartView extends Application {
 
                     if(newV.getValue().equals("Send product"))
                         layout.setCenter(SendProductLayout.getLayout());
+                    if(newV.getValue().equals("Get product"))
+                        layout.setCenter(GetProductLayout.getLayout());
 
                 });
 
