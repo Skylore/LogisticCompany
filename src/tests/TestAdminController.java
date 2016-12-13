@@ -20,16 +20,9 @@ public class TestAdminController {
 
         positiveTestShowAllRequest(googleMapsAPI, dataBase, admin);
         negativeTestShowAllRequest(googleMapsAPI, dataBase, admin);
-        testAddDepartment(googleMapsAPI, admin);
 
     }
 
-    private static void testAddDepartment(GoogleMapsAPI googleMapsAPI, AdminController admin) {
-        admin.addDepartment(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "11"));
-        admin.addDepartment(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "12"));
-
-        System.out.println("addDepartment() is " + (DataBase.getDepartments().size() == 7));
-    }
 
     private static void negativeTestShowAllRequest(GoogleMapsAPI googleMapsAPI, DataBase dataBase, AdminController admin) {
         dataBase.getRequests().add(new Request(1, "shalamay.vlad44@gmail.com",
