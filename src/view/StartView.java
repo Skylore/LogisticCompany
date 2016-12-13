@@ -48,8 +48,12 @@ public class StartView extends Application {
         // log in for employee
         Label labelLogIn = new Label("Log in as an employee");
 
-        TextField login = new TextField();
-        login.setPromptText("login");
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.getItems().addAll("Admin", "Builder", "Courier");
+        choiceBox.setValue("Admin");
+        choiceBox.getSelectionModel().selectedItemProperty().
+                addListener( (v, oldValue, newValue) -> System.out.println(v));
+
         TextField pass = new TextField();
         pass.setPromptText("password");
 
@@ -85,7 +89,7 @@ public class StartView extends Application {
 
 
         VBox leftMenu = new VBox();
-        leftMenu.getChildren().addAll(tree, labelLogIn, login, pass, buttonLogIn);
+        leftMenu.getChildren().addAll(tree, labelLogIn, choiceBox, pass, buttonLogIn);
         leftMenu.setSpacing(10);
         leftMenu.setMaxHeight(300);
 
