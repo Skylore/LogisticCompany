@@ -5,6 +5,7 @@ import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import database.DataBase;
+import gmailApi.SendMailSSL;
 import model.Product;
 import model.Request;
 import model.WorkRequest;
@@ -22,14 +23,20 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public int sendProductRequest(Product product,String email, Location from, Location to) {
+    public double sendProductRequest(Product product,String email, Location from, Location to) {
 
         double allDistance = googleMapsAPI.getDistance(from, to) / 1000;
 
         dataBase.addRequest(new Request(id, email, product,
                 ((int) (allDistance * PRICE_BY_KILOMETER)), from, to));
 
-        return id++;
+        id++;
+
+        SendMailSSL.sendLetter(email, "Delivery company", "you have been ordered delivery of " + product.getName() + "" +
+                "by address " + to.getFormattedAddress());
+
+        return (new GoogleMapsAPIImpl().getDistance(from, to) / 1000) * (product.getWeight() / 2);
+
     }
 
     @Override
