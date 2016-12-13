@@ -10,9 +10,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import view.layouts.SendProductLayout;
 
 /**
  * Created by Влад on 13.12.2016.
@@ -22,15 +24,16 @@ public class StartView extends Application {
     Stage window;
     BorderPane layout;
     TreeView<String> tree;
+    private static DataBase dataBase;
 
 
     public static void main(String[] args) {
 
-        /*DataBase dataBase = new DataBase();
+        dataBase = new DataBase();
         AdminController admin = new AdminController(dataBase);
         ClientController client = new ClientController(dataBase);
         CourierController courier = new CourierController(dataBase);
-        BuilderController builder = new BuilderController(dataBase);*/
+        BuilderController builder = new BuilderController(dataBase);
 
         launch(args);
     }
@@ -71,15 +74,13 @@ public class StartView extends Application {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
-
         tree = new TreeView<>(root);
         tree.setShowRoot(false);
         tree.getSelectionModel().selectedItemProperty().
                 addListener((v, oldV, newV) -> {
 
-                    //logic for choice
-
-                    System.out.println(newV.getValue());
+                    if(newV.getValue().equals("Send product"))
+                        layout.setCenter(SendProductLayout.getLayout());
 
                 });
 
@@ -87,12 +88,10 @@ public class StartView extends Application {
         topMenu.getChildren().add(topLabel);
         topMenu.setPadding(new Insets(20, 10, 20, 10));
 
-
         VBox leftMenu = new VBox();
         leftMenu.getChildren().addAll(tree, labelLogIn, choiceBox, pass, buttonLogIn);
         leftMenu.setSpacing(10);
         leftMenu.setMaxHeight(300);
-
 
         layout = new BorderPane();
         layout.setTop(topMenu);
