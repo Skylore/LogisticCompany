@@ -1,7 +1,7 @@
 package tests;
 
 import controller.ClientController;
-import controller.CourierConroller;
+import controller.CourierController;
 import database.DataBase;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
@@ -28,7 +28,7 @@ public class TestDelivery {
                 "iturchin98@gmail.com", location, location1);
 
         System.out.println(clientController.whereIsMyProduct(0));
-        new CourierConroller(dataBase).deliver();
+        new CourierController(dataBase).deliver();
         System.out.println(clientController.whereIsMyProduct(0));
 
         new Thread(() -> {
