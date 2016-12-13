@@ -1,4 +1,4 @@
-package controller;
+package utils;
 
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;

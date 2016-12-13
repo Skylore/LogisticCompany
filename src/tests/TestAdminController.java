@@ -10,6 +10,7 @@ public class TestAdminController {
 
         System.out.println("testShowWorkRequests() --> " + testShowWorkRequests() +
                            "\ntestConfirmWorkRequest() --> " + testConfirmWorkRequest());
+
     }
 
     private static boolean testShowWorkRequests() {

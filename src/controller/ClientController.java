@@ -1,12 +1,13 @@
 package controller;
 
-import com.sun.xml.internal.ws.api.message.Message;
+import com.sun.istack.internal.NotNull;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import database.DataBase;
 import model.Product;
 import model.Request;
+import model.WorkRequest;
 
 public class ClientController implements IClientController{
 
@@ -52,5 +53,13 @@ public class ClientController implements IClientController{
     @Override
     public Product getProduct(int id) {
         return dataBase.removeDelivered(id).getProduct();
+    }
+
+    @Override
+    public void sentWorkRequest(@NotNull String name, @NotNull String email,
+                                @NotNull String goal, @NotNull int salary) {
+
+        dataBase.addWorkRequest(new WorkRequest(name, email, goal, salary));
+        System.out.println("Please expect");
     }
 }
