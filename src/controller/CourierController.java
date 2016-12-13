@@ -5,16 +5,25 @@ import geolocation.controller.GoogleMapsAPIImpl;
 import gmailApi.SendMailSSL;
 import model.Request;
 
-public class CourierConroller {
+import java.security.AccessControlException;
+
+public class CourierController implements ICourierController{
 
     private static final int SPEED = 60;
     private DataBase dataBase;
+    private static final String PASSWORD = "courierPass";
 
-    public CourierConroller(DataBase dataBase) {
+    private boolean inSystem = false;
+
+    public CourierController(DataBase dataBase) {
         this.dataBase = dataBase;
     }
 
    public void deliver() {
+
+       if (!inSystem) {
+           throw new AccessControlException("incorrect password");
+       }
 
         Request last = dataBase.removeRequest();
 
@@ -36,5 +45,17 @@ public class CourierConroller {
             }
 
         }).start();
+    }
+
+    @Override
+    public void checkIn(String password) {
+        if (password != null && password.equals(PASSWORD)) {
+            inSystem = true;
+        }
+    }
+
+    @Override
+    public void checkOut() {
+        inSystem = false;
     }
 }
