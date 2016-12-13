@@ -7,7 +7,7 @@ import model.Department;
 /**
  * Created by Влад on 13.12.2016.
  */
-public class BuilderController implements IEmployee, IBuilder {
+public class BuilderController implements IBuilder{
 
     private DataBase dataBase;
     private boolean inSystem = false;
