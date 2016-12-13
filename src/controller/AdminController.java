@@ -7,7 +7,7 @@ import model.Department;
 import model.WorkRequest;
 import java.util.*;
 
-public class AdminController implements IEmployee, IAdminController{
+public class AdminController implements IAdminController{
 
     private DataBase dataBase;
 

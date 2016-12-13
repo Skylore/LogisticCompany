@@ -1,6 +1,6 @@
 package controller;
 
-public interface IAdminController {
+public interface IAdminController extends IEmployee {
 
     String showAllWorkRequests();
 
