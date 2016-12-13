@@ -8,11 +8,10 @@ import database.DataBase;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -23,16 +22,15 @@ public class StartView extends Application {
     Stage window;
     BorderPane layout;
     TreeView<String> tree;
-    Label topLabel;
 
 
     public static void main(String[] args) {
 
-        DataBase dataBase = new DataBase();
+        /*DataBase dataBase = new DataBase();
         AdminController admin = new AdminController(dataBase);
         ClientController client = new ClientController(dataBase);
         CourierController courier = new CourierController(dataBase);
-        BuilderController builder = new BuilderController(dataBase);
+        BuilderController builder = new BuilderController(dataBase);*/
 
         launch(args);
     }
@@ -44,9 +42,19 @@ public class StartView extends Application {
         window.setTitle("Logistic Company");
 
         //label
-        topLabel = new Label("Hi there!");
+        Label topLabel = new Label("Hi there!");
 
-        TreeItem<String> root, client, admin;
+
+        // log in for employee
+        Label labelLogIn = new Label("Log in as an employee");
+
+        TextField login = new TextField();
+        login.setPromptText("login");
+        TextField pass = new TextField();
+        pass.setPromptText("password");
+
+        Button buttonLogIn = new Button("Log in");
+        TreeItem<String> root, client;
 
         //root
         root = new TreeItem<>();
@@ -59,10 +67,6 @@ public class StartView extends Application {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
-        // admin
-        admin = makeBrunch("Admin", root);
-        makeBrunch("Show work requests", admin);
-        makeBrunch("Show product in department", admin);
 
         tree = new TreeView<>(root);
         tree.setShowRoot(false);
@@ -80,9 +84,10 @@ public class StartView extends Application {
         topMenu.setPadding(new Insets(20, 10, 20, 10));
 
 
-        StackPane leftMenu = new StackPane();
-        leftMenu.getChildren().add(tree);
-        leftMenu.setMinWidth(50);
+        VBox leftMenu = new VBox();
+        leftMenu.getChildren().addAll(tree, labelLogIn, login, pass, buttonLogIn);
+        leftMenu.setSpacing(10);
+        leftMenu.setMaxHeight(300);
 
 
         layout = new BorderPane();
