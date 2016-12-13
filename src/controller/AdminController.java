@@ -13,13 +13,6 @@ public class AdminController implements IAdminController{
     }
 
     @Override
-    public void addDepartment(Location location) {
-
-        DataBase.getDepartments().add(new Department(DataBase.getDepartments().size(), location));
-
-    }
-
-    @Override
     public String showRequestsInTheDepartment(int id) {
 
         Location departmentLocation = new Location();
