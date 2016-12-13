@@ -2,60 +2,39 @@ package tests;
 
 import controller.AdminController;
 import database.DataBase;
-import geolocation.controller.GoogleMapsAPI;
-import geolocation.controller.GoogleMapsAPIImpl;
-import model.Product;
-import model.Request;
+import model.WorkRequest;
 
-/**
- * Created by Влад on 12.12.2016.
- */
 public class TestAdminController {
 
     public static void main(String[] args) {
 
-        GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
-        DataBase dataBase = new DataBase();
-        AdminController admin = new AdminController(dataBase);
-
-        positiveTestShowAllRequest(googleMapsAPI, dataBase, admin);
-        negativeTestShowAllRequest(googleMapsAPI, dataBase, admin);
-
+        System.out.println("testShowWorkRequests() --> " + testShowWorkRequests() +
+                "\ntestConfirmWorkRequest() --> " + testConfirmWorkRequest());
     }
 
+    private static boolean testShowWorkRequests() {
+        DataBase db = new DataBase();
+        AdminController adminController = new AdminController(db);
 
-    private static void negativeTestShowAllRequest(GoogleMapsAPI googleMapsAPI, DataBase dataBase, AdminController admin) {
-        dataBase.getRequests().add(new Request(1, "shalamay.vlad44@gmail.com",
-                new Product("iphone", 1, 1), 100,
-                googleMapsAPI.findLocation("Україна", "Львів", "Словацького", "1"),
-                googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9")));
+        WorkRequest request = new WorkRequest("Ivan", "iturchin98@gmail.com", "builder", 1000);
+        db.addWorkRequest(request);
 
-        dataBase.getDelivered().add(new Request(1, "shalamay.vlad44@gmail.com",
-                new Product("ball", 1, 1), 5,
-                googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9"),
-                googleMapsAPI.findLocation("Україна", "Львів", "Словацького", "1")));
+        String res = adminController.showAllWorkRequests();
 
-        String res = admin.showRequestsInTheDepartment(2);
-
-        System.out.println("negative showRequestInTheDepartment() is " + res.isEmpty());
+        return res.contains(request.toString());
     }
 
-    private static void positiveTestShowAllRequest(GoogleMapsAPI googleMapsAPI, DataBase dataBase, AdminController admin) {
+    private static boolean testConfirmWorkRequest() {
+        DataBase db = new DataBase();
+        AdminController adminController = new AdminController(db);
 
-        dataBase.getRequests().add(new Request(1, "shalamay.vlad44@gmail.com",
-                new Product("iphone", 1, 1), 100,
-                googleMapsAPI.findLocation("Україна", "Львів", "Словацького", "1"),
-                googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9")));
+        WorkRequest request = new WorkRequest("Ivan", "iturchin98@gmail.com", "builder", 1000);
+        db.addWorkRequest(request);
 
-        dataBase.getDelivered().add(new Request(1, "shalamay.vlad44@gmail.com",
-                new Product("ball", 1, 1), 5,
-                googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9"),
-                googleMapsAPI.findLocation("Україна", "Львів", "Словацького", "1")));
+        adminController.checkIn("adminPass");
 
-        String res = admin.showRequestsInTheDepartment(1);
+        adminController.confirmWorkRequest();
 
-        System.out.println("positive showRequestInTheDepartment() is " +
-                (res.contains("iphone") && res.contains("ball")));
+        return !db.getWorkRequests().contains(request);
     }
-
 }
