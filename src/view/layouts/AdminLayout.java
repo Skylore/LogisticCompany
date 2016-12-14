@@ -6,13 +6,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/**
- * Created by Влад on 14.12.2016.
- */
 public class AdminLayout {
 
     private static TreeView<String> tree;
@@ -22,7 +18,7 @@ public class AdminLayout {
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10, 10, 10, 10));
 
-        //top
+        //top menu
         Label topLabel = new Label("Page for administration");
         StackPane topMenu = new StackPane();
         topMenu.getChildren().add(topLabel);
@@ -45,7 +41,7 @@ public class AdminLayout {
                 addListener((v, oldV, newV) -> {
 
                     if (newV.getValue().equals("Show work requests"))
-                        mainLayout.setCenter(SendProductLayout.getLayout()); //layout for requests
+                        mainLayout.setCenter(ShowWorkRequestLayout.getLayout(admin)); //layout for requests
                     if (newV.getValue().equals("Show products"))
                         mainLayout.setCenter(GetProductLayout.getLayout()); //layout for products
                 });
