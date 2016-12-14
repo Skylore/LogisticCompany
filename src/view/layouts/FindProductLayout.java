@@ -1,17 +1,21 @@
 package view.layouts;
 
+import controller.ClientController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-/**
- * Created by Влад on 14.12.2016.
- */
 public class FindProductLayout  {
 
-    public static GridPane getLayout(){
+    ClientController clientController;
+
+    public FindProductLayout(ClientController clientController) {
+        this.clientController = clientController;
+    }
+
+    public GridPane getLayout(){
         GridPane findProduct = new GridPane();
         findProduct.setPadding(new Insets(10, 10, 10, 10));
         findProduct.setVgap(8);
@@ -27,7 +31,14 @@ public class FindProductLayout  {
         GridPane.setConstraints(locationLabel, 1, 1);
 
         Button button = new Button("Find product");
-        button.setOnAction(e -> locationLabel.setText("address"));
+        button.setOnAction(e -> {
+
+            if (!idInput.getText().equals("")) {
+                locationLabel.setText(clientController.whereIsMyProduct(Integer.parseInt(idInput.getText())));
+            } else {
+                AlertBox.display("Please input id");
+            }
+        });
         GridPane.setConstraints(button, 0, 1);
 
         findProduct.getChildren().addAll(idInput, idLabel, button, locationLabel);

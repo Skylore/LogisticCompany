@@ -19,9 +19,6 @@ import model.Product;
 import model.Request;
 import view.layouts.*;
 
-/**
- * Created by Влад on 13.12.2016.
- */
 public class StartView extends Application {
 
     private Stage window;
@@ -109,6 +106,7 @@ public class StartView extends Application {
         SendProductLayout sendProductLayout = new SendProductLayout(dataBase, StartView.client);
         GetProductLayout getProductLayout = new GetProductLayout(StartView.client);
         WorkRequestLayout workRequestLayout = new WorkRequestLayout(StartView.client);
+        FindProductLayout findProductLayout = new FindProductLayout(StartView.client);
 
         tree = new TreeView<>(root);
         tree.setShowRoot(false);
@@ -122,7 +120,7 @@ public class StartView extends Application {
                     if (newV.getValue().equals("Send request for work"))
                         layout.setCenter(workRequestLayout.getLayout());
                     if (newV.getValue().equals("Find out where your product"))
-                        layout.setCenter(FindProductLayout.getLayout());
+                        layout.setCenter(findProductLayout.getLayout());
                 });
 
         StackPane topMenu = new StackPane();
