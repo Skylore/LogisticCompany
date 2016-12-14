@@ -1,17 +1,22 @@
 package view.layouts;
 
+import controller.ClientController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import model.Product;
 
-/**
- * Created by Влад on 13.12.2016.
- */
 public class GetProductLayout {
+
+    private ClientController clientController;
+
+    public GetProductLayout(ClientController clientController) {
+        this.clientController = clientController;
+    }
     
-    public static GridPane getLayout(){
+    public  GridPane getLayout(){
         GridPane getProductLayout = new GridPane();
         getProductLayout.setPadding(new Insets(10, 10, 10, 10));
         getProductLayout.setVgap(8);
@@ -27,7 +32,22 @@ public class GetProductLayout {
         GridPane.setConstraints(resultLabel, 1, 1);
 
         Button button = new Button("Get product");
-        button.setOnAction(e -> resultLabel.setText("You got your product"));
+        button.setOnAction(e -> {
+            if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
+                    equals("Your product delivered")) {
+
+                Product product = clientController.getProduct(Integer.valueOf(idInput.getText()));
+
+                resultLabel.setText("name " + product.getName() + "\nweight " + product.getWeight() +
+                "\nsize " + product.getSize());
+            } else {
+                try {
+                    resultLabel.setText(clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())));
+                } catch (Exception e1) {
+                    AlertBox.display("this product doesn't exist");
+                }
+            }
+        });
         GridPane.setConstraints(button, 0, 1);
 
         getProductLayout.getChildren().addAll(idInput, idLabel, button, resultLabel);
