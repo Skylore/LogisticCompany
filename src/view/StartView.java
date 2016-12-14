@@ -15,6 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Product;
+import model.Request;
 import view.layouts.*;
 
 /**
@@ -105,6 +107,7 @@ public class StartView extends Application {
         makeBrunch("Find out where your product", client);
 
         SendProductLayout sendProductLayout = new SendProductLayout(dataBase, this.client);
+        GetProductLayout getProductLayout = new GetProductLayout(this.client);
 
         tree = new TreeView<>(root);
         tree.setShowRoot(false);
@@ -114,7 +117,7 @@ public class StartView extends Application {
                     if (newV.getValue().equals("Send product"))
                         layout.setCenter(sendProductLayout.getLayout());
                     if (newV.getValue().equals("Get product"))
-                        layout.setCenter(GetProductLayout.getLayout());
+                        layout.setCenter(getProductLayout.getLayout());
                     if (newV.getValue().equals("Send request for work"))
                         layout.setCenter(WorkRequestLayout.getLayout());
                     if (newV.getValue().equals("Find out where your product"))
