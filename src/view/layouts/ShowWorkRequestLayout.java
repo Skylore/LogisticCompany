@@ -41,12 +41,14 @@ public class ShowWorkRequestLayout {
 
         table = new TableView<>();
         //table.setItems(admin.showAllWorkRequests());
-        table.setItems(getRequest());
+        table.setItems(admin.showAllWorkRequests());
         table.getColumns().addAll(nameColumn, emailColumn, goalColumn, salaryColumn);
         table.setMaxHeight(300);
 
         //button
-        Button confirmButton = new Button("Confirm");   //add logic for button
+        Button confirmButton = new Button("Confirm");     //add logic for button
+        confirmButton.setOnAction(e -> admin.confirmWorkRequest(table.getSelectionModel().getSelectedItem()));
+
 
         VBox layout = new VBox();
         layout.getChildren().addAll(table, confirmButton);
@@ -54,17 +56,6 @@ public class ShowWorkRequestLayout {
         layout.setAlignment(Pos.CENTER);
 
         return layout;
-    }
-
-    private static ObservableList<WorkRequest> getRequest() {
-        ObservableList<WorkRequest> products = FXCollections.observableArrayList();
-        products.add(new WorkRequest("Vasya", "1234.@gmail.com", "earn money", 100));
-        products.add(new WorkRequest("Ivan", "1234.@gmail.com", "earn money", 100));
-        products.add(new WorkRequest("Maks", "1234.@gmail.com", "earn money", 100));
-        products.add(new WorkRequest("Vlad", "1234.@gmail.com", "earn money", 100));
-        products.add(new WorkRequest("Alex", "1234.@gmail.com", "earn money", 100));
-
-        return products;
     }
 
 }

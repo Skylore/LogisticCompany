@@ -7,7 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Product;
 import model.WorkRequest;
@@ -35,24 +37,22 @@ public class ShowProductLayout {
 
 
         table = new TableView<>();
-        //table.setItems(admin.showAllWorkRequests());
-        table.setItems(getProduct());
         table.getColumns().addAll(nameColumn, weightColumn, sizeColumn);
         table.setMaxHeight(300);
 
+        TextField idInput = new TextField();
+        idInput.setPromptText("Department id");
+        idInput.setMaxWidth(150);
+
+        Button showButton = new Button("Show");
+        showButton.setOnAction(e ->
+                table.getItems().setAll((admin.showProductInTheDepartment(Integer.parseInt(idInput.getText())))));
 
         VBox layout = new VBox();
-        layout.getChildren().addAll(table);
+        layout.getChildren().addAll(table, idInput, showButton);
+        layout.setSpacing(10);
 
         return layout;
     }
 
-    private static ObservableList<Product> getProduct() {
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        products.add(new Product("Iphone", 1, 2));
-        products.add(new Product("Ipad",2, 2));
-        products.add(new Product("Ipod", 3, 3));
-
-        return products;
-    }
 }

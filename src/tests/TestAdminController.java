@@ -2,6 +2,7 @@ package tests;
 
 import controller.AdminController;
 import database.DataBase;
+import javafx.collections.ObservableList;
 import model.WorkRequest;
 
 public class TestAdminController {
@@ -20,9 +21,9 @@ public class TestAdminController {
         WorkRequest request = new WorkRequest("Ivan", "iturchin98@gmail.com", "builder", 1000);
         db.addWorkRequest(request);
 
-        String res = adminController.showAllWorkRequests();
+        ObservableList<WorkRequest> requests = adminController.showAllWorkRequests();
 
-        return res.contains(request.toString());
+        return requests.size() == 1;
     }
 
     private static boolean testConfirmWorkRequest() {
@@ -34,7 +35,7 @@ public class TestAdminController {
 
         adminController.checkIn("adminPass");
 
-        adminController.confirmWorkRequest();
+        adminController.confirmWorkRequest(request);
 
         return !db.getWorkRequests().contains(request);
     }

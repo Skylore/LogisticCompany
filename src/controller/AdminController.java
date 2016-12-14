@@ -3,7 +3,10 @@ package controller;
 import database.DataBase;
 import geolocation.controller.Location;
 import gmailApi.SendMailSSL;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Department;
+import model.Product;
 import model.WorkRequest;
 import java.util.*;
 
@@ -26,35 +29,33 @@ public class AdminController implements IAdminController{
     }
 
     @Override
-    public String showAllWorkRequests() {
+    public ObservableList<WorkRequest> showAllWorkRequests() {
         List<WorkRequest> requests = dataBase.getWorkRequests();
-        StringBuilder sb = new StringBuilder();
+        ObservableList<WorkRequest> result = FXCollections.observableArrayList();
 
-        requests.stream().filter((a) -> a != null).forEach((a) -> sb.append(a.toString()).append("\n"));
-        return sb.toString();
+        requests.stream().filter(Objects::nonNull).forEach(result::add);
+        return result;
     }
 
     @Override
-    public void confirmWorkRequest() {
-        if (inSystem && dataBase.getWorkRequests().size() != 0) {
-            WorkRequest res = dataBase.removeWorkRequest();
+    public void confirmWorkRequest(WorkRequest workRequest) {
 
+            dataBase.getWorkRequests().remove(workRequest);
             String pass;
 
-            if (res.getGoal().contains("admin")) {
+            if (workRequest.getGoal().contains("admin")) {
                 pass = ADMIN_PASSWORD;
-            } else if (res.getGoal().contains("builder")) {
+            } else if (workRequest.getGoal().contains("builder")) {
                 pass = BUILDER_PASSWORD;
-            } else if (res.getGoal().contains("courier")) {
+            } else if (workRequest.getGoal().contains("courier")) {
                 pass = COURIER_PASSWORD;
             } else {
                 System.err.println("Incorrect goal");
                 return;
             }
 
-            SendMailSSL.sendLetter(res.getEmail(), "Delivery administration", "our congratulations, "
-                    + res.getName() + " you have been recruited\nyour password - " + pass);
-        }
+            SendMailSSL.sendLetter(workRequest.getEmail(), "Delivery administration", "our congratulations, "
+                    + workRequest.getName() + " you have been recruited\nyour password - " + pass);
     }
 
     @Override
@@ -70,10 +71,10 @@ public class AdminController implements IAdminController{
     }
 
     @Override
-    public String showRequestsInTheDepartment(int id) {
+    public ObservableList<Product> showProductInTheDepartment(int id) {
 
         Location departmentLocation = new Location();
-        StringBuilder res = new StringBuilder();
+        ObservableList<Product> products = FXCollections.observableArrayList();
 
         // search department location
         for (Department department : DataBase.getDepartments()) {
@@ -87,12 +88,12 @@ public class AdminController implements IAdminController{
 
         // compare department location and product location
         dataBase.getRequests().stream().filter(request -> request.getFrom().equals(location)).
-                forEach(request -> res.append(request.toString()));
+                forEach(request -> products.add(request.getProduct()));
 
         dataBase.getDelivered().stream().filter(request -> request.getTo().equals(location)).
-                forEach(request -> res.append(request.toString()));
+                forEach(request -> products.add(request.getProduct()));
 
-        return res.toString();
+        return products;
     }
 
 }
