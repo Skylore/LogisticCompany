@@ -43,7 +43,7 @@ public class AdminLayout {
                     if (newV.getValue().equals("Show work requests"))
                         mainLayout.setCenter(ShowWorkRequestLayout.getLayout(admin)); //layout for requests
                     if (newV.getValue().equals("Show products"))
-                        mainLayout.setCenter(GetProductLayout.getLayout()); //layout for products
+                        mainLayout.setCenter(ShowProductLayout.getLayout(admin)); //layout for products
                 });
 
         mainLayout.setLeft(tree);
