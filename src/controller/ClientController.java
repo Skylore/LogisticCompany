@@ -33,7 +33,7 @@ public class ClientController implements IClientController{
         id++;
 
         SendMailSSL.sendLetter(email, "Delivery company", "you have ordered delivery of " + product.getName() +
-                " by address " + to.getFormattedAddress());
+                " by address " + to.getFormattedAddress() + "\nyour product's id is " + id);
     }
 
     @Override
@@ -56,7 +56,13 @@ public class ClientController implements IClientController{
 
     @Override
     public Product getProduct(int id) {
-        return dataBase.removeDelivered(id).getProduct();
+
+        Request res = dataBase.removeDelivered(id);
+
+        SendMailSSL.sendLetter(res.getEmail(), "Delivery company", "you could get your product by address:\n" +
+        res.getTo().getFormattedAddress());
+
+        return res.getProduct();
     }
 
     @Override
