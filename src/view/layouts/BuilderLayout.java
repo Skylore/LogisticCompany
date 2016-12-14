@@ -11,9 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-/**
- * Created by Влад on 14.12.2016.
- */
 public class BuilderLayout {
     public static void getLayout(Stage window, Scene scene, BuilderController builder) {
 

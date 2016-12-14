@@ -9,9 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
-/**
- * Created by Влад on 13.12.2016.
- */
 public class SendProductLayout {
     public static GridPane getLayout() {
         GridPane sendProductLayout = new GridPane();
