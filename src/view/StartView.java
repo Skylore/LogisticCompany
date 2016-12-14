@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import view.layouts.FindProductLayout;
 import view.layouts.GetProductLayout;
 import view.layouts.SendProductLayout;
+import view.layouts.WorkRequestLayout;
 
 /**
  * Created by Влад on 13.12.2016.
@@ -85,6 +86,8 @@ public class StartView extends Application {
                         layout.setCenter(SendProductLayout.getLayout());
                     if(newV.getValue().equals("Get product"))
                         layout.setCenter(GetProductLayout.getLayout());
+                    if(newV.getValue().equals("Send request for work"))
+                        layout.setCenter(WorkRequestLayout.getLayout());
                     if(newV.getValue().equals("Find out where your product"))
                         layout.setCenter(FindProductLayout.getLayout());
 
