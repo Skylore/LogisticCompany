@@ -33,7 +33,7 @@ public class WorkRequestLayout {
         TextField salaryInput = new TextField();
         GridPane.setConstraints(salaryInput, 1, 2);
 
-        Label goalLabel = new Label("Why do you need this job? ");
+        Label goalLabel = new Label("state : ");
         GridPane.setConstraints(goalLabel, 0, 3);
         TextField goalInput = new TextField();
         GridPane.setConstraints(goalInput, 1, 3);
