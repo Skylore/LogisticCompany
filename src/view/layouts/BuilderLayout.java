@@ -2,6 +2,8 @@ package view.layouts;
 
 import controller.BuilderController;
 import database.DataBase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,10 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.WorkRequest;
 
-/**
- * Created by Влад on 14.12.2016.
- */
 public class BuilderLayout {
     public static void getLayout(Stage window, Scene scene, BuilderController builder) {
 
@@ -56,10 +56,11 @@ public class BuilderLayout {
         GridPane.setConstraints(checkOutButton, 0, 5);
 
         builderLayout.getChildren().addAll(counryLabel, countryInput, cityLabel, cityInput,
-                streetLabel, streetInput, numLabel, numInput,resultLabel, buildButton, checkOutButton);
+                streetLabel, streetInput, numLabel, numInput, resultLabel, buildButton, checkOutButton);
 
         Scene builderScene = new Scene(builderLayout, 500, 500);
         window.setScene(builderScene);
 
     }
+
 }

@@ -58,8 +58,6 @@ public class StartView extends Application {
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("Admin", "Builder", "Courier");
         choiceBox.setValue("Admin");
-        choiceBox.getSelectionModel().selectedItemProperty().
-                addListener((v, oldValue, newValue) -> System.out.println(v));
 
         TextField pass = new TextField();
         pass.setPromptText("password");
@@ -70,7 +68,7 @@ public class StartView extends Application {
             if (choiceBox.getValue().equals("Admin")) {
                 admin.checkIn(pass.getText());
                 if (admin.isInSystem()) {
-                    // layout for admin
+                    AdminLayout.getLayout(window, scene, admin);
                 } else
                     AlertBox.display("Wrong password!");
             }
@@ -86,7 +84,7 @@ public class StartView extends Application {
             if (choiceBox.getValue().equals("Courier")) {
                 courier.checkIn(pass.getText());
                 if (courier.isInSystem()) {
-                    //layout for courier
+                    CourierLayout.getLayout(window, scene, courier);
                 } else
                     AlertBox.display("Wrong password!");
             }
