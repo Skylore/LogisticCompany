@@ -1,10 +1,13 @@
 package controller;
 
+import javafx.collections.ObservableList;
+import model.Product;
+
 public interface IAdminController extends IEmployee {
 
     String showAllWorkRequests();
 
     void confirmWorkRequest();
 
-    String showRequestsInTheDepartment(int id);
+    ObservableList<Product> showProductInTheDepartment(int id);
 }

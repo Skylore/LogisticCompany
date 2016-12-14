@@ -3,7 +3,10 @@ package controller;
 import database.DataBase;
 import geolocation.controller.Location;
 import gmailApi.SendMailSSL;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Department;
+import model.Product;
 import model.WorkRequest;
 import java.util.*;
 
@@ -70,10 +73,10 @@ public class AdminController implements IAdminController{
     }
 
     @Override
-    public String showRequestsInTheDepartment(int id) {
+    public ObservableList<Product> showProductInTheDepartment(int id) {
 
         Location departmentLocation = new Location();
-        StringBuilder res = new StringBuilder();
+        ObservableList<Product> products = FXCollections.observableArrayList();
 
         // search department location
         for (Department department : DataBase.getDepartments()) {
@@ -87,12 +90,12 @@ public class AdminController implements IAdminController{
 
         // compare department location and product location
         dataBase.getRequests().stream().filter(request -> request.getFrom().equals(location)).
-                forEach(request -> res.append(request.toString()));
+                forEach(request -> products.add(request.getProduct()));
 
         dataBase.getDelivered().stream().filter(request -> request.getTo().equals(location)).
-                forEach(request -> res.append(request.toString()));
+                forEach(request -> products.add(request.getProduct()));
 
-        return res.toString();
+        return products;
     }
 
 }
