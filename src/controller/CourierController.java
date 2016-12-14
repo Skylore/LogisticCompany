@@ -19,7 +19,11 @@ public class CourierController implements ICourierController{
         this.dataBase = dataBase;
     }
 
-   public void deliver() {
+    public boolean isInSystem() {
+        return inSystem;
+    }
+
+    public void deliver() {
 
        if (!inSystem) {
            throw new AccessControlException("incorrect password");

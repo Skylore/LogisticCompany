@@ -14,10 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import view.layouts.FindProductLayout;
-import view.layouts.GetProductLayout;
-import view.layouts.SendProductLayout;
-import view.layouts.WorkRequestLayout;
+import view.layouts.*;
 
 /**
  * Created by Влад on 13.12.2016.
@@ -28,15 +25,18 @@ public class StartView extends Application {
     BorderPane layout;
     TreeView<String> tree;
     private static DataBase dataBase;
-
+    private static AdminController admin;
+    private static CourierController courier;
+    private static BuilderController builder;
+    private static ClientController client;
 
     public static void main(String[] args) {
 
         dataBase = new DataBase();
-        AdminController admin = new AdminController(dataBase);
-        ClientController client = new ClientController(dataBase);
-        CourierController courier = new CourierController(dataBase);
-        BuilderController builder = new BuilderController(dataBase);
+        admin = new AdminController(dataBase);
+        client = new ClientController(dataBase);
+        courier = new CourierController(dataBase);
+        builder = new BuilderController(dataBase);
 
         launch(args);
     }
@@ -58,12 +58,41 @@ public class StartView extends Application {
         choiceBox.getItems().addAll("Admin", "Builder", "Courier");
         choiceBox.setValue("Admin");
         choiceBox.getSelectionModel().selectedItemProperty().
-                addListener( (v, oldValue, newValue) -> System.out.println(v));
+                addListener((v, oldValue, newValue) -> System.out.println(v));
 
         TextField pass = new TextField();
         pass.setPromptText("password");
 
         Button buttonLogIn = new Button("Log in");
+        buttonLogIn.setOnAction(e -> {
+
+            if (choiceBox.getValue().equals("Admin")) {
+                admin.checkIn(pass.getText());
+                if (admin.isInSystem()) {
+                    // layout for admin
+                } else
+                    AlertBox.display("Wrong password!");
+            }
+
+            if (choiceBox.getValue().equals("Builder")) {
+                builder.checkIn(pass.getText());
+                if (builder.isInSystem()) {
+                    //layout for builder
+                } else
+                    AlertBox.display("Wrong password!");
+            }
+
+            if (choiceBox.getValue().equals("Courier")) {
+                courier.checkIn(pass.getText());
+                if (courier.isInSystem()) {
+                    //layout for courier
+                } else
+                    AlertBox.display("Wrong password!");
+            }
+
+
+        });
+
         TreeItem<String> root, client;
 
         //root
@@ -82,13 +111,13 @@ public class StartView extends Application {
         tree.getSelectionModel().selectedItemProperty().
                 addListener((v, oldV, newV) -> {
 
-                    if(newV.getValue().equals("Send product"))
+                    if (newV.getValue().equals("Send product"))
                         layout.setCenter(SendProductLayout.getLayout());
-                    if(newV.getValue().equals("Get product"))
+                    if (newV.getValue().equals("Get product"))
                         layout.setCenter(GetProductLayout.getLayout());
-                    if(newV.getValue().equals("Send request for work"))
+                    if (newV.getValue().equals("Send request for work"))
                         layout.setCenter(WorkRequestLayout.getLayout());
-                    if(newV.getValue().equals("Find out where your product"))
+                    if (newV.getValue().equals("Find out where your product"))
                         layout.setCenter(FindProductLayout.getLayout());
 
                 });

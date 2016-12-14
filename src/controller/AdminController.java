@@ -21,6 +21,10 @@ public class AdminController implements IAdminController{
         this.dataBase = dataBase;
     }
 
+    public boolean isInSystem() {
+        return inSystem;
+    }
+
     @Override
     public String showAllWorkRequests() {
         List<WorkRequest> requests = dataBase.getWorkRequests();
