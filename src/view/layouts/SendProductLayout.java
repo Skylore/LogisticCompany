@@ -1,20 +1,33 @@
 package view.layouts;
 
+import controller.ClientController;
 import database.DataBase;
+import geolocation.controller.GoogleMapsAPI;
+import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import model.Department;
+import model.Product;
+import model.Request;
 
-
-/**
- * Created by Влад on 13.12.2016.
- */
 public class SendProductLayout {
 
-    public static GridPane getLayout() {
+    private static int id = 0;
+
+    private DataBase dataBase;
+    private ClientController clientController;
+
+    public SendProductLayout(DataBase dataBase, ClientController clientController) {
+        this.dataBase= dataBase;
+        this.clientController = clientController;
+    }
+
+    public GridPane getLayout() {
         GridPane sendProductLayout = new GridPane();
         sendProductLayout.setPadding(new Insets(10, 10, 10, 10));
         sendProductLayout.setVgap(8);
@@ -56,10 +69,13 @@ public class SendProductLayout {
                 addListener( (v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(choiceTo, 1, 5);
 
+        Utils utils = new Utils();
+
         Label price = new Label();
         GridPane.setConstraints(price, 1, 6);
         Button calculateButton = new Button("Calculate price");
-        calculateButton.setOnAction(e -> price.setText("1000"));
+        calculateButton.setOnAction(e -> price.setText(utils.getPrice(choiceFrom.getValue(),
+                choiceTo.getValue()) + ""));
         GridPane.setConstraints(calculateButton, 0, 6);
 
         Label submit = new Label();
@@ -73,5 +89,15 @@ public class SendProductLayout {
                 sizeLabel, sizeInput, emailLabel, emailInput, choiceFrom, choiceTo, fromLabel,
                 toLabel, price, calculateButton, submit, submitButton);
         return sendProductLayout;
+    }
+
+    private class Utils {
+
+        double getPrice(String from, String to) {
+            GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
+
+            return  new GoogleMapsAPIImpl().getDistance(googleMapsAPI.findLocation(from),
+                    googleMapsAPI.findLocation(to)) * 0.001;
+        }
     }
 }

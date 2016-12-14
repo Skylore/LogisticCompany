@@ -5,6 +5,7 @@ import controller.BuilderController;
 import controller.ClientController;
 import controller.CourierController;
 import database.DataBase;
+import geolocation.controller.GoogleMapsAPIImpl;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -105,13 +106,15 @@ public class StartView extends Application {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
+        SendProductLayout sendProductLayout = new SendProductLayout(dataBase, this.client);
+
         tree = new TreeView<>(root);
         tree.setShowRoot(false);
         tree.getSelectionModel().selectedItemProperty().
                 addListener((v, oldV, newV) -> {
 
                     if (newV.getValue().equals("Send product"))
-                        layout.setCenter(SendProductLayout.getLayout());
+                        layout.setCenter(sendProductLayout.getLayout());
                     if (newV.getValue().equals("Get product"))
                         layout.setCenter(GetProductLayout.getLayout());
                     if (newV.getValue().equals("Send request for work"))
