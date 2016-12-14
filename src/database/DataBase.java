@@ -34,12 +34,10 @@ public class DataBase {
         workRequests.add(request);
     }
 
-    public WorkRequest removeWorkRequest() {
-        if (workRequests.size() != 0) {
-            return workRequests.remove(workRequests.size() - 1);
-        }
+    public WorkRequest removeWorkRequest(WorkRequest workRequest) {
 
-        throw new EmptyStackException();
+            workRequests.remove(workRequest);
+            return workRequest;
     }
 
     public List<WorkRequest> getWorkRequests() {
