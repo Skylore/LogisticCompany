@@ -19,12 +19,18 @@ public class GetProductLayout {
 
         Label idLabel = new Label("Product id: ");
         GridPane.setConstraints(idLabel, 0, 0);
+
         TextField idInput = new TextField();
         GridPane.setConstraints(idInput, 1, 0);
+
+        Label resultLabel = new Label();
+        GridPane.setConstraints(resultLabel, 1, 1);
+
         Button button = new Button("Get product");
+        button.setOnAction(e -> resultLabel.setText("You got your product"));
         GridPane.setConstraints(button, 0, 1);
 
-        getProductLayout.getChildren().addAll(idInput, idLabel, button);
+        getProductLayout.getChildren().addAll(idInput, idLabel, button, resultLabel);
         return getProductLayout;
     }
     
