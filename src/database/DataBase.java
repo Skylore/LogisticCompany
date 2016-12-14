@@ -6,6 +6,7 @@ import model.Department;
 import model.Request;
 
 import com.sun.istack.internal.NotNull;
+import model.SupportRequest;
 import model.WorkRequest;
 
 import java.util.*;
@@ -17,6 +18,7 @@ public class DataBase {
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
+    private List<SupportRequest> supportRequests = new ArrayList<>();
 
     public static List<Department> getDepartments() {
         return departments;
@@ -28,6 +30,10 @@ public class DataBase {
 
     public List<Request> getDelivered() {
         return delivered;
+    }
+
+    public List<SupportRequest> getSupportRequests() {
+        return supportRequests;
     }
 
     public void addWorkRequest(@NotNull WorkRequest request) {
@@ -63,16 +69,6 @@ public class DataBase {
         delivered.add(request);
     }
 
-    public Request removeDelivered() {
-        if (delivered.size() != 0) {
-            Request res = delivered.get(delivered.size() - 1);
-            delivered.remove(delivered.size() - 1);
-            return res;
-        }
-
-        throw new EmptyStackException();
-    }
-
     public Request removeDelivered(int id) {
         for (Request request : delivered) {
             if (request.getId() == id) {
@@ -86,6 +82,21 @@ public class DataBase {
         }
 
         throw new IndexOutOfBoundsException();
+    }
+
+    public void addSupportRequest(@NotNull SupportRequest supportRequest) {
+        supportRequests.add(supportRequest);
+    }
+
+    public SupportRequest removeSupportRequest(int id) {
+
+        for (int i = 0; i < supportRequests.size(); i++) {
+            if (supportRequests.get(i).getId() == id) {
+                return supportRequests.remove(i);
+            }
+        }
+
+        throw new NoSuchElementException();
     }
 
 
