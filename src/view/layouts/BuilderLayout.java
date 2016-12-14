@@ -53,7 +53,7 @@ public class BuilderLayout {
         GridPane.setConstraints(checkOutButton, 0, 5);
 
         builderLayout.getChildren().addAll(counryLabel, countryInput, cityLabel, cityInput,
-                streetLabel, streetInput, numLabel, numInput,resultLabel, buildButton, checkOutButton);
+                streetLabel, streetInput, numLabel, numInput, resultLabel, buildButton, checkOutButton);
 
         Scene builderScene = new Scene(builderLayout, 500, 500);
         window.setScene(builderScene);

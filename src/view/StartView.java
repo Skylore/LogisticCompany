@@ -67,7 +67,7 @@ public class StartView extends Application {
             if (choiceBox.getValue().equals("Admin")) {
                 admin.checkIn(pass.getText());
                 if (admin.isInSystem()) {
-                    // layout for admin
+                    AdminLayout.getLayout(window, scene, admin);
                 } else
                     AlertBox.display("Wrong password!");
             }
