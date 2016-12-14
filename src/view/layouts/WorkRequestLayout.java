@@ -1,14 +1,12 @@
 package view.layouts;
 
 import controller.ClientController;
-import database.DataBase;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import model.WorkRequest;
 
 public class WorkRequestLayout {
 
@@ -42,9 +40,11 @@ public class WorkRequestLayout {
 
         Label goalLabel = new Label("state : ");
         GridPane.setConstraints(goalLabel, 0, 3);
-        TextField goalInput = new TextField();
-        GridPane.setConstraints(goalInput, 1, 3);
-
+        ChoiceBox<String> stateChoice = new ChoiceBox<>();
+        stateChoice.getItems().addAll("admin", "builder", "courier");
+        stateChoice.getSelectionModel().selectedItemProperty().
+                addListener((v, oldValue, newValue) -> System.out.println(v));
+        GridPane.setConstraints(stateChoice, 1, 3);
 
         Label resultLabel = new Label();
         GridPane.setConstraints(resultLabel, 1, 4);
@@ -52,9 +52,10 @@ public class WorkRequestLayout {
         Button button = new Button("Send");
         button.setOnAction(e -> {
 
-            if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && !goalInput.getText().equals("")) {
+            if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && stateChoice.getItems() != null) {
+
                 clientController.sentWorkRequest(nameInput.getText(), emailInput.getText(),
-                        goalInput.getText(), Integer.valueOf(salaryInput.getText()));
+                        stateChoice.getValue(), Integer.valueOf(salaryInput.getText()));
 
                 resultLabel.setText("Please wait for admin's answer");
             } else {
@@ -64,7 +65,7 @@ public class WorkRequestLayout {
         GridPane.setConstraints(button, 0, 4);
 
         workRequestLayout.getChildren().addAll(nameLabel, nameInput, salaryLabel, salaryInput,
-                goalLabel, goalInput, emailLabel, emailInput, button, resultLabel);
+                goalLabel, stateChoice, emailLabel, emailInput, button, resultLabel);
         return workRequestLayout;
     }
 }
