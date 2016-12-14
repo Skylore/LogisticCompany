@@ -21,9 +21,10 @@ import view.layouts.*;
  */
 public class StartView extends Application {
 
-    Stage window;
-    BorderPane layout;
-    TreeView<String> tree;
+    private Stage window;
+    private BorderPane layout;
+    private TreeView<String> tree;
+    private Scene scene;
     private static DataBase dataBase;
     private static AdminController admin;
     private static CourierController courier;
@@ -49,7 +50,6 @@ public class StartView extends Application {
 
         //label
         Label topLabel = new Label("Hi there!");
-
 
         // log in for employee
         Label labelLogIn = new Label("Log in as an employee");
@@ -77,7 +77,7 @@ public class StartView extends Application {
             if (choiceBox.getValue().equals("Builder")) {
                 builder.checkIn(pass.getText());
                 if (builder.isInSystem()) {
-                    //layout for builder
+                    BuilderLayout.getLayout(window, scene, builder);
                 } else
                     AlertBox.display("Wrong password!");
             }
@@ -89,7 +89,6 @@ public class StartView extends Application {
                 } else
                     AlertBox.display("Wrong password!");
             }
-
 
         });
 
@@ -119,7 +118,6 @@ public class StartView extends Application {
                         layout.setCenter(WorkRequestLayout.getLayout());
                     if (newV.getValue().equals("Find out where your product"))
                         layout.setCenter(FindProductLayout.getLayout());
-
                 });
 
         StackPane topMenu = new StackPane();
@@ -134,7 +132,7 @@ public class StartView extends Application {
         layout = new BorderPane();
         layout.setTop(topMenu);
         layout.setLeft(leftMenu);
-        Scene scene = new Scene(layout, 800, 500);
+        scene = new Scene(layout, 800, 500);
         window.setScene(scene);
         window.show();
 
