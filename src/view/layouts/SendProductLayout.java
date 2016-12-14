@@ -4,16 +4,21 @@ import controller.ClientController;
 import database.DataBase;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
-import geolocation.controller.Location;
+import gmailApi.SendMailSSL;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import model.Department;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.Product;
-import model.Request;
+
+import java.awt.*;
 
 public class SendProductLayout {
 
@@ -23,7 +28,7 @@ public class SendProductLayout {
     private ClientController clientController;
 
     public SendProductLayout(DataBase dataBase, ClientController clientController) {
-        this.dataBase= dataBase;
+        this.dataBase = dataBase;
         this.clientController = clientController;
     }
 
@@ -58,7 +63,7 @@ public class SendProductLayout {
         ChoiceBox<String> choiceFrom = new ChoiceBox<>();
         DataBase.getDepartments().forEach(department -> choiceFrom.getItems().add(department.getLocation().getFormattedAddress()));
         choiceFrom.getSelectionModel().selectedItemProperty().
-                addListener( (v, oldValue, newValue) -> System.out.println(v));
+                addListener((v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(choiceFrom, 1, 4);
 
         Label toLabel = new Label("To: ");
@@ -66,7 +71,7 @@ public class SendProductLayout {
         ChoiceBox<String> choiceTo = new ChoiceBox<>();
         DataBase.getDepartments().forEach(department -> choiceTo.getItems().add(department.getLocation().getFormattedAddress()));
         choiceTo.getSelectionModel().selectedItemProperty().
-                addListener( (v, oldValue, newValue) -> System.out.println(v));
+                addListener((v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(choiceTo, 1, 5);
 
         Utils utils = new Utils();
@@ -81,9 +86,37 @@ public class SendProductLayout {
         Label submit = new Label();
         GridPane.setConstraints(submit, 1, 7);
         Button submitButton = new Button("submit");
-        submitButton.setOnAction((e) -> submit.setText("done"));
-        GridPane.setConstraints(submitButton, 0, 7);
 
+        submitButton.setOnAction((e) -> {
+
+            final String CHECKING_CODE = "a1mK34f";
+            GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
+
+            if (!nameInput.getText().equals("") && !emailInput.getText().equals("")) {
+
+                TextField textField = new TextField();
+                textField.setPromptText("checking code");
+                GridPane.setConstraints(textField, 1, 7);
+                sendProductLayout.getChildren().addAll(textField);
+                SendMailSSL.sendLetter(emailInput.getText(), "Delivery company",
+                        "your checking code is " + CHECKING_CODE);
+
+                submitButton.setOnAction(event -> {
+                    if (textField.getText().equals(CHECKING_CODE)) {
+                        clientController.sendProductRequest(new Product(nameInput.getText(),
+                                        Integer.valueOf(weightInput.getText()), Integer.valueOf(sizeInput.getText())),
+                                emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
+                                googleMapsAPI.findLocation(choiceTo.getValue()));
+
+                        sendProductLayout.getChildren().remove(textField);
+                    }
+                });
+            } else {
+                AlertBox.display("Please fill all boxes");
+            }
+        });
+
+        GridPane.setConstraints(submitButton, 0, 7);
 
         sendProductLayout.getChildren().addAll(nameLabel, nameInput, weightLabel, weightInput,
                 sizeLabel, sizeInput, emailLabel, emailInput, choiceFrom, choiceTo, fromLabel,
@@ -96,7 +129,7 @@ public class SendProductLayout {
         double getPrice(String from, String to) {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
-            return  new GoogleMapsAPIImpl().getDistance(googleMapsAPI.findLocation(from),
+            return new GoogleMapsAPIImpl().getDistance(googleMapsAPI.findLocation(from),
                     googleMapsAPI.findLocation(to)) * 0.001;
         }
     }

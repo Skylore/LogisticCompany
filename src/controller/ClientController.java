@@ -23,7 +23,7 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public double sendProductRequest(Product product,String email, Location from, Location to) {
+    public void sendProductRequest(Product product,String email, Location from, Location to) {
 
         double allDistance = googleMapsAPI.getDistance(from, to) / 1000;
 
@@ -32,11 +32,8 @@ public class ClientController implements IClientController{
 
         id++;
 
-        SendMailSSL.sendLetter(email, "Delivery company", "you have been ordered delivery of " + product.getName() + "" +
-                "by address " + to.getFormattedAddress());
-
-        return (new GoogleMapsAPIImpl().getDistance(from, to) / 1000) * (product.getWeight() / 2);
-
+        SendMailSSL.sendLetter(email, "Delivery company", "you have ordered delivery of " + product.getName() +
+                " by address " + to.getFormattedAddress());
     }
 
     @Override
