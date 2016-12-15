@@ -31,15 +31,14 @@ public class CourierLayout {
         courierLayout.setAlignment(Pos.CENTER);
 
         //choice box
-        ChoiceBox<Integer> idBox = new ChoiceBox<>();
+        ChoiceBox<String> idBox = new ChoiceBox<>();
         idBox.getItems().addAll(courier.getIdRequests());
-
 
         //deliver
         Button deliveryButton = new Button("Deliver Product");
         deliveryButton.setOnAction(e -> {
             courier.deliver(idBox.getValue());
-            AlertBox.display("Product with id:" + idBox.getValue() + " is delivered");
+            AlertBox.display("Product: " + idBox.getValue() + " is delivered");
         });
 
         //log out
