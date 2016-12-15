@@ -136,21 +136,21 @@ public class StartView extends Application {
         topMenu.setPadding(new Insets(20, 10, 20, 10));
 
         //bottom menu
-        Label supportLabel = new Label("If you have any questions, our support will gladly answer");
+        Label supportLabel = new Label("Here you can ask any question");
         TextField emailInput = new TextField();
         emailInput.setPromptText("Email");
-        emailInput.setMaxWidth(300);
+        emailInput.setMaxWidth(200);
         TextField textInput = new TextField();
         textInput.setPromptText("Your question");
-        textInput.setMinHeight(50);
-        textInput.setMaxWidth(300);
+        textInput.setMinHeight(30);
+        textInput.setMaxWidth(200);
         Button supportButton = new Button("Ask a question");
 
         VBox bottomMenu = new VBox();
         bottomMenu.getChildren().addAll(supportLabel, emailInput, textInput, supportButton);
         bottomMenu.setPadding(new Insets(10, 10, 10, 10));
         bottomMenu.setSpacing(10);
-        bottomMenu.setAlignment(Pos.CENTER);
+        bottomMenu.setAlignment(Pos.BASELINE_LEFT);
 
         VBox leftMenu = new VBox();
         leftMenu.getChildren().addAll(tree, labelLogIn, choiceBox, pass, buttonLogIn);
@@ -161,7 +161,7 @@ public class StartView extends Application {
         layout.setTop(topMenu);
         layout.setLeft(leftMenu);
         layout.setBottom(bottomMenu);
-        scene = new Scene(layout, 800, 500);
+        scene = new Scene(layout, 800, 550);
         window.setScene(scene);
         window.show();
 
