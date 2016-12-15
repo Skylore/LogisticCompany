@@ -109,6 +109,11 @@ public class SendProductLayout {
                                 googleMapsAPI.findLocation(choiceTo.getValue()));
 
                         sendProductLayout.getChildren().remove(textField);
+
+                        nameInput.setText("");
+                        weightInput.setText("");
+                        sizeInput.setText("");
+                        emailInput.setText("");
                     }
                 });
             } else {

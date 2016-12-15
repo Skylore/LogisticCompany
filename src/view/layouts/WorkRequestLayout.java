@@ -41,7 +41,7 @@ public class WorkRequestLayout {
         Label goalLabel = new Label("state : ");
         GridPane.setConstraints(goalLabel, 0, 3);
         ChoiceBox<String> stateChoice = new ChoiceBox<>();
-        stateChoice.getItems().addAll("admin", "builder", "courier");
+        stateChoice.getItems().addAll("admin", "support", "builder", "courier");
         stateChoice.getSelectionModel().selectedItemProperty().
                 addListener((v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(stateChoice, 1, 3);
@@ -58,6 +58,10 @@ public class WorkRequestLayout {
                         stateChoice.getValue(), Integer.valueOf(salaryInput.getText()));
 
                 resultLabel.setText("Please wait for admin's answer");
+
+                nameInput.setText("");
+                emailInput.setText("");
+                salaryInput.setText("");
             } else {
                 AlertBox.display("Please fill all boxes");
             }

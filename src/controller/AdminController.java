@@ -17,6 +17,7 @@ public class AdminController implements IAdminController{
     private static final String ADMIN_PASSWORD = "adminPass";
     private static final String BUILDER_PASSWORD = "builderPass";
     private static final String COURIER_PASSWORD = "courierPass";
+    private static final String SUPPORT_PASSWORD = "supportPass";
 
     private boolean inSystem = false;
 
@@ -49,6 +50,8 @@ public class AdminController implements IAdminController{
                 pass = BUILDER_PASSWORD;
             } else if (workRequest.getGoal().contains("courier")) {
                 pass = COURIER_PASSWORD;
+            } else if (workRequest.getGoal().contains("support")) {
+                pass = SUPPORT_PASSWORD;
             } else {
                 System.err.println("Incorrect goal");
                 return;

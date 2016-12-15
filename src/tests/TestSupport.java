@@ -18,7 +18,7 @@ public class TestSupport {
 
         SupportRequest supportRequest = new SupportRequest("iturchin98@gmail.com", "what is this?", 0);
 
-        supportController.ask(supportRequest);
+        supportController.ask(supportRequest.getEmail(), supportRequest.getQuestion());
 
         supportController.reply(0, "ANSWER");
 
@@ -32,9 +32,9 @@ public class TestSupport {
 
         SupportRequest supportRequest = new SupportRequest("iturchin98@gmail.com", "what is this?", 0);
 
-        supportController.ask(supportRequest);
+        supportController.ask(supportRequest.getEmail(), supportRequest.getQuestion());
 
-        return supportController.showRequests().contains(supportController.toString());
+        return supportController.showRequests().contains(supportRequest.toString());
     }
 
 }
