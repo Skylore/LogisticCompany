@@ -1,7 +1,10 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
+import javafx.collections.ObservableList;
 import model.SupportRequest;
+
+import java.util.List;
 
 public interface ISupport extends IEmployee {
 
@@ -9,5 +12,5 @@ public interface ISupport extends IEmployee {
 
     void reply(int id, String text);
 
-    String showRequests();
+    ObservableList<SupportRequest> showRequests();
 }

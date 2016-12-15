@@ -3,9 +3,14 @@ package controller;
 import com.sun.istack.internal.NotNull;
 import database.DataBase;
 import gmailApi.SendMailSSL;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Product;
 import model.SupportRequest;
 
 import java.security.AccessControlException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SupportController implements ISupport{
 
@@ -51,11 +56,11 @@ public class SupportController implements ISupport{
     }
 
     @Override
-    public String showRequests() {
+    public ObservableList<SupportRequest> showRequests() {
 
-        StringBuilder sb = new StringBuilder();
-        dataBase.getSupportRequests().forEach((e) -> sb.append(e.toString()).append("\n"));
+        ObservableList<SupportRequest> requests = FXCollections.observableArrayList();
+        dataBase.getSupportRequests().forEach(requests::add);
 
-        return sb.toString();
+        return requests;
     }
 }

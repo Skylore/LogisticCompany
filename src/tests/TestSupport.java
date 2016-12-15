@@ -9,32 +9,28 @@ public class TestSupport {
     public static void main(String[] args) {
 
         System.out.println("testReply() --> " + testReply() +
-                           "testShowAllSupportRequests() --> " + testShowRequests());
+                           "\ntestShowAllSupportRequests() --> " + testShowRequests());
     }
 
     private static boolean testReply() {
         DataBase dataBase = new DataBase();
         SupportController supportController = new SupportController(dataBase);
 
-        SupportRequest supportRequest = new SupportRequest("iturchin98@gmail.com", "what is this?", 0);
-
-        supportController.ask(supportRequest);
-
+        supportController.ask("shalamay.vlad44@gmail.com", "what is this?");
         supportController.reply(0, "ANSWER");
 
-        return !dataBase.getSupportRequests().contains(supportRequest);
+        return dataBase.getSupportRequests().size() == 0;
     }
 
     private static boolean testShowRequests() {
 
         DataBase dataBase = new DataBase();
         SupportController supportController = new SupportController(dataBase);
+        supportController.ask("shalamay.vlad44@gmail.com", "what is this?");
 
-        SupportRequest supportRequest = new SupportRequest("iturchin98@gmail.com", "what is this?", 0);
+        System.out.println(supportController.showRequests().get(0).getId());
 
-        supportController.ask(supportRequest);
-
-        return supportController.showRequests().contains(supportController.toString());
+        return supportController.showRequests().get(0).getId() == 1;
     }
 
 }

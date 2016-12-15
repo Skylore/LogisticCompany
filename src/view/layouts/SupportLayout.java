@@ -25,15 +25,13 @@ public class SupportLayout {
         emailColumn.setMinWidth(200);
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        TableColumn<SupportRequest, String> textColumn = new TableColumn<>("Text");
-        textColumn.setMinWidth(500);
-        textColumn.setCellValueFactory(new PropertyValueFactory<>("answer"));
+        TableColumn<SupportRequest, String> questionColumn = new TableColumn<>("Question");
+        questionColumn.setMinWidth(500);
+        questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
 
         table = new TableView<>();
-
-        //table.setItems(suppout.showAllWorkRequests());   ObservableList
-
-        table.getColumns().addAll(emailColumn, textColumn);
+        table.setItems(support.showRequests());
+        table.getColumns().addAll(emailColumn, questionColumn);
         table.setMaxHeight(300);
 
         //text field
@@ -43,7 +41,10 @@ public class SupportLayout {
 
         //button
         Button replyButton = new Button("Reply");
-        //replyButton.setOnAction(e -> admin.confirmWorkRequest(table.getSelectionModel().getSelectedItem()));
+        replyButton.setOnAction(e -> {
+            support.reply(table.getSelectionModel().getSelectedItem().getId(), answer.getText());
+            answer.setText("");
+        });
 
         //check out
         Button checkOutButton = new Button("Log out");
