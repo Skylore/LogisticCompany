@@ -44,6 +44,7 @@ public class SupportLayout {
         replyButton.setOnAction(e -> {
             support.reply(table.getSelectionModel().getSelectedItem().getId(), answer.getText());
             answer.setText("");
+            table.setItems(support.showRequests());
         });
 
         //check out

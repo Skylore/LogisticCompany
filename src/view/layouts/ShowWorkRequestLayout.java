@@ -47,7 +47,10 @@ public class ShowWorkRequestLayout {
 
         //button
         Button confirmButton = new Button("Confirm");     //add logic for button
-        confirmButton.setOnAction(e -> admin.confirmWorkRequest(table.getSelectionModel().getSelectedItem()));
+        confirmButton.setOnAction(e -> {
+            admin.confirmWorkRequest(table.getSelectionModel().getSelectedItem());
+            table.setItems(admin.showAllWorkRequests());
+        });
 
 
         VBox layout = new VBox();
