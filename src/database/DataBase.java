@@ -42,8 +42,8 @@ public class DataBase {
 
     public WorkRequest removeWorkRequest(WorkRequest workRequest) {
 
-            workRequests.remove(workRequest);
-            return workRequest;
+        workRequests.remove(workRequest);
+        return workRequest;
     }
 
     public List<WorkRequest> getWorkRequests() {
@@ -54,18 +54,20 @@ public class DataBase {
         requests.add(request);
     }
 
-    public Request removeRequest() {
+    public Request removeRequest(int id) {
+        Request res = null;
 
-        if (requests.size() != 0) {
-            Request res = requests.get(requests.size() - 1);
-            requests.remove(requests.size() - 1);
-            return res;
+        for (Request r : requests) {
+            if (r.getId() == id) {
+                res = r;
+                break;
+            }
         }
-
-        throw new EmptyStackException();
+        requests.remove(id);
+        return res;
     }
 
-    public void deliver (@NotNull Request request) {
+    public void deliver(@NotNull Request request) {
         delivered.add(request);
     }
 

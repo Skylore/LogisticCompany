@@ -6,8 +6,10 @@ import gmailApi.SendMailSSL;
 import model.Request;
 
 import java.security.AccessControlException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CourierController implements ICourierController{
+public class CourierController implements ICourierController {
 
     private static final int SPEED = 60;
     private DataBase dataBase;
@@ -23,32 +25,23 @@ public class CourierController implements ICourierController{
         return inSystem;
     }
 
-    public void deliver() {
+    public List<Integer> getIdRequests() {
+        List<Integer> result = new ArrayList<>();
 
-       if (!inSystem) {
-           throw new AccessControlException("incorrect password");
-       }
+        dataBase.getRequests().forEach(r -> result.add(r.getId()));
+        return result;
+    }
 
-        Request last = dataBase.removeRequest();
+    @Override
+    public void deliver(int id) {
 
-        long timeForDeliver = ((long) (new GoogleMapsAPIImpl().getDistance(last.getFrom(),
-                last.getTo()) / SPEED));
+        Request removed = dataBase.removeRequest(id);
+        dataBase.deliver(removed);
 
-       new Thread(() -> {
-            System.err.println("startOfDelivery");
-            try {
-                Thread.sleep(timeForDeliver * 1000);
-                dataBase.deliver(last);
-                System.err.println("delivered");
+        SendMailSSL.sendLetter(removed.getEmail(), "Delivery service", "product:\n" +
+                removed.getProduct().getName() + "\ndelivered by address:\n" + removed.getTo().getFormattedAddress());
 
-                SendMailSSL.sendLetter(last.getEmail(), "Delivery service", "product:\n" +
-                        last.getProduct().getName() + "\ndelivered by address:\n" + last.getTo().getFormattedAddress());
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }).start();
     }
 
     @Override
