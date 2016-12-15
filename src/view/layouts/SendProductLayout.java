@@ -22,13 +22,9 @@ import java.awt.*;
 
 public class SendProductLayout {
 
-    private static int id = 0;
-
-    private DataBase dataBase;
     private ClientController clientController;
 
-    public SendProductLayout(DataBase dataBase, ClientController clientController) {
-        this.dataBase = dataBase;
+    public SendProductLayout(ClientController clientController) {
         this.clientController = clientController;
     }
 

@@ -15,8 +15,8 @@ public class GetProductLayout {
     public GetProductLayout(ClientController clientController) {
         this.clientController = clientController;
     }
-    
-    public  GridPane getLayout(){
+
+    public GridPane getLayout() {
         GridPane getProductLayout = new GridPane();
         getProductLayout.setPadding(new Insets(10, 10, 10, 10));
         getProductLayout.setVgap(8);
@@ -33,19 +33,18 @@ public class GetProductLayout {
 
         Button button = new Button("Get product");
         button.setOnAction(e -> {
-            if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
+
+            if (Integer.valueOf(idInput.getText()) >= ClientController.getId()) {
+                AlertBox.display("Incorrect id input");
+            } else if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
                     equals("Your product delivered")) {
 
                 Product product = clientController.getProduct(Integer.valueOf(idInput.getText()));
 
                 resultLabel.setText("name " + product.getName() + "\nweight " + product.getWeight() +
-                "\nsize " + product.getSize());
+                        "\nsize " + product.getSize());
             } else {
-                try {
-                    resultLabel.setText(clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())));
-                } catch (Exception e1) {
-                    AlertBox.display("this product doesn't exist");
-                }
+                resultLabel.setText(clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())));
             }
         });
         GridPane.setConstraints(button, 0, 1);
@@ -53,5 +52,5 @@ public class GetProductLayout {
         getProductLayout.getChildren().addAll(idInput, idLabel, button, resultLabel);
         return getProductLayout;
     }
-    
+
 }

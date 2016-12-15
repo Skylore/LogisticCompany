@@ -108,7 +108,7 @@ public class StartView extends Application {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
-        SendProductLayout sendProductLayout = new SendProductLayout(dataBase, StartView.client);
+        SendProductLayout sendProductLayout = new SendProductLayout(StartView.client);
         GetProductLayout getProductLayout = new GetProductLayout(StartView.client);
         WorkRequestLayout workRequestLayout = new WorkRequestLayout(StartView.client);
         FindProductLayout findProductLayout = new FindProductLayout(StartView.client);

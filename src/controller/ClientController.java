@@ -71,4 +71,8 @@ public class ClientController implements IClientController{
         dataBase.addWorkRequest(new WorkRequest(name, email, goal, salary));
         System.out.println("Please expect");
     }
+
+    public static int getId() {
+        return id;
+    }
 }
