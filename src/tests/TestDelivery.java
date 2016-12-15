@@ -28,7 +28,7 @@ public class TestDelivery {
                 "iturchin98@gmail.com", location, location1);
 
         System.out.println(clientController.whereIsMyProduct(0));
-        new CourierController(dataBase).deliver();
+        new CourierController(dataBase).deliver(0);
         System.out.println(clientController.whereIsMyProduct(0));
 
         new Thread(() -> {

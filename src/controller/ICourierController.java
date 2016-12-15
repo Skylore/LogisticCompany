@@ -2,5 +2,5 @@ package controller;
 
 public interface ICourierController extends IEmployee{
 
-    void deliver();
+    void deliver(int id);
 }

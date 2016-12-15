@@ -30,10 +30,9 @@ public class ClientController implements IClientController{
         dataBase.addRequest(new Request(id, email, product,
                 ((int) (allDistance * PRICE_BY_KILOMETER)), from, to));
 
-        id++;
-
         SendMailSSL.sendLetter(email, "Delivery company", "you have ordered delivery of " + product.getName() +
                 " by address " + to.getFormattedAddress() + "\nyour product's id is " + id);
+        id++;
     }
 
     @Override

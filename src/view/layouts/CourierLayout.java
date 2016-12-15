@@ -3,39 +3,57 @@ package view.layouts;
 
 import controller.BuilderController;
 import controller.CourierController;
+import controller.SupportController;
+import geolocation.controller.GoogleMapsAPI;
+import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Product;
+import model.Request;
+import model.SupportRequest;
 
 public class CourierLayout {
+
     public static void getLayout(Stage window, Scene scene, CourierController courier) {
 
-        GridPane courierLayout = new GridPane();
+        VBox courierLayout = new VBox();
         courierLayout.setPadding(new Insets(10, 10, 10, 10));
-        courierLayout.setVgap(8);
-        courierLayout.setHgap(10);
+        courierLayout.setSpacing(10);
+        courierLayout.setAlignment(Pos.CENTER);
 
-        Label resultLabel = new Label();
-        GridPane.setConstraints(resultLabel, 1, 0);
+        //choice box
+        ChoiceBox<Integer> idBox = new ChoiceBox<>();
+        idBox.getItems().addAll(courier.getIdRequests());
+
+
+        //deliver
         Button deliveryButton = new Button("Deliver Product");
-        deliveryButton.setOnAction(e -> resultLabel.setText("Done"));
-        GridPane.setConstraints(deliveryButton, 0, 0);
+        deliveryButton.setOnAction(e -> {
+            courier.deliver(idBox.getValue());
+            AlertBox.display("Product with id:" + idBox.getValue() + " is delivered");
+        });
 
+        //log out
         Button checkOutButton = new Button("Log out");
         checkOutButton.setOnAction(e -> {
             courier.checkOut();
             window.setScene(scene);
         });
-        GridPane.setConstraints(checkOutButton, 0, 1);
 
-        courierLayout.getChildren().addAll(resultLabel, deliveryButton, checkOutButton);
+        courierLayout.getChildren().addAll(idBox, deliveryButton, checkOutButton);
 
-        Scene builderScene = new Scene(courierLayout, 500, 500);
-        window.setScene(builderScene);
+        Scene courierScene = new Scene(courierLayout, 500, 500);
+        window.setScene(courierScene);
 
     }
+
 }
