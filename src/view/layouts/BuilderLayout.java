@@ -1,20 +1,18 @@
 package view.layouts;
 
 import controller.BuilderController;
-import database.DataBase;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.WorkRequest;
 
 public class BuilderLayout {
+
     public static void getLayout(Stage window, Scene scene, BuilderController builder) {
 
         GridPane builderLayout = new GridPane();
@@ -22,8 +20,8 @@ public class BuilderLayout {
         builderLayout.setVgap(8);
         builderLayout.setHgap(10);
 
-        Label counryLabel = new Label("Country: ");
-        GridPane.setConstraints(counryLabel, 0, 0);
+        Label countryLabel = new Label("Country: ");
+        GridPane.setConstraints(countryLabel, 0, 0);
         TextField countryInput = new TextField();
         GridPane.setConstraints(countryInput, 1, 0);
 
@@ -45,7 +43,17 @@ public class BuilderLayout {
         Label resultLabel = new Label();
         GridPane.setConstraints(resultLabel, 1, 4);
         Button buildButton = new Button("Build");
-        buildButton.setOnAction(e -> resultLabel.setText("Done"));
+        buildButton.setOnAction(e -> {
+            if (!countryInput.getText().equals("") && !cityInput.getText().equals("") &&
+                    !streetInput.getText().equals("") && !numInput.getText().equals("")) {
+                Location location = new GoogleMapsAPIImpl().findLocation(countryInput.getText(),
+                        cityInput.getText(), streetInput.getText(), numInput.getText());
+                builder.build(location);
+                resultLabel.setText("you have built department by address + \n" + location.getFormattedAddress());
+            } else {
+                AlertBox.display("Please fill all boxes");
+            }
+        });
         GridPane.setConstraints(buildButton, 0, 4);
 
         Button checkOutButton = new Button("Log out");
@@ -55,7 +63,7 @@ public class BuilderLayout {
         });
         GridPane.setConstraints(checkOutButton, 0, 5);
 
-        builderLayout.getChildren().addAll(counryLabel, countryInput, cityLabel, cityInput,
+        builderLayout.getChildren().addAll(countryLabel, countryInput, cityLabel, cityInput,
                 streetLabel, streetInput, numLabel, numInput, resultLabel, buildButton, checkOutButton);
 
         Scene builderScene = new Scene(builderLayout, 500, 500);

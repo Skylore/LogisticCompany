@@ -2,19 +2,16 @@ package view;
 
 import controller.*;
 import database.DataBase;
-import geolocation.controller.GoogleMapsAPIImpl;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Product;
-import model.Request;
+import model.SupportRequest;
 import view.layouts.*;
 
 public class StartView extends Application {
@@ -145,6 +142,13 @@ public class StartView extends Application {
         textInput.setMinHeight(30);
         textInput.setMaxWidth(200);
         Button supportButton = new Button("Ask a question");
+        supportButton.setOnAction((e) -> {
+            if (!emailInput.getText().equals("") && !textInput.getText().equals("")) {
+                support.ask(emailInput.getText(), textInput.getText());
+                textInput.setText("");
+                emailInput.setText("");
+            }
+        });
 
         VBox bottomMenu = new VBox();
         bottomMenu.getChildren().addAll(supportLabel, emailInput, textInput, supportButton);

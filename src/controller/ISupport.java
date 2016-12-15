@@ -5,7 +5,7 @@ import model.SupportRequest;
 
 public interface ISupport extends IEmployee {
 
-    void ask(@NotNull SupportRequest supportRequest);
+    void ask(@NotNull String email, @NotNull String question);
 
     void reply(int id, String text);
 

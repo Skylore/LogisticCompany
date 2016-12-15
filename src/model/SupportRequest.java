@@ -3,17 +3,17 @@ package model;
 public class SupportRequest {
 
     private String email;
-    private String answer;
+    private String question;
     private int id;
 
-    public SupportRequest(String email, String answer, int id) {
+    public SupportRequest(String email, String question, int id) {
 
-        if (email == null || answer == null || id < 0) {
+        if (email == null || question == null || id < 0) {
             throw new NullPointerException();
         }
 
         this.email = email;
-        this.answer = answer;
+        this.question = question;
         this.id = id;
     }
 
@@ -21,8 +21,8 @@ public class SupportRequest {
         return email;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getQuestion() {
+        return question;
     }
 
     public int getId() {
@@ -33,7 +33,7 @@ public class SupportRequest {
     public String toString() {
         return "SupportRequest{" +
                 "email='" + email + '\'' +
-                ", answer='" + answer + '\'' +
+                ", question='" + question + '\'' +
                 ", id=" + id +
                 '}';
     }
@@ -47,14 +47,14 @@ public class SupportRequest {
 
         if (id != that.id) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        return answer != null ? answer.equals(that.answer) : that.answer == null;
+        return question != null ? question.equals(that.question) : that.question == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = email != null ? email.hashCode() : 0;
-        result = 31 * result + (answer != null ? answer.hashCode() : 0);
+        result = 31 * result + (question != null ? question.hashCode() : 0);
         result = 31 * result + id;
         return result;
     }
