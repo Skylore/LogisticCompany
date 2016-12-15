@@ -1,7 +1,5 @@
 package view.layouts;
 
-import controller.AdminController;
-import controller.BuilderController;
 import controller.SupportController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.SupportRequest;
-import model.WorkRequest;
 
 /**
  * Created by Влад on 15.12.2016.

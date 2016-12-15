@@ -11,6 +11,7 @@ public class SupportController implements ISupport{
 
     private DataBase dataBase;
     private boolean inSystem;
+    private static int id = 0;
 
     public SupportController(DataBase dataBase) {
         this.dataBase = dataBase;
@@ -36,8 +37,10 @@ public class SupportController implements ISupport{
     }
 
     @Override
-    public void ask(@NotNull SupportRequest supportRequest) {
-        dataBase.addSupportRequest(supportRequest);
+    public void ask(@NotNull String email, @NotNull String question) {
+        dataBase.addSupportRequest(new SupportRequest(email, question, id));
+        System.out.println("done");
+        id++;
     }
 
     @Override
