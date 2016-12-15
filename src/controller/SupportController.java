@@ -16,6 +16,10 @@ public class SupportController implements ISupport{
         this.dataBase = dataBase;
     }
 
+    public boolean isInSystem() {
+        return inSystem;
+    }
+
     @Override
     public void checkIn(String password) {
         if (password.equals("supportPass")) {

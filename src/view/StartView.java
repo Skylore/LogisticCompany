@@ -1,13 +1,11 @@
 package view;
 
-import controller.AdminController;
-import controller.BuilderController;
-import controller.ClientController;
-import controller.CourierController;
+import controller.*;
 import database.DataBase;
 import geolocation.controller.GoogleMapsAPIImpl;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +28,7 @@ public class StartView extends Application {
     private static CourierController courier;
     private static BuilderController builder;
     private static ClientController client;
+    private static SupportController support;
 
     public static void main(String[] args) {
 
@@ -38,6 +37,7 @@ public class StartView extends Application {
         client = new ClientController(dataBase);
         courier = new CourierController(dataBase);
         builder = new BuilderController(dataBase);
+        support = new SupportController(dataBase);
 
         launch(args);
     }
@@ -55,7 +55,7 @@ public class StartView extends Application {
         Label labelLogIn = new Label("Log in as an employee");
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("Admin", "Builder", "Courier");
+        choiceBox.getItems().addAll("Admin", "Builder", "Courier", "Support");
         choiceBox.setValue("Admin");
 
         TextField pass = new TextField();
@@ -84,6 +84,14 @@ public class StartView extends Application {
                 courier.checkIn(pass.getText());
                 if (courier.isInSystem()) {
                     CourierLayout.getLayout(window, scene, courier);
+                } else
+                    AlertBox.display("Wrong password!");
+            }
+
+            if (choiceBox.getValue().equals("Support")) {
+                support.checkIn(pass.getText());
+                if (support.isInSystem()) {
+                    SupportLayout.getLayout(window, scene, support);
                 } else
                     AlertBox.display("Wrong password!");
             }
@@ -127,6 +135,23 @@ public class StartView extends Application {
         topMenu.getChildren().add(topLabel);
         topMenu.setPadding(new Insets(20, 10, 20, 10));
 
+        //bottom menu
+        Label supportLabel = new Label("If you have any questions, our support will gladly answer");
+        TextField emailInput = new TextField();
+        emailInput.setPromptText("Email");
+        emailInput.setMaxWidth(300);
+        TextField textInput = new TextField();
+        textInput.setPromptText("Your question");
+        textInput.setMinHeight(50);
+        textInput.setMaxWidth(300);
+        Button supportButton = new Button("Ask a question");
+
+        VBox bottomMenu = new VBox();
+        bottomMenu.getChildren().addAll(supportLabel, emailInput, textInput, supportButton);
+        bottomMenu.setPadding(new Insets(10, 10, 10, 10));
+        bottomMenu.setSpacing(10);
+        bottomMenu.setAlignment(Pos.CENTER);
+
         VBox leftMenu = new VBox();
         leftMenu.getChildren().addAll(tree, labelLogIn, choiceBox, pass, buttonLogIn);
         leftMenu.setSpacing(10);
@@ -135,6 +160,7 @@ public class StartView extends Application {
         layout = new BorderPane();
         layout.setTop(topMenu);
         layout.setLeft(leftMenu);
+        layout.setBottom(bottomMenu);
         scene = new Scene(layout, 800, 500);
         window.setScene(scene);
         window.show();

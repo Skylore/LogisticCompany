@@ -14,6 +14,7 @@ public class SupportRequest {
 
         this.email = email;
         this.answer = answer;
+        this.id = id;
     }
 
     public String getEmail() {
