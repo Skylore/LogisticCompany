@@ -54,16 +54,16 @@ public class DataBase {
         requests.add(request);
     }
 
-    public Request removeRequest(int id) {
+    public Request removeRequest(String name) {
         Request res = null;
 
         for (Request r : requests) {
-            if (r.getId() == id) {
+            if (r.getProduct().getName().equals(name)) {
                 res = r;
                 break;
             }
         }
-        requests.remove(id);
+        requests.remove(res);
         return res;
     }
 
