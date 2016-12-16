@@ -60,7 +60,8 @@ public class SupportLayout {
         layout.setSpacing(20);
         layout.setAlignment(Pos.CENTER);
 
-        Scene supportScene = new Scene(layout, 700, 500);
+        Scene supportScene = new Scene(layout, 760, 475);
+        supportScene.getStylesheets().add("view/style.css");
         window.setScene(supportScene);
     }
 }

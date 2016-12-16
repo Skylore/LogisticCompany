@@ -2,6 +2,9 @@
     -fx-background-image: url("pic.jpg")
 }
 .button{
--fx-background-color: #7cafc2
-//-fx-text-fill: #FFFFFF
+-fx-background-color: #7cafc2;
+-fx-text-fill: #FFFFFF;
+}
+.label{
+-fx-text-fill: #34677a
 }
