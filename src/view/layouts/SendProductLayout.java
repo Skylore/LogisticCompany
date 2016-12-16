@@ -89,8 +89,8 @@ public class SendProductLayout {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {
-                int cheq = Integer.parseInt(weightInput.getText()) + 1;
-                int cheq1 = Integer.parseInt(sizeInput.getText()) + 1;
+                int weight = Integer.parseInt(weightInput.getText()) ;
+                int size = Integer.parseInt(sizeInput.getText());
 
                 if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@")) {
 
@@ -103,8 +103,7 @@ public class SendProductLayout {
 
                     submitButton.setOnAction(event -> {
                         if (textField.getText().equals(CHECKING_CODE)) {
-                            clientController.sendProductRequest(new Product(nameInput.getText(),
-                                            Integer.valueOf(weightInput.getText()), Integer.valueOf(sizeInput.getText())),
+                            clientController.sendProductRequest(new Product(nameInput.getText(), weight, size),
                                     emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
                                     googleMapsAPI.findLocation(choiceTo.getValue()));
 
