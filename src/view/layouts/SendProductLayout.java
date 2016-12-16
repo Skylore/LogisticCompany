@@ -89,8 +89,8 @@ public class SendProductLayout {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {
-                int cheq = Integer.parseInt(weightInput.getText()) + 1;
-                int cheq1 = Integer.parseInt(sizeInput.getText()) + 1;
+                int cheq = Integer.parseInt(weightInput.getText());
+                int cheq1 = Integer.parseInt(sizeInput.getText());
 
                 if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@")) {
 
