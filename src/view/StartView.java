@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import dao.ControllerFactory;
 import database.DataBase;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -20,27 +21,17 @@ public class StartView extends Application {
     private BorderPane layout;
     private TreeView<String> tree;
     private Scene scene;
-    private static DataBase dataBase;
-    private static AdminController admin;
-    private static CourierController courier;
-    private static BuilderController builder;
-    private static ClientController client;
-    private static SupportController support;
-
-    public static void main(String[] args) {
-
-        dataBase = new DataBase();
-        admin = new AdminController(dataBase);
-        client = new ClientController(dataBase);
-        courier = new CourierController(dataBase);
-        builder = new BuilderController(dataBase);
-        support = new SupportController(dataBase);
-
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        ControllerFactory controllerFactory = new ControllerFactory();
+
+        ClientController clientController = controllerFactory.getClientController();
+        AdminController adminController = controllerFactory.getAdminController();
+        SupportController supportController = controllerFactory.getSupportController();
+        BuilderController builderController = controllerFactory.getBuilderController();
+        CourierController courierController = controllerFactory.getCourierController();
 
         window = primaryStage;
         window.setTitle("Logistic Company");
@@ -62,33 +53,33 @@ public class StartView extends Application {
         buttonLogIn.setOnAction(e -> {
 
             if (choiceBox.getValue().equals("Admin")) {
-                admin.checkIn(pass.getText());
-                if (admin.isInSystem()) {
-                    AdminLayout.getLayout(window, scene, admin);
+                adminController.checkIn(pass.getText());
+                if (adminController.isInSystem()) {
+                    AdminLayout.getLayout(window, scene, adminController);
                 } else
                     AlertBox.display("Wrong password!");
             }
 
             if (choiceBox.getValue().equals("Builder")) {
-                builder.checkIn(pass.getText());
-                if (builder.isInSystem()) {
-                    BuilderLayout.getLayout(window, scene, builder);
+                builderController.checkIn(pass.getText());
+                if (builderController.isInSystem()) {
+                    BuilderLayout.getLayout(window, scene, builderController);
                 } else
                     AlertBox.display("Wrong password!");
             }
 
             if (choiceBox.getValue().equals("Courier")) {
-                courier.checkIn(pass.getText());
-                if (courier.isInSystem()) {
-                    CourierLayout.getLayout(window, scene, courier);
+                courierController.checkIn(pass.getText());
+                if (courierController.isInSystem()) {
+                    CourierLayout.getLayout(window, scene, courierController);
                 } else
                     AlertBox.display("Wrong password!");
             }
 
             if (choiceBox.getValue().equals("Support")) {
-                support.checkIn(pass.getText());
-                if (support.isInSystem()) {
-                    SupportLayout.getLayout(window, scene, support);
+                supportController.checkIn(pass.getText());
+                if (supportController.isInSystem()) {
+                    SupportLayout.getLayout(window, scene, supportController);
                 } else
                     AlertBox.display("Wrong password!");
             }
@@ -108,10 +99,10 @@ public class StartView extends Application {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
-        SendProductLayout sendProductLayout = new SendProductLayout(StartView.client);
-        GetProductLayout getProductLayout = new GetProductLayout(StartView.client);
-        WorkRequestLayout workRequestLayout = new WorkRequestLayout(StartView.client);
-        FindProductLayout findProductLayout = new FindProductLayout(StartView.client);
+        SendProductLayout sendProductLayout = new SendProductLayout(clientController);
+        GetProductLayout getProductLayout = new GetProductLayout(clientController);
+        WorkRequestLayout workRequestLayout = new WorkRequestLayout(clientController);
+        FindProductLayout findProductLayout = new FindProductLayout(clientController);
 
         tree = new TreeView<>(root);
         tree.setShowRoot(false);
@@ -144,7 +135,7 @@ public class StartView extends Application {
         Button supportButton = new Button("Ask a question");
         supportButton.setOnAction((e) -> {
             if (!emailInput.getText().equals("") && !textInput.getText().equals("")) {
-                support.ask(emailInput.getText(), textInput.getText());
+                supportController.ask(emailInput.getText(), textInput.getText());
                 textInput.setText("");
                 emailInput.setText("");
             }
