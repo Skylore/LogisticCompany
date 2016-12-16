@@ -24,7 +24,7 @@ public class ShowWorkRequestLayout {
 
         //column
         TableColumn<WorkRequest, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setMinWidth(200);
+        nameColumn.setMinWidth(100);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         TableColumn<WorkRequest, String> emailColumn = new TableColumn<>("Email");
@@ -32,15 +32,14 @@ public class ShowWorkRequestLayout {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         TableColumn<WorkRequest, String> goalColumn = new TableColumn<>("Goal");
-        goalColumn.setMinWidth(200);
+        goalColumn.setMinWidth(100);
         goalColumn.setCellValueFactory(new PropertyValueFactory<>("goal"));
 
         TableColumn<WorkRequest, Integer> salaryColumn = new TableColumn<>("Desired salary");
-        salaryColumn.setMinWidth(200);
+        salaryColumn.setMinWidth(50);
         salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
 
         table = new TableView<>();
-        //table.setItems(admin.showAllWorkRequests());
         table.setItems(admin.showAllWorkRequests());
         table.getColumns().addAll(nameColumn, emailColumn, goalColumn, salaryColumn);
         table.setMaxHeight(300);

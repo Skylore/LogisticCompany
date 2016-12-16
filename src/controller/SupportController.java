@@ -32,8 +32,6 @@ public class SupportController implements ISupport{
             inSystem = true;
             return;
         }
-
-        throw new AccessControlException("incorrect password");
     }
 
     @Override
