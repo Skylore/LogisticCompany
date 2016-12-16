@@ -56,7 +56,7 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
     }
 
     @Override//todo finish all task
-    public Location findLocation(String country, String city, String street, String houseNum) {
+    public Location findLocation(String country, String city, String street, String houseNum) throws IndexOutOfBoundsException {
         final String preparedQuery = String.format(GET_ADDRESS_FORMATTED_QUERY_TEMPLATE, prepareQueryReplaceSpaces((houseNum + " " + street)), city, country, GOOGLE_API_KEY);
 
         try {

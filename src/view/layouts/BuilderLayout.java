@@ -44,15 +44,14 @@ public class BuilderLayout {
         GridPane.setConstraints(resultLabel, 1, 4);
         Button buildButton = new Button("Build");
         buildButton.setOnAction(e -> {
-            if (!countryInput.getText().equals("") && !cityInput.getText().equals("") &&
-                    !streetInput.getText().equals("") && !numInput.getText().equals("")) {
-                Location location = new GoogleMapsAPIImpl().findLocation(countryInput.getText(),
-                        cityInput.getText(), streetInput.getText(), numInput.getText());
-                builder.build(location);
-                resultLabel.setText("you have built department by address + \n" + location.getFormattedAddress());
-            } else {
-                AlertBox.display("Please fill all boxes");
-            }
+                try {
+                    Location location = new GoogleMapsAPIImpl().findLocation(countryInput.getText(),
+                            cityInput.getText(), streetInput.getText(), numInput.getText());
+                    builder.build(location);
+                    resultLabel.setText("you have built department by address + \n" + location.getFormattedAddress());
+                } catch (IndexOutOfBoundsException ex) {
+                    AlertBox.display("This address does not exist");
+                }
         });
         GridPane.setConstraints(buildButton, 0, 4);
 

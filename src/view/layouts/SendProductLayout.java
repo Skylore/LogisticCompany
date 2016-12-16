@@ -75,8 +75,8 @@ public class SendProductLayout {
         Label price = new Label();
         GridPane.setConstraints(price, 1, 6);
         Button calculateButton = new Button("Calculate price");
-        calculateButton.setOnAction(e -> price.setText(utils.getPrice(choiceFrom.getValue(),
-                choiceTo.getValue()) + ""));
+        calculateButton.setOnAction(e -> price.setText(String.format("%.2f", utils.getPrice(choiceFrom.getValue(),
+                choiceTo.getValue()))));
         GridPane.setConstraints(calculateButton, 0, 6);
 
         Label submit = new Label();

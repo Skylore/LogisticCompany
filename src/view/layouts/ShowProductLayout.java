@@ -20,7 +20,7 @@ import model.WorkRequest;
 public class ShowProductLayout {
     private static TableView<Product> table;
 
-    public static VBox getLayout(AdminController admin){
+    public static VBox getLayout(AdminController admin) {
 
         //column
         TableColumn<Product, String> nameColumn = new TableColumn<>("Name");
@@ -45,8 +45,14 @@ public class ShowProductLayout {
         idInput.setMaxWidth(150);
 
         Button showButton = new Button("Show");
-        showButton.setOnAction(e ->
-                table.getItems().setAll((admin.showProductInTheDepartment(Integer.parseInt(idInput.getText())))));
+        showButton.setOnAction(e -> {
+
+            try {
+                table.getItems().setAll((admin.showProductInTheDepartment(Integer.parseInt(idInput.getText()))));
+            } catch (NumberFormatException ex) {
+                AlertBox.display(idInput.getText() + " is not number");
+            }
+        });
 
         VBox layout = new VBox();
         layout.getChildren().addAll(table, idInput, showButton);
