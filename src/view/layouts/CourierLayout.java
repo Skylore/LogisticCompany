@@ -50,7 +50,8 @@ public class CourierLayout {
 
         courierLayout.getChildren().addAll(idBox, deliveryButton, checkOutButton);
 
-        Scene courierScene = new Scene(courierLayout, 500, 500);
+        Scene courierScene = new Scene(courierLayout, 760, 475);
+        courierLayout.getStylesheets().add("view/style.css");
         window.setScene(courierScene);
 
     }

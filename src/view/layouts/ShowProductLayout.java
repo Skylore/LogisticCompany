@@ -28,11 +28,11 @@ public class ShowProductLayout {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         TableColumn<Product, Integer> weightColumn = new TableColumn<>("Weight");
-        weightColumn.setMinWidth(200);
+        weightColumn.setMaxWidth(80);
         weightColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
 
         TableColumn<Product, Integer> sizeColumn = new TableColumn<>("Size(m^2)");
-        sizeColumn.setMinWidth(200);
+        sizeColumn.setMaxWidth(80);
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
 
 

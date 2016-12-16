@@ -58,8 +58,8 @@ public class AdminLayout {
             window.setScene(scene);
         });
         mainLayout.setBottom(bottomMenu);
-
-        Scene adminScene = new Scene(mainLayout, 800, 500);
+        Scene adminScene = new Scene(mainLayout, 760, 475);
+        adminScene.getStylesheets().add("view/style.css");
         window.setScene(adminScene);
 
     }

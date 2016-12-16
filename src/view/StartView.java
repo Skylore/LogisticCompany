@@ -36,9 +36,6 @@ public class StartView extends Application {
         window = primaryStage;
         window.setTitle("Logistic Company");
 
-        //label
-        Label topLabel = new Label("Hi there!");
-
         // log in for employee
         Label labelLogIn = new Label("Log in as an employee");
 
@@ -119,10 +116,6 @@ public class StartView extends Application {
                         layout.setCenter(findProductLayout.getLayout());
                 });
 
-        StackPane topMenu = new StackPane();
-        topMenu.getChildren().add(topLabel);
-        topMenu.setPadding(new Insets(20, 10, 20, 10));
-
         //bottom menu
         Label supportLabel = new Label("Here you can ask any question");
         TextField emailInput = new TextField();
@@ -153,7 +146,6 @@ public class StartView extends Application {
         leftMenu.setMaxHeight(300);
 
         layout = new BorderPane();
-        layout.setTop(topMenu);
         layout.setLeft(leftMenu);
         layout.setBottom(bottomMenu);
         scene = new Scene(layout, 760, 475);

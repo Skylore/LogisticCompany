@@ -4,6 +4,7 @@ import controller.BuilderController;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -64,8 +65,10 @@ public class BuilderLayout {
 
         builderLayout.getChildren().addAll(countryLabel, countryInput, cityLabel, cityInput,
                 streetLabel, streetInput, numLabel, numInput, resultLabel, buildButton, checkOutButton);
+        builderLayout.setAlignment(Pos.CENTER);
 
-        Scene builderScene = new Scene(builderLayout, 500, 500);
+        Scene builderScene = new Scene(builderLayout, 760, 475);
+        builderLayout.getStylesheets().add("view/style.css");
         window.setScene(builderScene);
 
     }
