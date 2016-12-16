@@ -156,7 +156,9 @@ public class StartView extends Application {
         layout.setTop(topMenu);
         layout.setLeft(leftMenu);
         layout.setBottom(bottomMenu);
-        scene = new Scene(layout, 800, 550);
+        scene = new Scene(layout, 760, 475);
+        String css = this.getClass().getResource("style.css").toExternalForm();
+        scene.getStylesheets().add(css);
         window.setScene(scene);
         window.show();
 
