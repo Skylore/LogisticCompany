@@ -89,38 +89,31 @@ public class SendProductLayout {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {
+                int cheq = Integer.parseInt(weightInput.getText()) + 1;
+                int cheq1 = Integer.parseInt(sizeInput.getText()) + 1;
 
-                if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@") &&
-                        !choiceTo.getValue().equals("") && !choiceFrom.getValue().equals("")) {
+                if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@")) {
 
-                    try {
-                        if (weightInput.getText().equals(Integer.valueOf(weightInput.getText()).toString()) &&
-                                sizeInput.getText().equals(Integer.valueOf(sizeInput.getText()).toString())) {
+                    TextField textField = new TextField();
+                    textField.setPromptText("checking code");
+                    GridPane.setConstraints(textField, 1, 7);
+                    sendProductLayout.getChildren().addAll(textField);
+                    SendMailSSL.sendLetter(emailInput.getText(), "Delivery company",
+                            "your checking code is " + CHECKING_CODE);
 
-                            TextField textField = new TextField();
-                            textField.setPromptText("checking code");
-                            GridPane.setConstraints(textField, 1, 7);
-                            sendProductLayout.getChildren().addAll(textField);
-                            SendMailSSL.sendLetter(emailInput.getText(), "Delivery company",
-                                    "your checking code is " + CHECKING_CODE);
+                    submitButton.setOnAction(event -> {
+                        if (textField.getText().equals(CHECKING_CODE)) {
+                            clientController.sendProductRequest(new Product(nameInput.getText(),
+                                            Integer.valueOf(weightInput.getText()), Integer.valueOf(sizeInput.getText())),
+                                    emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
+                                    googleMapsAPI.findLocation(choiceTo.getValue()));
 
-                            submitButton.setOnAction(event -> {
-                                if (textField.getText().equals(CHECKING_CODE)) {
-                                    clientController.sendProductRequest(new Product(nameInput.getText(),
-                                                    Integer.valueOf(weightInput.getText()), Integer.valueOf(sizeInput.getText())),
-                                            emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
-                                            googleMapsAPI.findLocation(choiceTo.getValue()));
-
-                                    sendProductLayout.getChildren().remove(textField);
-                                }
-                            });
+                            sendProductLayout.getChildren().remove(textField);
                         }
-                    } catch (Exception e1) {
-                        AlertBox.display("wrong input");
-                    }
+                    });
                 }
-            } catch (Exception e2) {
-                AlertBox.display("please choose delivery address");
+            } catch (Exception e1) {
+                AlertBox.display("Wrong input");
             }
         });
 
