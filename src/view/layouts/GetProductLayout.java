@@ -33,18 +33,21 @@ public class GetProductLayout {
 
         Button button = new Button("Get product");
         button.setOnAction(e -> {
+            try {
+                if (Integer.valueOf(idInput.getText()) >= ClientController.getId()) {
+                    AlertBox.display("Incorrect id input");
+                } else if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
+                        equals("Your product delivered")) {
 
-            if (Integer.valueOf(idInput.getText()) >= ClientController.getId()) {
-                AlertBox.display("Incorrect id input");
-            } else if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
-                    equals("Your product delivered")) {
+                    Product product = clientController.getProduct(Integer.valueOf(idInput.getText()));
 
-                Product product = clientController.getProduct(Integer.valueOf(idInput.getText()));
-
-                resultLabel.setText("name " + product.getName() + "\nweight " + product.getWeight() +
-                        "\nsize " + product.getSize());
-            } else {
-                resultLabel.setText(clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())));
+                    resultLabel.setText("name " + product.getName() + "\nweight " + product.getWeight() +
+                            "\nsize " + product.getSize());
+                } else {
+                    resultLabel.setText(clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())));
+                }
+            } catch (Exception e1) {
+                AlertBox.display("wrong input");
             }
         });
         GridPane.setConstraints(button, 0, 1);

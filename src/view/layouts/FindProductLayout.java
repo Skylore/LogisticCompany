@@ -32,14 +32,19 @@ public class FindProductLayout  {
 
         Button button = new Button("Find product");
         button.setOnAction(e -> {
-            if (!idInput.getText().equals("")) {
-                if (Integer.valueOf(idInput.getText()) >= ClientController.getId()) {
-                    AlertBox.display("Incorrect input");
+
+            try {
+                if (!idInput.getText().equals("")) {
+                    if (Integer.valueOf(idInput.getText()) >= ClientController.getId()) {
+                        AlertBox.display("Incorrect input");
+                    } else {
+                        locationLabel.setText(clientController.whereIsMyProduct(Integer.parseInt(idInput.getText())));
+                    }
                 } else {
-                    locationLabel.setText(clientController.whereIsMyProduct(Integer.parseInt(idInput.getText())));
+                    AlertBox.display("Please input id");
                 }
-            } else {
-                AlertBox.display("Please input id");
+            } catch (Exception e1) {
+                AlertBox.display("wrong input");
             }
         });
         GridPane.setConstraints(button, 0, 1);
