@@ -1,64 +1,38 @@
 package database;
 
-import geolocation.controller.GoogleMapsAPI;
-import geolocation.controller.GoogleMapsAPIImpl;
-import model.Product;
-import model.Request;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.EmptyStackException;
+import java.util.stream.Collectors;
 
 public class Logger {
 
-    private FileWriter requestFileWriter;
-    private GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
+    public void write(String json) {
 
-    {
         try {
-            requestFileWriter = new FileWriter("requests.txt");
+            PrintWriter printWriter = new PrintWriter("dataBaseLog.txt");
+            printWriter.write(json);
+            printWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private BufferedWriter bufferedRequestWriter = new BufferedWriter(requestFileWriter);
+    public String read() {
 
-    public void logRequest(Request request) {
         try {
-            bufferedRequestWriter.write(request.getId() + " " + request.getEmail() + " " +
-                    request.getProduct().getName() + " " + request.getProduct().getWeight() + " " +
-                    request.getProduct().getSize() + " " + request.getPrice() + " " +
-                    request.getFrom().toString().substring(1, request.getFrom().toString().length() - 1)
-                    + " " + request.getTo().toString().substring(1, request.getTo().toString().length() - 1) + "\n");
-            bufferedRequestWriter.flush();
+            return Files.readAllLines(Paths.get("dataBaseLog.txt")).stream().collect(Collectors.joining("\n"));
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ArrayList<Request> readRequest() {
-        ArrayList<Request> res = new ArrayList<>();
-        Scanner scanner;
-
-        try {
-            scanner = new Scanner(new File("requests.txt"));
-            while (scanner.hasNext()) {
-                String[] ln = scanner.nextLine().split(" ");
-                res.add(new Request(Integer.valueOf(ln[0]), ln[1], new Product(ln[2], Integer.valueOf(ln[3]),
-                        Integer.valueOf(ln[4])), Integer.valueOf(ln[5]), googleMapsAPI.findLocation(ln[6]),
-                        googleMapsAPI.findLocation(ln[7])));
-                requestFileWriter.write("");
-                requestFileWriter.flush();
+            try {
+                FileWriter writer = new FileWriter(new File("dataBaseLog.txt"));
+                writer.write("{\"requests\":[],\"delivered\":[],\"workRequests\":[],\"supportRequests\":[]}");
+                writer.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        return res;
+        throw new EmptyStackException();
     }
 }

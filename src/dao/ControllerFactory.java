@@ -1,11 +1,21 @@
 package dao;
 
 import controller.*;
+import database.Converter;
 import database.DataBase;
+import database.Logger;
 
 public class ControllerFactory {
 
     private DataBase dataBase = new DataBase();
+
+    {
+        try {
+            dataBase = Converter.fromJson(new Logger().read(), DataBase.class);
+        } catch (Exception e) {
+            System.out.println("Log created");
+        }
+    }
 
     private AdminController adminController = new AdminController(dataBase);
 
@@ -19,6 +29,10 @@ public class ControllerFactory {
 
     public AdminController getAdminController() {
         return adminController;
+    }
+
+    public DataBase getDataBase() {
+        return dataBase;
     }
 
     public ClientController getClientController() {
