@@ -13,8 +13,10 @@ import java.util.*;
 
 public class DataBase {
 
+    // why this one is static
     public static List<Department> departments = DepartmentList.getDepartments();
 
+    // why these are not static
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
     private List<WorkRequest> workRequests = new ArrayList<>();

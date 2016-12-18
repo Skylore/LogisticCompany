@@ -125,6 +125,9 @@ public class SendProductLayout {
         return sendProductLayout;
     }
 
+    // todo refactor
+    // no field, class is redundant
+    // or put in uitls package
     private class Utils {
 
         double getPrice(String from, String to) {

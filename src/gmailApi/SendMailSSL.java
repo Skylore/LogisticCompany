@@ -14,6 +14,10 @@ public class SendMailSSL {
 
     public static void sendLetter(@NotNull String receiver, @NotNull String tittle, @NotNull String text) {
 
+
+        // init properties, one time in program lifecycle
+
+        // todo load properties from file
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

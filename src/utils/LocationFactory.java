@@ -10,7 +10,7 @@ public class LocationFactory {
         Location location = null;
 
         try {
-        location = new GoogleMapsAPIImpl().findLocation(country, city, street, houseNum);
+            location = new GoogleMapsAPIImpl().findLocation(country, city, street, houseNum);
         } catch (IndexOutOfBoundsException e) {
             System.err.println("wrong argument\nlocation has not been initialized");
         }
