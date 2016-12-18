@@ -2,10 +2,17 @@ package dao;
 
 import controller.*;
 import database.DataBase;
+import utils.DBSaver;
+
+import java.io.*;
 
 public class ControllerFactory {
 
-    private DataBase dataBase = new DataBase();
+    private static DataBase dataBase = DBSaver.load();
+
+    public static DataBase getDataBase() {
+        return dataBase;
+    }
 
     private AdminController adminController = new AdminController(dataBase);
 

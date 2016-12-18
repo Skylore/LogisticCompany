@@ -1,6 +1,8 @@
 package model;
 
-public class SupportRequest {
+import java.io.Serializable;
+
+public class SupportRequest implements Serializable{
 
     private String email;
     private String question;

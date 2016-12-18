@@ -1,6 +1,8 @@
 package model;
 
-public class WorkRequest {
+import java.io.Serializable;
+
+public class WorkRequest implements Serializable{
 
     private String name;
     private String email;

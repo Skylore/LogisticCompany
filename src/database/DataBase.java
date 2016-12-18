@@ -9,18 +9,18 @@ import com.sun.istack.internal.NotNull;
 import model.SupportRequest;
 import model.WorkRequest;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class DataBase {
+public class DataBase implements Serializable{
 
-    public static List<Department> departments = DepartmentList.getDepartments();
-
+    private List<Department> departments = DepartmentList.getDepartments();
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
     private List<SupportRequest> supportRequests = new ArrayList<>();
 
-    public static List<Department> getDepartments() {
+    public List<Department> getDepartments() {
         return departments;
     }
 

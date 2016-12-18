@@ -1,6 +1,7 @@
 package tests;
 
 import controller.BuilderController;
+import dao.ControllerFactory;
 import database.DataBase;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
@@ -44,6 +45,6 @@ public class TestBuilderController {
         builder.build(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "11"));
         builder.build(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "12"));
 
-        System.out.println("build() is " + (DataBase.getDepartments().size() == 7));
+        System.out.println("build() is " + (ControllerFactory.getDataBase().getDepartments().size() == 7));
     }
 }

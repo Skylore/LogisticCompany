@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.SupportRequest;
+import utils.DBSaver;
 import view.layouts.*;
 
 public class StartView extends Application {
@@ -153,6 +154,7 @@ public class StartView extends Application {
         scene.getStylesheets().add(css);
         window.setScene(scene);
         window.show();
+        window.setOnCloseRequest(e -> DBSaver.save(ControllerFactory.getDataBase()));
 
     }
 

@@ -2,7 +2,9 @@ package model;
 
 import geolocation.controller.Location;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department implements Serializable{
 
     private int id;
     private Location location;

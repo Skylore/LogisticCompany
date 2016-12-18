@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ControllerFactory;
 import database.DataBase;
 import geolocation.controller.Location;
 import gmailApi.SendMailSSL;
@@ -8,6 +9,8 @@ import javafx.collections.ObservableList;
 import model.Department;
 import model.Product;
 import model.WorkRequest;
+
+import javax.naming.ldap.Control;
 import java.util.*;
 
 public class AdminController implements IAdminController{
@@ -77,7 +80,7 @@ public class AdminController implements IAdminController{
         ObservableList<Product> products = FXCollections.observableArrayList();
 
         // search department location
-        for (Department department : DataBase.getDepartments()) {
+        for (Department department : ControllerFactory.getDataBase().getDepartments()) {
             if (department.getId() == id){
                 departmentLocation = department.getLocation();
                 break;

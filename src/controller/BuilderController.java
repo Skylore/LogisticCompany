@@ -23,7 +23,7 @@ public class BuilderController implements IBuilder{
 
     @Override
     public void build(Location location) {
-        DataBase.getDepartments().add(new Department(DataBase.getDepartments().size(), location));
+        dataBase.getDepartments().add(new Department(dataBase.getDepartments().size(), location));
     }
 
     @Override

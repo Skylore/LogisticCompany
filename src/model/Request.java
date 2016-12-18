@@ -2,7 +2,9 @@ package model;
 
 import geolocation.controller.Location;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable{
 
     private int id;
     private String email;
@@ -10,7 +12,6 @@ public class Request {
     private int price;
     private Location from;
     private Location to;
-    private Department department;
 
     public Request(int id, String email, Product product, int price, Location from, Location to) {
         this.id = id;
@@ -43,10 +44,6 @@ public class Request {
 
     public Location getTo() {
         return to;
-    }
-
-    public Department getDepartment() {
-        return department;
     }
 
     @Override
