@@ -89,7 +89,7 @@ public class SendProductLayout {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {
-                int weight = Integer.parseInt(weightInput.getText()) ;
+                int weight = Integer.parseInt(weightInput.getText());
                 int size = Integer.parseInt(sizeInput.getText());
 
                 if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@")) {
@@ -115,6 +115,7 @@ public class SendProductLayout {
                         }
                     });
                 }
+
             } catch (Exception e1) {
                 AlertBox.display("Wrong input");
             }

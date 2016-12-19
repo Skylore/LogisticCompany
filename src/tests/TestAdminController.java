@@ -33,8 +33,6 @@ public class TestAdminController {
         WorkRequest request = new WorkRequest("Ivan", "iturchin98@gmail.com", "builder", 1000);
         db.addWorkRequest(request);
 
-        adminController.checkIn("adminPass");
-
         adminController.confirmWorkRequest(request);
 
         return !db.getWorkRequests().contains(request);

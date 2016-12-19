@@ -54,7 +54,6 @@ public class AdminLayout {
         bottomMenu.getChildren().addAll(checkOutButton);
         bottomMenu.setAlignment(Pos.BOTTOM_RIGHT);
         checkOutButton.setOnAction(e -> {
-            admin.checkOut();
             window.setScene(scene);
         });
         mainLayout.setBottom(bottomMenu);

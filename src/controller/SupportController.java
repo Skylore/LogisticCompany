@@ -15,28 +15,18 @@ import java.util.List;
 public class SupportController implements ISupport{
 
     private DataBase dataBase;
-    private boolean inSystem;
     private static int id = 0;
+    private static final String PASS = "supportPass";
 
     public SupportController(DataBase dataBase) {
         this.dataBase = dataBase;
     }
 
-    public boolean isInSystem() {
-        return inSystem;
-    }
-
     @Override
-    public void checkIn(String password) {
-        if (password.equals("supportPass")) {
-            inSystem = true;
-            return;
+    public void checkIn(String password) throws IllegalAccessException {
+        if (!password.equals(PASS)) {
+            throw new IllegalAccessException("wrong exception");
         }
-    }
-
-    @Override
-    public void checkOut() {
-        inSystem = false;
     }
 
     @Override

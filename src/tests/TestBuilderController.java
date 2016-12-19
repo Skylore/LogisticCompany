@@ -19,25 +19,26 @@ public class TestBuilderController {
         testBuild(googleMapsAPI, builder);
         positiveTestCheckIn(builder);
         negativeTestCheckIn(builder);
-        testChekOut(builder);
-
 
     }
 
-    private static void testChekOut(BuilderController builder) {
-        builder.checkIn("builderPass");
-        builder.checkOut();
-        System.out.println("checkOut() is " + !builder.isInSystem());
-    }
 
     private static void negativeTestCheckIn(BuilderController builder) {
-        builder.checkIn("123245");
-        System.out.println("negative checkIn() is " + !builder.isInSystem());
+        try {
+            builder.checkIn("123245");
+            System.out.println("negative checkIn() is false");
+        } catch (IllegalAccessException e) {
+            System.out.println("negative checkIn() is true");
+        }
     }
 
     private static void positiveTestCheckIn(BuilderController builder) {
-        builder.checkIn("builderPass");
-        System.out.println("positive checkIn() is " + builder.isInSystem());
+        try {
+            builder.checkIn("builderPass");
+            System.out.println("negative checkIn() is true");
+        } catch (IllegalAccessException e) {
+            System.out.println("negative checkIn() is false");
+        }
     }
 
     private static void testBuild(GoogleMapsAPI googleMapsAPI, BuilderController builder) {

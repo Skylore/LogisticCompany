@@ -1,28 +1,19 @@
 package controller;
 
 import database.DataBase;
-import geolocation.controller.GoogleMapsAPIImpl;
 import gmailApi.SendMailSSL;
 import model.Request;
 
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourierController implements ICourierController {
 
-    private static final int SPEED = 60;
     private DataBase dataBase;
     private static final String PASSWORD = "courierPass";
 
-    private boolean inSystem = false;
-
     public CourierController(DataBase dataBase) {
         this.dataBase = dataBase;
-    }
-
-    public boolean isInSystem() {
-        return inSystem;
     }
 
     public List<String> getIdRequests() {
@@ -45,14 +36,9 @@ public class CourierController implements ICourierController {
     }
 
     @Override
-    public void checkIn(String password) {
-        if (password != null && password.equals(PASSWORD)) {
-            inSystem = true;
+    public void checkIn(String password) throws IllegalAccessException {
+        if (!password.equals(PASSWORD)) {
+            throw new IllegalAccessException("wrong exception");
         }
-    }
-
-    @Override
-    public void checkOut() {
-        inSystem = false;
     }
 }

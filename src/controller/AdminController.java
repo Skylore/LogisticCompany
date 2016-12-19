@@ -18,14 +18,8 @@ public class AdminController implements IAdminController{
     private static final String BUILDER_PASSWORD = "builderPass";
     private static final String COURIER_PASSWORD = "courierPass";
 
-    private boolean inSystem = false;
-
     public AdminController(DataBase dataBase) {
         this.dataBase = dataBase;
-    }
-
-    public boolean isInSystem() {
-        return inSystem;
     }
 
     @Override
@@ -59,15 +53,10 @@ public class AdminController implements IAdminController{
     }
 
     @Override
-    public void checkIn(String password) {
-        if (password.equals(ADMIN_PASSWORD)) {
-            inSystem = true;
+    public void checkIn(String password) throws IllegalAccessException{
+        if (!password.equals(ADMIN_PASSWORD)) {
+            throw new IllegalAccessException("wrong password");
         }
-    }
-
-    @Override
-    public void checkOut() {
-        inSystem = false;
     }
 
     @Override
