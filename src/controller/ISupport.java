@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ISupport extends IEmployee {
 
+    // todo return an action confirmation
     void ask(@NotNull String email, @NotNull String question);
 
     void reply(int id, String text);

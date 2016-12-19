@@ -2,6 +2,7 @@ package database;
 
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
 import model.Department;
 import model.Request;
 
@@ -13,8 +14,10 @@ import java.util.*;
 
 public class DataBase {
 
+    // why this one is static
     public static List<Department> departments = DepartmentList.getDepartments();
 
+    // why these are not static
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
@@ -108,10 +111,11 @@ public class DataBase {
 
         static {
 
+            // todo weird logic, just create location through a constructor
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
-            Department department4 = new Department(4, googleMapsAPI.
-                    findLocation("Україна", "Запоріжжя", "Перемоги", "40"));
+            Location location =  new Location(123.23, 123.12, "test location");
+            Department department4 = new Department(4, location);
 
             Department department3 = new Department(3, googleMapsAPI.
                     findLocation("Україна", "Вінниця", "Коцюбинського", "30"));

@@ -5,6 +5,7 @@ import database.DataBase;
 import javafx.collections.ObservableList;
 import model.WorkRequest;
 
+// todo JUnit test framework
 public class TestAdminController {
 
     public static void main(String[] args) {

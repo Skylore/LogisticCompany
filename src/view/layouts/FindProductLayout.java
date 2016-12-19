@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 
 public class FindProductLayout  {
 
-    ClientController clientController;
+    private ClientController clientController;
 
     public FindProductLayout(ClientController clientController) {
         this.clientController = clientController;

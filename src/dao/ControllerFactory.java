@@ -8,6 +8,11 @@ import database.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+// todo
+// ClientController cl = (ClientController) ObjectFactory.get("clientController")
+// Map<String, Object> context todo coding bat map
+// context.put("clientController", new ClientController())
+// context.get("clientController");
 public class ControllerFactory {
 
     private DataBase dataBase = new DataBase();
