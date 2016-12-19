@@ -1,39 +1,38 @@
 package dao;
 
 import controller.*;
+import database.Converter;
 import database.DataBase;
+import database.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControllerFactory {
 
     private DataBase dataBase = new DataBase();
 
-    private AdminController adminController = new AdminController(dataBase);
-
-    private ClientController clientController = new ClientController(dataBase);
-
-    private BuilderController builderController = new BuilderController(dataBase);
-
-    private CourierController courierController = new CourierController(dataBase);
-
-    private SupportController supportController = new SupportController(dataBase);
-
-    public AdminController getAdminController() {
-        return adminController;
+    {
+        try {
+            dataBase = Converter.fromJson(new Logger().read(), DataBase.class);
+        } catch (Exception e) {
+            System.out.println("Log created");
+        }
     }
 
-    public ClientController getClientController() {
-        return clientController;
+    public Object getController(String key) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("AdminController", new AdminController(dataBase));
+        map.put("ClientController", new ClientController(dataBase));
+        map.put("BuilderController", new BuilderController(dataBase));
+        map.put("CourierController", new CourierController(dataBase));
+        map.put("SupportController", new SupportController(dataBase));
+
+        return map.get(key);
     }
 
-    public BuilderController getBuilderController() {
-        return builderController;
-    }
-
-    public CourierController getCourierController() {
-        return courierController;
-    }
-
-    public SupportController getSupportController() {
-        return supportController;
+    public DataBase getDataBase() {
+        return dataBase;
     }
 }
