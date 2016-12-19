@@ -2,17 +2,19 @@ package view;
 
 import controller.*;
 import dao.ControllerFactory;
+import database.Converter;
 import database.DataBase;
+import database.Logger;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.SupportRequest;
+import javafx.stage.WindowEvent;
 import view.layouts.*;
 
 public class StartView extends Application {
@@ -153,6 +155,8 @@ public class StartView extends Application {
         scene.getStylesheets().add(css);
         window.setScene(scene);
         window.show();
+        window.setOnCloseRequest((e) ->
+                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
 
     }
 

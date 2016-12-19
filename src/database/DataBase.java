@@ -38,6 +38,7 @@ public class DataBase {
 
     public void addWorkRequest(@NotNull WorkRequest request) {
         workRequests.add(request);
+
     }
 
     public WorkRequest removeWorkRequest(WorkRequest workRequest) {
@@ -100,7 +101,6 @@ public class DataBase {
 
         throw new NoSuchElementException();
     }
-
 
     private static class DepartmentList {
 

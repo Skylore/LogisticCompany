@@ -10,7 +10,6 @@ public class Request {
     private int price;
     private Location from;
     private Location to;
-    private Department department;
 
     public Request(int id, String email, Product product, int price, Location from, Location to) {
         this.id = id;
@@ -45,9 +44,6 @@ public class Request {
         return to;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
 
     @Override
     public boolean equals(Object o) {
