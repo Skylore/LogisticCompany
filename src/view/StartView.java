@@ -3,10 +3,8 @@ package view;
 import controller.*;
 import dao.ControllerFactory;
 import database.Converter;
-import database.DataBase;
 import database.Logger;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import view.layouts.*;
 
 public class StartView extends Application {
@@ -29,11 +26,11 @@ public class StartView extends Application {
 
         ControllerFactory controllerFactory = new ControllerFactory();
 
-        ClientController clientController = controllerFactory.getClientController();
-        AdminController adminController = controllerFactory.getAdminController();
-        SupportController supportController = controllerFactory.getSupportController();
-        BuilderController builderController = controllerFactory.getBuilderController();
-        CourierController courierController = controllerFactory.getCourierController();
+        ClientController clientController = (ClientController) controllerFactory.getController("ClientController");
+        AdminController adminController = (AdminController) controllerFactory.getController("AdminController");
+        SupportController supportController = (SupportController) controllerFactory.getController("SupportController");
+        BuilderController builderController = (BuilderController) controllerFactory.getController("BuilderController");
+        CourierController courierController = (CourierController) controllerFactory.getController("CourierController");
 
         window = primaryStage;
         window.setTitle("Logistic Company");
