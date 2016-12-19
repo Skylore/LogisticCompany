@@ -24,18 +24,18 @@ public class TestUserController {
         Location location1 = googleMapsAPI.findLocation("Україна", "Київ", "Ревуцького", "7");
         Location location2 = googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "9");
 
-        controller.sendProductRequest(new Product("SomeProduct", 10, 10), "mail" ,location1, location2);
+
+        controller.sendProductRequest(new Product("SomeProduct", 10, 10), "@mail", location1, location2);
 
 
         boolean res = db.getRequests().get(0).equals(new Request(0, "", new Product("SomeProduct", 10, 10),
-                ((int) ((googleMapsAPI.getDistance(location1, location2) / 1000) * 20)) , location1, location2));
+                ((int) ((googleMapsAPI.getDistance(location1, location2) / 1000) * 20)), location1, location2));
 
         return res;
     }
 
 
-
-        private static boolean whereIsMyProduct() {
+    private static boolean whereIsMyProduct() {
 
         DataBase db = new DataBase();
         ClientController controller = new ClientController(db);

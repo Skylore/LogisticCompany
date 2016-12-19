@@ -24,8 +24,10 @@ public class TestDelivery {
 
         System.out.println(googleMapsAPI.getDistance(location, location1));
 
+
         clientController.sendProductRequest(new Product("Ipad", 2, 3),
                 "iturchin98@gmail.com", location, location1);
+
 
         System.out.println(clientController.whereIsMyProduct(0));
         new CourierController(dataBase).deliver("Ipad");

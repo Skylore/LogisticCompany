@@ -89,28 +89,29 @@ public class SendProductLayout {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {
-                int weight = Integer.parseInt(weightInput.getText()) ;
+                int weight = Integer.parseInt(weightInput.getText());
                 int size = Integer.parseInt(sizeInput.getText());
 
-                if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@")) {
-
-                    TextField textField = new TextField();
-                    textField.setPromptText("checking code");
-                    GridPane.setConstraints(textField, 1, 7);
-                    sendProductLayout.getChildren().addAll(textField);
-                    SendMailSSL.sendLetter(emailInput.getText(), "Delivery company",
-                            "your checking code is " + CHECKING_CODE);
-
-                    submitButton.setOnAction(event -> {
-                        if (textField.getText().equals(CHECKING_CODE)) {
-                            clientController.sendProductRequest(new Product(nameInput.getText(), weight, size),
-                                    emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
-                                    googleMapsAPI.findLocation(choiceTo.getValue()));
-
-                            sendProductLayout.getChildren().remove(textField);
-                        }
-                    });
+                if (nameInput.getText().equals("") || !emailInput.getText().contains("@")){
+                    throw new Exception("wrong input");
                 }
+
+                TextField textField = new TextField();
+                textField.setPromptText("checking code");
+                GridPane.setConstraints(textField, 1, 7);
+                sendProductLayout.getChildren().addAll(textField);
+                SendMailSSL.sendLetter(emailInput.getText(), "Delivery company",
+                        "your checking code is " + CHECKING_CODE);
+
+                submitButton.setOnAction(event -> {
+                    if (textField.getText().equals(CHECKING_CODE)) {
+                        clientController.sendProductRequest(new Product(nameInput.getText(), weight, size),
+                                emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
+                                googleMapsAPI.findLocation(choiceTo.getValue()));
+
+                        sendProductLayout.getChildren().remove(textField);
+                    }
+                });
             } catch (Exception e1) {
                 AlertBox.display("Wrong input");
             }
