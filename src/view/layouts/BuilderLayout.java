@@ -58,7 +58,6 @@ public class BuilderLayout {
 
         Button checkOutButton = new Button("Log out");
         checkOutButton.setOnAction(e -> {
-            builder.checkOut();
             window.setScene(scene);
         });
         GridPane.setConstraints(checkOutButton, 0, 5);

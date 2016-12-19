@@ -10,15 +10,10 @@ import model.Department;
 public class BuilderController implements IBuilder{
 
     private DataBase dataBase;
-    private boolean inSystem = false;
     private static final String PASS = "builderPass";
 
     public BuilderController(DataBase dataBase) {
         this.dataBase = dataBase;
-    }
-
-    public boolean isInSystem() {
-        return inSystem;
     }
 
     @Override
@@ -27,15 +22,10 @@ public class BuilderController implements IBuilder{
     }
 
     @Override
-    public void checkIn(String password) {
+    public void checkIn(String password) throws IllegalAccessException{
 
-        if (password.equals(PASS)){
-            inSystem = true;
+        if (!password.equals(PASS)){
+            throw new IllegalAccessException("wrong password");
         }
-    }
-
-    @Override
-    public void checkOut() {
-        inSystem = false;
     }
 }

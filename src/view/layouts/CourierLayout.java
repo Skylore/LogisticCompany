@@ -44,7 +44,6 @@ public class CourierLayout {
         //log out
         Button checkOutButton = new Button("Log out");
         checkOutButton.setOnAction(e -> {
-            courier.checkOut();
             window.setScene(scene);
         });
 

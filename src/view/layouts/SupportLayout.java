@@ -50,7 +50,6 @@ public class SupportLayout {
         //check out
         Button checkOutButton = new Button("Log out");
         checkOutButton.setOnAction(e -> {
-            support.checkOut();
             window.setScene(scene);
         });
 

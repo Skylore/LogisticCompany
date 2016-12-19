@@ -50,35 +50,40 @@ public class StartView extends Application {
         buttonLogIn.setOnAction(e -> {
 
             if (choiceBox.getValue().equals("Admin")) {
-                adminController.checkIn(pass.getText());
-                if (adminController.isInSystem()) {
+
+                try {
+                    adminController.checkIn(pass.getText());
                     AdminLayout.getLayout(window, scene, adminController);
-                } else
+                } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
+                }
             }
 
             if (choiceBox.getValue().equals("Builder")) {
-                builderController.checkIn(pass.getText());
-                if (builderController.isInSystem()) {
+                try {
+                    builderController.checkIn(pass.getText());
                     BuilderLayout.getLayout(window, scene, builderController);
-                } else
+                } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
+                }
             }
 
             if (choiceBox.getValue().equals("Courier")) {
-                courierController.checkIn(pass.getText());
-                if (courierController.isInSystem()) {
+                try {
+                    courierController.checkIn(pass.getText());
                     CourierLayout.getLayout(window, scene, courierController);
-                } else
+                } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
+                }
             }
 
             if (choiceBox.getValue().equals("Support")) {
-                supportController.checkIn(pass.getText());
-                if (supportController.isInSystem()) {
+                try {
+                    supportController.checkIn(pass.getText());
                     SupportLayout.getLayout(window, scene, supportController);
-                } else
+                } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
+                }
             }
 
         });
