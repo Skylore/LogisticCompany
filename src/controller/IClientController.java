@@ -1,10 +1,15 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
+import exceptions.BookedLoginException;
 import geolocation.controller.Location;
 import model.Product;
 
 public interface IClientController {
+
+    void registration(String email, String login, String password) throws BookedLoginException;
+
+    void logIn(String login, String password);
 
     void sendProductRequest(Product product, String email, Location from, Location to) throws IllegalAccessException;
 

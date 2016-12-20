@@ -1,11 +1,13 @@
 import com.google.gson.Gson;
 import controller.ClientController;
 import database.DataBase;
+import exceptions.BookedLoginException;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import model.Product;
 import model.Request;
+import model.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,5 +49,73 @@ public class TestUserController {
         controller.sendProductRequest(new Product("SomeProduct", 10, 10), "shalamay.vlad44@mail",
                 location1, location2);
         Assert.assertEquals("Your product is awaiting", controller.whereIsMyProduct(0));
+    }
+
+    @Test
+    public void testRegistration() {
+
+        DataBase dataBase = new DataBase();
+        ClientController clientController = new ClientController(dataBase);
+
+        String email = "iturchin98@gmail.com";
+        String login = "login";
+        String pass = "pass";
+
+        try {
+            clientController.registration(email, login, pass);
+            Assert.assertEquals(new User(login, email, pass), dataBase.getUsers().get(login));
+        } catch (BookedLoginException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testRegistrationNegative() {
+
+        DataBase dataBase = new DataBase();
+        ClientController clientController = new ClientController(dataBase);
+
+        String email = "iturchin98@gmail.com";
+        String login = "login";
+        String pass = "pass";
+
+        try {
+            clientController.registration(email, login, pass);
+            clientController.registration("@gmail.com", login, pass);
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testLogIn() {
+
+        DataBase dataBase = new DataBase();
+        ClientController clientController = new ClientController(dataBase);
+
+        String email = "iturchin98@gmail.com";
+        String login = "login";
+        String pass = "pass";
+
+        try {
+            clientController.registration(email, login, pass);
+            clientController.logIn(login, pass);
+            Assert.assertTrue(clientController.getInSystem().equals(new User(login, email, pass)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testLogInNegative() {
+
+        DataBase dataBase = new DataBase();
+        ClientController clientController = new ClientController(dataBase);
+
+        try {
+            clientController.logIn("login", "pass");
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
     }
 }
