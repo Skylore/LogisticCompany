@@ -1,13 +1,11 @@
 package database;
 
+import exceptions.BookedLoginException;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
-import model.Department;
-import model.Request;
+import model.*;
 
 import com.sun.istack.internal.NotNull;
-import model.SupportRequest;
-import model.WorkRequest;
 
 import java.util.*;
 
@@ -19,36 +17,32 @@ public class DataBase {
     private List<Request> delivered = new ArrayList<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
     private List<SupportRequest> supportRequests = new ArrayList<>();
+    public Map<String, User> users = new HashMap<>();
 
-    public static List<Department> getDepartments() {
-        return departments;
+    public void addUser(@NotNull User user) throws BookedLoginException{
+        if (users.containsKey(user.getLogin())) {
+            throw new BookedLoginException("Please choose another login");
+        }
+
+        users.put(user.getLogin(), user);
     }
 
-    public List<Request> getRequests() {
-        return requests;
-    }
-
-    public List<Request> getDelivered() {
-        return delivered;
-    }
-
-    public List<SupportRequest> getSupportRequests() {
-        return supportRequests;
+    public void removeUser(@NotNull String password) throws BookedLoginException {
+        try {
+            users.remove(password);
+        } catch (Exception e) {
+            throw new BookedLoginException("such login doesn't exist");
+        }
     }
 
     public void addWorkRequest(@NotNull WorkRequest request) {
         workRequests.add(request);
-
     }
 
     public WorkRequest removeWorkRequest(WorkRequest workRequest) {
 
         workRequests.remove(workRequest);
         return workRequest;
-    }
-
-    public List<WorkRequest> getWorkRequests() {
-        return workRequests;
     }
 
     public void addRequest(@NotNull Request request) {
@@ -135,5 +129,29 @@ public class DataBase {
         private static List<Department> getDepartments() {
             return departments;
         }
+    }
+
+    public static List<Department> getDepartments() {
+        return departments;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public List<Request> getDelivered() {
+        return delivered;
+    }
+
+    public List<SupportRequest> getSupportRequests() {
+        return supportRequests;
+    }
+
+    public List<WorkRequest> getWorkRequests() {
+        return workRequests;
+    }
+
+    public Map<String, User> getUsers() {
+        return users;
     }
 }

@@ -5,12 +5,7 @@ import database.DataBase;
 import gmailApi.SendMailSSL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Product;
 import model.SupportRequest;
-
-import java.security.AccessControlException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SupportController implements ISupport{
 

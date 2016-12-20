@@ -1,6 +1,7 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
+import exceptions.BookedLoginException;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
@@ -8,7 +9,10 @@ import database.DataBase;
 import gmailApi.SendMailSSL;
 import model.Product;
 import model.Request;
+import model.User;
 import model.WorkRequest;
+
+import java.util.NoSuchElementException;
 
 public class ClientController implements IClientController{
 
@@ -18,8 +22,27 @@ public class ClientController implements IClientController{
     private DataBase dataBase;
     private static int id = 0;
 
+    private User inSystem;
+
     public ClientController(DataBase dataBase) {
         this.dataBase = dataBase;
+    }
+
+    @Override
+    public void registration(String email, String login, String password) throws BookedLoginException {
+        dataBase.addUser(new User(login, email, password));
+    }
+
+    @Override
+    public void logIn(String login, String password) throws NoSuchElementException {
+        if (!dataBase.getUsers().containsKey(login)) {
+            throw new NoSuchElementException();
+        }
+        User user = dataBase.getUsers().get(login);
+
+        if (user.getPassword().equals(password)) {
+            this.inSystem = user;
+        }
     }
 
     @Override
@@ -70,6 +93,10 @@ public class ClientController implements IClientController{
 
         dataBase.addWorkRequest(new WorkRequest(name, email, goal, salary));
         System.out.println("Please expect");
+    }
+
+    public User getInSystem() {
+        return this.inSystem;
     }
 
     public static int getId() {
