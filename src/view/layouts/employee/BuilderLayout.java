@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.employee;
 
 import controller.BuilderController;
 import geolocation.controller.GoogleMapsAPIImpl;
@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import view.layouts.AlertBox;
 
 public class BuilderLayout {
 
