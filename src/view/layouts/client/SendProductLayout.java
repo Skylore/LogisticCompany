@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.client;
 
 import controller.ClientController;
 import database.DataBase;
@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Product;
+import view.layouts.AlertBox;
 
 import java.awt.*;
 

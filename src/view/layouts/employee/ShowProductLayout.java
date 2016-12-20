@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.employee;
 
 import controller.AdminController;
 import javafx.collections.FXCollections;
@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Product;
 import model.WorkRequest;
+import view.layouts.AlertBox;
 
 /**
  * Created by Влад on 14.12.2016.

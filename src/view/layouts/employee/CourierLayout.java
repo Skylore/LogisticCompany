@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.employee;
 
 
 import controller.BuilderController;
@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import model.Product;
 import model.Request;
 import model.SupportRequest;
+import view.layouts.AlertBox;
 
 public class CourierLayout {
 

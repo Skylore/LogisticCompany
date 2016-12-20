@@ -2,7 +2,7 @@ package run;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.StartView;
+import view.layouts.LogInLayout;
 
 public class Launcher extends Application{
     public static void main(String[] args) {
@@ -11,6 +11,6 @@ public class Launcher extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        new StartView().start(primaryStage);
+        new LogInLayout().start(primaryStage);
     }
 }

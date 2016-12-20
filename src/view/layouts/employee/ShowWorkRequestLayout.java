@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.employee;
 
 import controller.AdminController;
 import javafx.collections.FXCollections;

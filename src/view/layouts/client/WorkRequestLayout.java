@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.client;
 
 import controller.ClientController;
 import javafx.geometry.Insets;
@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import view.layouts.AlertBox;
 
 public class WorkRequestLayout {
 
