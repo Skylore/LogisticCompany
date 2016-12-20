@@ -1,4 +1,4 @@
-package view.layouts;
+package view.layouts.employee;
 
 import controller.*;
 import dao.ControllerFactory;
@@ -10,16 +10,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import view.layouts.employee.AdminLayout;
-import view.layouts.employee.BuilderLayout;
-import view.layouts.employee.CourierLayout;
-import view.layouts.employee.SupportLayout;
+import view.layouts.AlertBox;
 
 public class AsEmployeeLayout {
 
-    public static void getLayout(Stage window, Scene scene){
+    ControllerFactory controllerFactory;
 
-        ControllerFactory controllerFactory = new ControllerFactory();
+    public AsEmployeeLayout(ControllerFactory controllerFactory) {
+        this.controllerFactory = controllerFactory;
+    }
+
+    public void getLayout(Stage window, Scene scene){
 
         AdminController adminController = (AdminController) controllerFactory.getController("AdminController");
         SupportController supportController = (SupportController) controllerFactory.getController("SupportController");

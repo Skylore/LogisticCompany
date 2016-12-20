@@ -1,5 +1,7 @@
 package view.layouts;
 
+import controller.ClientController;
+import dao.ControllerFactory;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,14 +12,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.layouts.client.ClientView;
+import view.layouts.employee.AsEmployeeLayout;
 
-public class LogInLayout extends Application{
+public class LogInLayout extends Application {
 
     Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        ControllerFactory controllerFactory = new ControllerFactory();
+        ClientView clientView = new ClientView(controllerFactory);
+        AsEmployeeLayout asEmployeeLayout = new AsEmployeeLayout(controllerFactory);
 
         Stage window = primaryStage;
         window.setTitle("Logistic Company");
@@ -27,13 +33,16 @@ public class LogInLayout extends Application{
         topMenu.setAlignment(Pos.TOP_RIGHT);
         topMenu.setPadding(new Insets(15, 15, 15, 15));
         Button employee = new Button("Employee");
-        employee.setOnAction(event -> AsEmployeeLayout.getLayout(window, scene));
+        employee.setOnAction(event -> asEmployeeLayout.getLayout(window, scene));
         topMenu.getChildren().addAll(employee);
 
         //center menu
         VBox centerMenu = new VBox();
         centerMenu.setSpacing(10);
         centerMenu.setAlignment(Pos.CENTER);
+
+        ClientController clientController = (ClientController)
+                controllerFactory.getController("ClientController");
 
         Label logInLabel = new Label("Your login: ");
         Label passLabel = new Label("Your pass: ");
@@ -42,9 +51,27 @@ public class LogInLayout extends Application{
         TextField pass = new TextField();
         pass.setMaxWidth(150);
         Button logInButton = new Button("Log in");
-        logInButton.setOnAction(e -> ClientView.getLayout(window, scene));
+        logInButton.setOnAction(e -> {
+            if (!logIn.getText().equals("") && !pass.getText().equals("")) {
+                try {
+                    clientController.logIn(logIn.getText(), pass.getText());
+                    clientView.getLayout(window, scene);
+                } catch (Exception e1) {
+                    AlertBox.display("Wrong input");
+
+                    logInLabel.setText("");
+                    passLabel.setText("");
+                }
+            } else {
+                AlertBox.display("Please fill up all fields");
+            }
+        });
+
+        SignUpLayout signUpLayout = new SignUpLayout((ClientController)
+                controllerFactory.getController("ClientController"));
+
         Button signUpButton = new Button("Sign up");
-        signUpButton.setOnAction(event -> SignUpLayout.getLayout(window, scene));
+        signUpButton.setOnAction(event -> signUpLayout.getLayout(window, scene));
 
         centerMenu.getChildren().addAll(logInLabel, logIn, passLabel, pass, logInButton, signUpButton);
 
@@ -55,7 +82,5 @@ public class LogInLayout extends Application{
         scene.getStylesheets().add("view/style.css");
         window.setScene(scene);
         window.show();
-
     }
-
 }

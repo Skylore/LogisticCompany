@@ -9,7 +9,7 @@ public interface IClientController {
 
     void registration(String email, String login, String password) throws BookedLoginException;
 
-    void logIn(String login, String password);
+    void logIn(String login, String password) throws IllegalAccessException;
 
     void sendProductRequest(Product product, String email, Location from, Location to) throws IllegalAccessException;
 

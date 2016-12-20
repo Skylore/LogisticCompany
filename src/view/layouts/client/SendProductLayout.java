@@ -6,20 +6,14 @@ import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import gmailApi.SendMailSSL;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import model.Product;
 import view.layouts.AlertBox;
-
-import java.awt.*;
+import utils.KeyFactory;
 
 public class SendProductLayout {
 
@@ -84,9 +78,10 @@ public class SendProductLayout {
         GridPane.setConstraints(submit, 1, 7);
         Button submitButton = new Button("submit");
 
+        KeyFactory keyFactory = new KeyFactory();
         submitButton.setOnAction((e) -> {
 
-            final String CHECKING_CODE = "a1mK34f";
+            final String CHECKING_CODE = keyFactory.generateKey(8);
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {

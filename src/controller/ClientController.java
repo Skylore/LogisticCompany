@@ -34,7 +34,7 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public void logIn(String login, String password) throws NoSuchElementException {
+    public void logIn(String login, String password) throws IllegalAccessException {
         if (!dataBase.getUsers().containsKey(login)) {
             throw new NoSuchElementException();
         }
@@ -42,7 +42,10 @@ public class ClientController implements IClientController{
 
         if (user.getPassword().equals(password)) {
             this.inSystem = user;
+            return;
         }
+
+        throw new IllegalAccessException();
     }
 
     @Override

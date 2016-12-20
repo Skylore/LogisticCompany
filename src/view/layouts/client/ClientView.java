@@ -1,6 +1,7 @@
 package view.layouts.client;
 
-import controller.*;
+import controller.ClientController;
+import controller.SupportController;
 import dao.ControllerFactory;
 import database.Converter;
 import database.Logger;
@@ -15,10 +16,14 @@ import javafx.stage.Stage;
 public class ClientView {
 
     private static BorderPane layout;
+    private ControllerFactory controllerFactory;
 
-    public static void getLayout(Stage window, Scene scene) {
+    public ClientView(ControllerFactory controllerFactory) {
+        this.controllerFactory = controllerFactory;
+    }
 
-        ControllerFactory controllerFactory = new ControllerFactory();
+    public void getLayout(Stage window, Scene scene) {
+
         ClientController clientController = (ClientController) controllerFactory.getController("ClientController");
         SupportController supportController = (SupportController) controllerFactory.getController("SupportController");
 
