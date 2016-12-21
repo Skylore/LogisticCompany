@@ -2,12 +2,15 @@ package view.layouts.employee;
 
 import controller.*;
 import dao.ControllerFactory;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.layouts.AlertBox;
@@ -27,7 +30,7 @@ public class AsEmployeeLayout {
         BuilderController builderController = (BuilderController) controllerFactory.getController("BuilderController");
         CourierController courierController = (CourierController) controllerFactory.getController("CourierController");
 
-        // log in for employee
+        // center menu
         Label labelLogIn = new Label("Log in as an employee");
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
@@ -80,10 +83,21 @@ public class AsEmployeeLayout {
 
         });
 
-        VBox layout = new VBox();
-        layout.getChildren().addAll(labelLogIn, choiceBox, pass, buttonLogIn);
-        layout.setSpacing(10);
-        layout.setAlignment(Pos.CENTER);
+        VBox center = new VBox();
+        center.getChildren().addAll(labelLogIn, choiceBox, pass, buttonLogIn);
+        center.setSpacing(10);
+        center.setAlignment(Pos.CENTER);
+
+        //top menu
+        Button logOut = new Button("Log out");
+        logOut.setOnAction(event -> window.setScene(scene));
+        StackPane top = new StackPane(logOut);
+        top.setAlignment(Pos.TOP_RIGHT);
+        top.setPadding(new Insets(10, 10, 10, 10));
+
+        BorderPane layout = new BorderPane();
+        layout.setCenter(center);
+        layout.setTop(top);
 
         Scene empScene = new Scene(layout, 760, 475);
         empScene.getStylesheets().add("view/style.css");
