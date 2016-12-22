@@ -10,6 +10,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,10 +24,16 @@ public class ClientView {
         this.controllerFactory = controllerFactory;
     }
 
-    public void getLayout(Stage window, Scene scene) {
+    public void getLayout(Stage window, Scene scene, ClientController clientController) {
 
-        ClientController clientController = (ClientController) controllerFactory.getController("ClientController");
         SupportController supportController = (SupportController) controllerFactory.getController("SupportController");
+
+        //top label
+        Label clientInfo = new Label("Signed in as "  + clientController.getInSystem().getLogin());
+        clientInfo.getStyleClass().add("label-info");
+        StackPane topLayout = new StackPane(clientInfo);
+        topLayout.setPadding(new Insets(10, 10, 10, 10));
+        topLayout.setAlignment(Pos.TOP_RIGHT);
 
         TreeItem<String> root, client;
 
@@ -90,6 +98,7 @@ public class ClientView {
         leftMenu.setMaxHeight(300);
 
         layout = new BorderPane();
+        layout.setTop(topLayout);
         layout.setLeft(leftMenu);
         layout.setBottom(bottomMenu);
         Scene userScene = new Scene(layout, 760, 475);

@@ -8,3 +8,8 @@
 .label{
     -fx-font-weight: bold;
 }
+.label-info{
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}

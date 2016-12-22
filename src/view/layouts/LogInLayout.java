@@ -55,9 +55,9 @@ public class LogInLayout extends Application {
             if (!logIn.getText().equals("") && !pass.getText().equals("")) {
                 try {
                     clientController.logIn(logIn.getText(), pass.getText());
-                    clientView.getLayout(window, scene);
+                    clientView.getLayout(window, scene, clientController);
                 } catch (Exception e1) {
-                    AlertBox.display("Wrong input");
+                    e1.printStackTrace();
 
                     logInLabel.setText("");
                     passLabel.setText("");
