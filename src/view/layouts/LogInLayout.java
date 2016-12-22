@@ -22,6 +22,7 @@ public class LogInLayout extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         ControllerFactory controllerFactory = new ControllerFactory();
+
         ClientView clientView = new ClientView(controllerFactory);
         AsEmployeeLayout asEmployeeLayout = new AsEmployeeLayout(controllerFactory);
 
@@ -59,8 +60,8 @@ public class LogInLayout extends Application {
                 } catch (Exception e1) {
                     e1.printStackTrace();
 
-                    logInLabel.setText("");
-                    passLabel.setText("");
+                    logIn.setText("");
+                    pass.setText("");
                 }
             } else {
                 AlertBox.display("Please fill up all fields");
