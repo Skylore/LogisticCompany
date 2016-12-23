@@ -44,26 +44,21 @@ public class SendProductLayout {
         TextField sizeInput = new TextField();
         GridPane.setConstraints(sizeInput, 1, 2);
 
-        Label emailLabel = new Label("Email: ");
-        GridPane.setConstraints(emailLabel, 0, 3);
-        TextField emailInput = new TextField();
-        GridPane.setConstraints(emailInput, 1, 3);
-
         Label fromLabel = new Label("From: ");
-        GridPane.setConstraints(fromLabel, 0, 4);
+        GridPane.setConstraints(fromLabel, 0, 3);
         ChoiceBox<String> choiceFrom = new ChoiceBox<>();
         DataBase.getDepartments().forEach(department -> choiceFrom.getItems().add(department.getLocation().getFormattedAddress()));
         choiceFrom.getSelectionModel().selectedItemProperty().
                 addListener((v, oldValue, newValue) -> System.out.println(v));
-        GridPane.setConstraints(choiceFrom, 1, 4);
+        GridPane.setConstraints(choiceFrom, 1, 3);
 
         Label toLabel = new Label("To: ");
-        GridPane.setConstraints(toLabel, 0, 5);
+        GridPane.setConstraints(toLabel, 0, 4);
         ChoiceBox<String> choiceTo = new ChoiceBox<>();
         DataBase.getDepartments().forEach(department -> choiceTo.getItems().add(department.getLocation().getFormattedAddress()));
         choiceTo.getSelectionModel().selectedItemProperty().
                 addListener((v, oldValue, newValue) -> System.out.println(v));
-        GridPane.setConstraints(choiceTo, 1, 5);
+        GridPane.setConstraints(choiceTo, 1, 4);
 
         Utils utils = new Utils();
 
@@ -88,26 +83,30 @@ public class SendProductLayout {
                 int weight = Integer.parseInt(weightInput.getText());
                 int size = Integer.parseInt(sizeInput.getText());
 
-                if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && emailInput.getText().contains("@")) {
+                if (!nameInput.getText().equals("")) {
+
+                    String email = clientController.getInSystem().getEmail();
 
                     TextField textField = new TextField();
                     textField.setPromptText("checking code");
                     GridPane.setConstraints(textField, 1, 7);
                     sendProductLayout.getChildren().addAll(textField);
-                    SendMailSSL.sendLetter(emailInput.getText(), "Delivery company",
+                    SendMailSSL.sendLetter(email, "Delivery company",
                             "your checking code is " + CHECKING_CODE);
 
                     submitButton.setOnAction(event -> {
                         if (textField.getText().equals(CHECKING_CODE)) {
                             clientController.sendProductRequest(new Product(nameInput.getText(), weight, size),
-                                    emailInput.getText(), googleMapsAPI.findLocation(choiceFrom.getValue()),
+                                    email, googleMapsAPI.findLocation(choiceFrom.getValue()),
                                     googleMapsAPI.findLocation(choiceTo.getValue()));
 
                             sendProductLayout.getChildren().remove(textField);
                             nameInput.setText("");
                             weightInput.setText("");
                             sizeInput.setText("");
-                            emailInput.setText("");
+                            price.setText("");
+                            choiceTo.setValue(null);
+                            choiceFrom.setValue(null);
                         }
                     });
                 }
@@ -121,7 +120,7 @@ public class SendProductLayout {
         GridPane.setConstraints(submitButton, 0, 7);
 
         sendProductLayout.getChildren().addAll(nameLabel, nameInput, weightLabel, weightInput,
-                sizeLabel, sizeInput, emailLabel, emailInput, choiceFrom, choiceTo, fromLabel,
+                sizeLabel, sizeInput, choiceFrom, choiceTo, fromLabel,
                 toLabel, price, calculateButton, submit, submitButton);
         return sendProductLayout;
     }
