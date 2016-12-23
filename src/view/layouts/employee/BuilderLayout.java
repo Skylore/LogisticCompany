@@ -1,6 +1,9 @@
 package view.layouts.employee;
 
 import controller.BuilderController;
+import dao.ControllerFactory;
+import database.Converter;
+import database.Logger;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
 import javafx.geometry.Insets;
@@ -15,7 +18,7 @@ import view.layouts.AlertBox;
 
 public class BuilderLayout {
 
-    public static void getLayout(Stage window, Scene scene, BuilderController builder) {
+    public static void getLayout(Stage window, Scene scene, BuilderController builder, ControllerFactory controllerFactory) {
 
         GridPane builderLayout = new GridPane();
         builderLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -69,6 +72,8 @@ public class BuilderLayout {
 
         Scene builderScene = new Scene(builderLayout, 760, 475);
         builderLayout.getStylesheets().add("view/style.css");
+        window.setOnCloseRequest((e) ->
+                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
         window.setScene(builderScene);
 
     }

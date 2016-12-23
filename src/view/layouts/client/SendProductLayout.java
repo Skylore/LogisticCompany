@@ -18,9 +18,11 @@ import utils.KeyFactory;
 public class SendProductLayout {
 
     private ClientController clientController;
+    private DataBase dataBase;
 
-    public SendProductLayout(ClientController clientController) {
+    public SendProductLayout(ClientController clientController, DataBase dataBase) {
         this.clientController = clientController;
+        this.dataBase = dataBase;
     }
 
     public GridPane getLayout() {
@@ -52,7 +54,7 @@ public class SendProductLayout {
         Label fromLabel = new Label("From: ");
         GridPane.setConstraints(fromLabel, 0, 4);
         ChoiceBox<String> choiceFrom = new ChoiceBox<>();
-        DataBase.getDepartments().forEach(department -> choiceFrom.getItems().add(department.getLocation().getFormattedAddress()));
+        dataBase.getDepartments().forEach(department -> choiceFrom.getItems().add(department.getLocation().getFormattedAddress()));
         choiceFrom.getSelectionModel().selectedItemProperty().
                 addListener((v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(choiceFrom, 1, 4);
@@ -60,7 +62,7 @@ public class SendProductLayout {
         Label toLabel = new Label("To: ");
         GridPane.setConstraints(toLabel, 0, 5);
         ChoiceBox<String> choiceTo = new ChoiceBox<>();
-        DataBase.getDepartments().forEach(department -> choiceTo.getItems().add(department.getLocation().getFormattedAddress()));
+        dataBase.getDepartments().forEach(department -> choiceTo.getItems().add(department.getLocation().getFormattedAddress()));
         choiceTo.getSelectionModel().selectedItemProperty().
                 addListener((v, oldValue, newValue) -> System.out.println(v));
         GridPane.setConstraints(choiceTo, 1, 5);

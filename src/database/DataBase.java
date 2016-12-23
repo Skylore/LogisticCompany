@@ -11,15 +11,15 @@ import java.util.*;
 
 public class DataBase {
 
-    public static List<Department> departments = DepartmentList.getDepartments();
-
+    //private List<Department> departments = DepartmentList.getDepartments();
+    private List<Department> departments = new ArrayList<>();
     private List<Request> requests = new LinkedList<>();
     private List<Request> delivered = new ArrayList<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
     private List<SupportRequest> supportRequests = new ArrayList<>();
     public Map<String, User> users = new HashMap<>();
 
-    public void addUser(@NotNull User user) throws BookedLoginException{
+    public void addUser(@NotNull User user) throws BookedLoginException {
         if (users.containsKey(user.getLogin())) {
             throw new BookedLoginException("Please choose another login");
         }
@@ -100,8 +100,8 @@ public class DataBase {
 
         private static List<Department> departments = new ArrayList<>();
 
-        static {
 
+        private static void initDepartments() {
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             Department department4 = new Department(4, googleMapsAPI.
@@ -124,14 +124,16 @@ public class DataBase {
             departments.add(department2);
             departments.add(department3);
             departments.add(department4);
+
         }
 
         private static List<Department> getDepartments() {
+            initDepartments();
             return departments;
         }
     }
 
-    public static List<Department> getDepartments() {
+    public List<Department> getDepartments() {
         return departments;
     }
 

@@ -24,13 +24,7 @@ public class Logger {
         try {
             return Files.readAllLines(Paths.get("dataBaseLog.txt")).stream().collect(Collectors.joining("\n"));
         } catch (IOException e) {
-            try {
-                FileWriter writer = new FileWriter(new File("dataBaseLog.txt"));
-                writer.write("{\"requests\":[],\"delivered\":[],\"workRequests\":[],\"supportRequests\":[]}");
-                writer.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            e.printStackTrace();
         }
 
         throw new EmptyStackException();

@@ -48,7 +48,7 @@ public class ClientView {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
-        SendProductLayout sendProductLayout = new SendProductLayout(clientController);
+        SendProductLayout sendProductLayout = new SendProductLayout(clientController, controllerFactory.getDataBase());
         GetProductLayout getProductLayout = new GetProductLayout(clientController);
         WorkRequestLayout workRequestLayout = new WorkRequestLayout(clientController);
         FindProductLayout findProductLayout = new FindProductLayout(clientController);

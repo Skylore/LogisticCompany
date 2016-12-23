@@ -48,7 +48,7 @@ public class AsEmployeeLayout {
 
                 try {
                     adminController.checkIn(pass.getText());
-                    AdminLayout.getLayout(window, scene, adminController);
+                    AdminLayout.getLayout(window, scene, adminController, controllerFactory);
                 } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
                 }
@@ -57,7 +57,7 @@ public class AsEmployeeLayout {
             if (choiceBox.getValue().equals("Builder")) {
                 try {
                     builderController.checkIn(pass.getText());
-                    BuilderLayout.getLayout(window, scene, builderController);
+                    BuilderLayout.getLayout(window, scene, builderController, controllerFactory);
                 } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
                 }
@@ -66,7 +66,7 @@ public class AsEmployeeLayout {
             if (choiceBox.getValue().equals("Courier")) {
                 try {
                     courierController.checkIn(pass.getText());
-                    CourierLayout.getLayout(window, scene, courierController);
+                    CourierLayout.getLayout(window, scene, courierController, controllerFactory);
                 } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
                 }
@@ -75,7 +75,7 @@ public class AsEmployeeLayout {
             if (choiceBox.getValue().equals("Support")) {
                 try {
                     supportController.checkIn(pass.getText());
-                    SupportLayout.getLayout(window, scene, supportController);
+                    SupportLayout.getLayout(window, scene, supportController, controllerFactory);
                 } catch (IllegalAccessException e1) {
                     AlertBox.display("Wrong password!");
                 }

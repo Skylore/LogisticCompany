@@ -1,6 +1,9 @@
 package view.layouts.employee;
 
 import controller.SupportController;
+import dao.ControllerFactory;
+import database.Converter;
+import database.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +21,7 @@ import model.SupportRequest;
 public class SupportLayout {
     private static TableView<SupportRequest> table;
 
-    public static void getLayout(Stage window, Scene scene, SupportController support){
+    public static void getLayout(Stage window, Scene scene, SupportController support, ControllerFactory controllerFactory){
 
         //column
         TableColumn<SupportRequest, String> emailColumn = new TableColumn<>("Email");
@@ -61,6 +64,8 @@ public class SupportLayout {
 
         Scene supportScene = new Scene(layout, 760, 475);
         supportScene.getStylesheets().add("view/style.css");
+        window.setOnCloseRequest((e) ->
+                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
         window.setScene(supportScene);
     }
 }
