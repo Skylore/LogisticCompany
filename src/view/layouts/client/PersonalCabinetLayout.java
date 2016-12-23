@@ -3,18 +3,19 @@ package view.layouts.client;
 import controller.ClientController;
 import gmailApi.SendMailSSL;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import model.User;
 import utils.KeyFactory;
 import view.layouts.AlertBox;
 
 public class PersonalCabinetLayout {
 
-    public GridPane getLayout(ClientController clientController) {
+    public GridPane getLayout(ClientController clientController, Scene scene, Stage stage) {
         GridPane cabinetLayout = new GridPane();
         cabinetLayout.setPadding(new Insets(10, 10, 10, 10));
         cabinetLayout.setVgap(8);
@@ -107,8 +108,12 @@ public class PersonalCabinetLayout {
             });
         });
 
+        Button logOutButton = new Button("log out");
+        GridPane.setConstraints(logOutButton, 0, 6);
+        logOutButton.setOnAction((e) -> stage.setScene(scene));
+
         cabinetLayout.getChildren().addAll(loginLabel, login, passwordLabel,
-                pass, emailLabel, email, changeEmail, changePassword);
+                pass, emailLabel, email, changeEmail, changePassword, logOutButton);
         return cabinetLayout;
     }
 }

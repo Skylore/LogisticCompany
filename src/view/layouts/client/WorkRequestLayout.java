@@ -29,11 +29,6 @@ public class WorkRequestLayout {
         TextField nameInput = new TextField();
         GridPane.setConstraints(nameInput, 1, 0);
 
-        Label emailLabel = new Label("Email: ");
-        GridPane.setConstraints(emailLabel, 0, 1);
-        TextField emailInput = new TextField();
-        GridPane.setConstraints(emailInput, 1, 1);
-
         Label salaryLabel = new Label("Desired salary : ");
         GridPane.setConstraints(salaryLabel, 0, 2);
         TextField salaryInput = new TextField();
@@ -53,9 +48,9 @@ public class WorkRequestLayout {
         Button button = new Button("Send");
         button.setOnAction(e -> {
 
-            if (!nameInput.getText().equals("") && !emailInput.getText().equals("") && stateChoice.getItems() != null) {
+            if (!nameInput.getText().equals("") && !stateChoice.getValue().equals("")) {
 
-                clientController.sentWorkRequest(nameInput.getText(), emailInput.getText(),
+                clientController.sentWorkRequest(nameInput.getText(), clientController.getInSystem().getEmail(),
                         stateChoice.getValue(), Integer.valueOf(salaryInput.getText()));
 
                 resultLabel.setText("Please wait for admin's answer");
@@ -66,7 +61,7 @@ public class WorkRequestLayout {
         GridPane.setConstraints(button, 0, 4);
 
         workRequestLayout.getChildren().addAll(nameLabel, nameInput, salaryLabel, salaryInput,
-                goalLabel, stateChoice, emailLabel, emailInput, button, resultLabel);
+                goalLabel, stateChoice, button, resultLabel);
         return workRequestLayout;
     }
 }
