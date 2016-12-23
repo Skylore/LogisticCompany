@@ -27,9 +27,9 @@ public class DataBase {
         users.put(user.getLogin(), user);
     }
 
-    public void removeUser(@NotNull String password) {
+    public User removeUser(@NotNull String login) {
         try {
-            users.remove(password);
+            return users.remove(login);
         } catch (Exception e) {
             throw new NoSuchElementException();
         }
