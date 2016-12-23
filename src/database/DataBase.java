@@ -27,11 +27,11 @@ public class DataBase {
         users.put(user.getLogin(), user);
     }
 
-    public void removeUser(@NotNull String password) throws BookedLoginException {
+    public void removeUser(@NotNull String password) {
         try {
             users.remove(password);
         } catch (Exception e) {
-            throw new BookedLoginException("such login doesn't exist");
+            throw new NoSuchElementException();
         }
     }
 

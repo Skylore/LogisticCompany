@@ -98,6 +98,16 @@ public class ClientController implements IClientController{
         System.out.println("Please expect");
     }
 
+    @Override
+    public void updateInfo(User user, String scope) throws BookedLoginException {
+        if (!dataBase.getUsers().containsKey(scope) || user == null || scope == null) {
+            throw new NoSuchElementException();
+        }
+
+        dataBase.removeUser(scope);
+        dataBase.addUser(user);
+    }
+
     public User getInSystem() {
         return this.inSystem;
     }

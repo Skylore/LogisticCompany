@@ -10,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -27,13 +26,7 @@ public class ClientView {
     public void getLayout(Stage window, Scene scene, ClientController clientController) {
 
         SupportController supportController = (SupportController) controllerFactory.getController("SupportController");
-
-        //top label
-        Label clientInfo = new Label("Signed in as "  + clientController.getInSystem().getLogin());
-        clientInfo.getStyleClass().add("label-info");
-        StackPane topLayout = new StackPane(clientInfo);
-        topLayout.setPadding(new Insets(10, 10, 10, 10));
-        topLayout.setAlignment(Pos.TOP_RIGHT);
+        PersonalCabinetLayout personalCabinetLayout = new PersonalCabinetLayout();
 
         TreeItem<String> root, client;
 
@@ -96,6 +89,17 @@ public class ClientView {
         leftMenu.getChildren().addAll(tree);
         leftMenu.setSpacing(10);
         leftMenu.setMaxHeight(300);
+
+        //top label
+        Label clientInfo = new Label(clientController.getInSystem().getLogin());
+        clientInfo.getStyleClass().add("label-info");
+        StackPane topLayout = new StackPane(clientInfo);
+        topLayout.setPadding(new Insets(10, 10, 10, 10));
+        topLayout.setAlignment(Pos.TOP_RIGHT);
+
+        clientInfo.setOnMouseClicked((e) ->
+                layout.setCenter(personalCabinetLayout.getLayout(clientController)));
+
 
         layout = new BorderPane();
         layout.setTop(topLayout);
