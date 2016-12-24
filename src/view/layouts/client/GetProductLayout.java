@@ -1,6 +1,7 @@
 package view.layouts.client;
 
 import controller.ClientController;
+import database.DataBase;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,9 +13,12 @@ import view.layouts.AlertBox;
 public class GetProductLayout {
 
     private ClientController clientController;
+    private DataBase dataBase;
 
-    public GetProductLayout(ClientController clientController) {
+
+    public GetProductLayout(ClientController clientController, DataBase dataBase) {
         this.clientController = clientController;
+        this.dataBase = dataBase;
     }
 
     public GridPane getLayout() {
@@ -35,7 +39,7 @@ public class GetProductLayout {
         Button button = new Button("Get product");
         button.setOnAction(e -> {
             try {
-                if (Integer.valueOf(idInput.getText()) >= ClientController.getId()) {
+                if (!dataBase.getRequests().containsKey(Integer.valueOf(idInput.getText()))) {
                     AlertBox.display("Incorrect id input");
                 } else if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
                         equals("Your product delivered")) {

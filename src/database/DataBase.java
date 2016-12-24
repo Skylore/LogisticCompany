@@ -3,6 +3,7 @@ package database;
 import exceptions.BookedLoginException;
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
 import model.*;
 
 import com.sun.istack.internal.NotNull;
@@ -11,10 +12,11 @@ import java.util.*;
 
 public class DataBase {
 
+    private int id = 0;
     public static List<Department> departments = DepartmentList.getDepartments();
 
-    private List<Request> requests = new LinkedList<>();
-    private List<Request> delivered = new ArrayList<>();
+    private Map<Integer, Request> requests = new HashMap<>();
+    private Map<Integer, Request> delivered = new HashMap<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
     private List<SupportRequest> supportRequests = new ArrayList<>();
     public Map<String, User> users = new HashMap<>();
@@ -41,37 +43,22 @@ public class DataBase {
         return workRequest;
     }
 
-    public void addRequest(@NotNull Request request) {
-        requests.add(request);
+    public int addRequest(String email, Product product, int price, Location from, Location to) {
+
+        requests.put(id, new Request(email, product, price, from, to));
+        return id++;
     }
 
-    public Request removeRequest(String name) {
-        Request res = null;
+    public Request requestToDelivered(String name) {
 
-        for (Request r : requests) {
-            if (r.getProduct().getName().equals(name)) {
-                res = r;
-                break;
-            }
-        }
-        requests.remove(res);
-        return res;
+        Optional<Integer> id = requests.keySet().stream().filter(key -> requests.get(key).getProduct().getName().equals(name)).findFirst();
+        delivered.put(id.get(), requests.get(id.get()));
+        return requests.remove(id.get());
     }
 
-    public void deliver(@NotNull Request request) {
-        delivered.add(request);
-    }
-
+    //todo remove by id and return removed request
     public Request removeDelivered(int id) {
-        for (Request request : delivered) {
-            if (request.getId() == id) {
-
-                delivered.remove(id);
-                return request;
-
-            }
-        }
-        return null;
+        return delivered.remove(id);
 
     }
 
@@ -129,11 +116,11 @@ public class DataBase {
         return departments;
     }
 
-    public List<Request> getRequests() {
+    public Map<Integer, Request> getRequests() {
         return requests;
     }
 
-    public List<Request> getDelivered() {
+    public Map<Integer, Request> getDelivered() {
         return delivered;
     }
 

@@ -16,18 +16,17 @@ public class CourierController implements ICourierController {
         this.dataBase = dataBase;
     }
 
-    public List<String> getIdRequests() {
+    public List<String> getRequestsName() {
         List<String> result = new ArrayList<>();
 
-        dataBase.getRequests().forEach(r -> result.add(r.getProduct().getName()));
+        dataBase.getRequests().values().forEach(r -> result.add(r.getProduct().getName()));
         return result;
     }
 
     @Override
     public void deliver(String name) {
 
-        Request removed = dataBase.removeRequest(name);
-        dataBase.deliver(removed);
+        Request removed = dataBase.requestToDelivered(name);
 
         SendMailSSL.sendLetter(removed.getEmail(), "Delivery service", "product:\n" +
                 removed.getProduct().getName() + "\ndelivered by address:\n" + removed.getTo().getFormattedAddress());

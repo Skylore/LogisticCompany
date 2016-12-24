@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 public class TestUserController {
 
     private GoogleMapsAPI googleMapsAPI;
-    private DataBase db;
+    private DataBase db = new DataBase();
     private ClientController controller;
     private Location location1;
     private Location location2;
@@ -37,20 +37,20 @@ public class TestUserController {
     @Test
     public void testSendProductRequest() {
 
-        controller.sendProductRequest(new Product("SomeProduct", 10, 10), "shalamay.vlad44@mail",
-                location1, location2);
+        System.out.println(controller.sendProductRequest(new Product("SomeProduct", 10, 10),
+                "shalamay.vlad44@gmail.com", location1, location2));
 
-        Request request = new Request(1, "shalamay.vlad44@mail", new Product("SomeProduct", 10, 10),
+        Request request = new Request("shalamay.vlad44@gmail.com", new Product("SomeProduct", 10, 10),
                 (int) ((googleMapsAPI.getDistance(location1, location2) / 1000 * 20)), location1, location2);
 
-        Assert.assertTrue(db.getRequests().get(0).equals(request));
+        Assert.assertEquals(request, db.getRequests().get(0));
     }
 
     @Test
     public void testWhereIsMyProduct() {
 
-        controller.sendProductRequest(new Product("SomeProduct", 10, 10), "shalamay.vlad44@mail",
-                location1, location2);
+        controller.sendProductRequest(new Product("SomeProduct", 10, 10),
+                "shalamay.vlad44@gmail.com", location1, location2);
         Assert.assertEquals("Your product is awaiting", controller.whereIsMyProduct(0));
     }
 

@@ -4,24 +4,18 @@ import geolocation.controller.Location;
 
 public class Request {
 
-    private int id;
     private String email;
     private Product product;
     private int price;
     private Location from;
     private Location to;
 
-    public Request(int id, String email, Product product, int price, Location from, Location to) {
-        this.id = id;
+    public Request(String email, Product product, int price, Location from, Location to) {
         this.email = email;
         this.product = product;
         this.price = price;
         this.from = from;
         this.to = to;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getEmail() {
@@ -44,7 +38,6 @@ public class Request {
         return to;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,17 +45,16 @@ public class Request {
 
         Request request = (Request) o;
 
-        if (id != request.id) return false;
         if (price != request.price) return false;
+        if (email != null ? !email.equals(request.email) : request.email != null) return false;
         if (product != null ? !product.equals(request.product) : request.product != null) return false;
         if (from != null ? !from.equals(request.from) : request.from != null) return false;
         return to != null ? to.equals(request.to) : request.to == null;
-
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = email != null ? email.hashCode() : 0;
         result = 31 * result + (product != null ? product.hashCode() : 0);
         result = 31 * result + price;
         result = 31 * result + (from != null ? from.hashCode() : 0);
@@ -72,13 +64,12 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request -> " +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", product=" + product.getName() +
+        return "Request{" +
+                "email='" + email + '\'' +
+                ", product=" + product +
                 ", price=" + price +
-                ", \nfrom=" + from.getFormattedAddress() +
-                ", to=" + to.getFormattedAddress() +
-                "\n\n";
+                ", from=" + from +
+                ", to=" + to +
+                '}';
     }
 }

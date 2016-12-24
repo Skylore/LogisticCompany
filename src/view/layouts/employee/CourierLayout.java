@@ -1,25 +1,13 @@
 package view.layouts.employee;
 
 
-import controller.BuilderController;
 import controller.CourierController;
-import controller.SupportController;
-import geolocation.controller.GoogleMapsAPI;
-import geolocation.controller.GoogleMapsAPIImpl;
-import geolocation.controller.Location;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Product;
-import model.Request;
-import model.SupportRequest;
 import view.layouts.AlertBox;
 
 public class CourierLayout {
@@ -33,7 +21,7 @@ public class CourierLayout {
 
         //choice box
         ChoiceBox<String> idBox = new ChoiceBox<>();
-        idBox.getItems().addAll(courier.getIdRequests());
+        idBox.getItems().addAll(courier.getRequestsName());
 
         //deliver
         Button deliveryButton = new Button("Deliver Product");

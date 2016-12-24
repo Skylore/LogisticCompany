@@ -42,9 +42,9 @@ public class ClientView {
         makeBrunch("Find out where your product", client);
 
         SendProductLayout sendProductLayout = new SendProductLayout(clientController);
-        GetProductLayout getProductLayout = new GetProductLayout(clientController);
+        GetProductLayout getProductLayout = new GetProductLayout(clientController, controllerFactory.getDataBase());
         WorkRequestLayout workRequestLayout = new WorkRequestLayout(clientController);
-        FindProductLayout findProductLayout = new FindProductLayout(clientController);
+        FindProductLayout findProductLayout = new FindProductLayout(clientController, controllerFactory.getDataBase());
 
         TreeView<String> tree = new TreeView<>(root);
         tree.setShowRoot(false);

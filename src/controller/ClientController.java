@@ -13,6 +13,7 @@ import model.User;
 import model.WorkRequest;
 import utils.SecurityUtils;
 
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class ClientController implements IClientController{
@@ -21,7 +22,6 @@ public class ClientController implements IClientController{
 
     private GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
     private DataBase dataBase;
-    private static int id = 0;
 
     private User inSystem;
 
@@ -50,26 +50,24 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public void sendProductRequest(Product product,String email, Location from, Location to) {
+    public int sendProductRequest(Product product,String email, Location from, Location to) {
 
         double allDistance = googleMapsAPI.getDistance(from, to) / 1000;
 
-        dataBase.addRequest(new Request(id, email, product,
-                ((int) (allDistance * PRICE_BY_KILOMETER)), from, to));
+        int id = dataBase.addRequest(email, product,
+                ((int) (allDistance * PRICE_BY_KILOMETER)), from, to);
 
         SendMailSSL.sendLetter(email, "Delivery company", "you have ordered delivery of " + product.getName() +
                 " by address " + to.getFormattedAddress() + "\nyour product's id is " + id);
-        id++;
+        return id;
     }
 
     @Override
     public String whereIsMyProduct(int id) {
-
-        if (dataBase.getRequests().stream().filter(r -> r.getId() == id).count() == 0)
+        if (!dataBase.getRequests().containsKey(id))
             return "Your product delivered";
         else
             return "Your product is awaiting";
-
     }
 
     @Override
@@ -105,7 +103,4 @@ public class ClientController implements IClientController{
         return this.inSystem;
     }
 
-    public static int getId() {
-        return id;
-    }
 }

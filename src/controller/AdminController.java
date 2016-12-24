@@ -68,10 +68,10 @@ public class AdminController implements IAdminController{
                 map(Department::getLocation).findFirst();
 
         // compare department location and product location
-        dataBase.getRequests().stream().filter(request -> request.getFrom().equals(location.get())).
+        dataBase.getRequests().values().stream().filter(request -> request.getFrom().equals(location.get())).
                 forEach(request -> products.add(request.getProduct()));
 
-        dataBase.getDelivered().stream().filter(request -> request.getTo().equals(location.get())).
+        dataBase.getDelivered().values().stream().filter(request -> request.getTo().equals(location.get())).
                 forEach(request -> products.add(request.getProduct()));
 
         return products;

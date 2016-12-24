@@ -12,7 +12,7 @@ public interface IClientController {
 
     void logIn(String login, String password) throws IllegalAccessException;
 
-    void sendProductRequest(Product product, String email, Location from, Location to) throws IllegalAccessException;
+    int sendProductRequest(Product product, String email, Location from, Location to) throws IllegalAccessException;
 
     String whereIsMyProduct(int id);
 
