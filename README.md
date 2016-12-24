@@ -17,10 +17,10 @@ all fields, after that you could using all functions.
 
 _there are such functions_
 <strong>
-* Send product
-* Get product
-* Find out where your product
-* Sent request for a work
+* [Send product](https://github.com/Skylore/LogisticCompany#send-product)
+* [Get product](https://github.com/Skylore/LogisticCompany#get-product)
+* [Find out where your product](https://github.com/Skylore/LogisticCompany#find-out-where-my-product)
+* [Sent request for a work](https://github.com/Skylore/LogisticCompany#send-request-for-a-work)
 </strong>
 
 ###Send Product
