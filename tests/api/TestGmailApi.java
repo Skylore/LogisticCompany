@@ -7,9 +7,6 @@ import org.junit.rules.ExpectedException;
 
 public class TestGmailApi {
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     @Test
     public void testGmail(){
         SendMailSSL.sendLetter("shalamay.vlad44@gmail.com", "some tittle", "some text");
@@ -17,7 +14,6 @@ public class TestGmailApi {
 
     @Test(expected = NullPointerException.class)
     public void negativeTestGmail(){
-       // exception.expect(NullPointerException.class);
         SendMailSSL.sendLetter(null, null, null);
     }
 

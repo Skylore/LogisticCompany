@@ -1,6 +1,5 @@
 package client;
 
-import com.google.gson.Gson;
 import controller.ClientController;
 import database.DataBase;
 import exceptions.BookedLoginException;
@@ -14,6 +13,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import utils.SecurityUtils;
+
+import java.util.NoSuchElementException;
 
 public class TestUserController {
 
@@ -42,7 +43,6 @@ public class TestUserController {
         Request request = new Request(1, "shalamay.vlad44@mail", new Product("SomeProduct", 10, 10),
                 (int) ((googleMapsAPI.getDistance(location1, location2) / 1000 * 20)), location1, location2);
 
-        Gson gson = new Gson();
         Assert.assertTrue(db.getRequests().get(0).equals(request));
     }
 
@@ -55,70 +55,46 @@ public class TestUserController {
     }
 
     @Test
-    public void testRegistration() {
-
-        DataBase dataBase = new DataBase();
-        ClientController clientController = new ClientController(dataBase);
+    public void testRegistration() throws BookedLoginException {
 
         String email = "iturchin98@gmail.com";
         String login = "login";
         String pass = "pass";
 
-        try {
-            clientController.registration(email, login, pass);
-            Assert.assertEquals(new User(login, email, SecurityUtils.hashMD5(pass)), dataBase.getUsers().get(login));
-        } catch (BookedLoginException e) {
-            e.printStackTrace();
-        }
+        controller.registration(email, login, pass);
+        Assert.assertEquals(new User(login, email, SecurityUtils.hashMD5(pass)), db.getUsers().get(login));
+
     }
 
-    @Test
-    public void testRegistrationNegative() {
-
-        DataBase dataBase = new DataBase();
-        ClientController clientController = new ClientController(dataBase);
+    @Test(expected = BookedLoginException.class)
+    public void testRegistrationNegative() throws BookedLoginException {
 
         String email = "iturchin98@gmail.com";
         String login = "login";
         String pass = "pass";
 
-        try {
-            clientController.registration(email, login, pass);
-            clientController.registration("@gmail.com", login, pass);
-        } catch (Exception e) {
-            Assert.assertTrue(true);
-        }
+        controller.registration(email, login, pass);
+        controller.registration("@gmail.com", login, pass);
     }
 
     @Test
     public void testLogIn() {
 
-        DataBase dataBase = new DataBase();
-        ClientController clientController = new ClientController(dataBase);
-
-        String email = "iturchin98@gmail.com";
+        String email = "shalamay.vlad44@gmail.com";
         String login = "login";
         String pass = "pass";
 
         try {
-            clientController.registration(email, login, pass);
-            clientController.logIn(login, pass);
-            Assert.assertTrue(clientController.getInSystem().equals(new User(login, email, pass)));
+            controller.registration(email, login, pass);
+            controller.logIn(login, pass);
+            Assert.assertTrue(controller.getInSystem().equals(new User(login, email, SecurityUtils.hashMD5(pass))));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Test
-    public void testLogInNegative() {
-
-        DataBase dataBase = new DataBase();
-        ClientController clientController = new ClientController(dataBase);
-
-        try {
-            clientController.logIn("login", "pass");
-        } catch (Exception e) {
-            Assert.assertTrue(true);
-        }
+    @Test(expected = NoSuchElementException.class)
+    public void testLogInNegative() throws IllegalAccessException {
+        controller.logIn("login", "pass");
     }
 }

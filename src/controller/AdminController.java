@@ -62,24 +62,16 @@ public class AdminController implements IAdminController{
     @Override
     public ObservableList<Product> showProductInTheDepartment(int id) {
 
-        Location departmentLocation = new Location();
         ObservableList<Product> products = FXCollections.observableArrayList();
 
-        // search department location
-        for (Department department : DataBase.getDepartments()) {
-            if (department.getId() == id){
-                departmentLocation = department.getLocation();
-                break;
-            }
-        }
-
-        final Location location = departmentLocation;
+        Optional<Location> location = DataBase.getDepartments().stream().filter(d -> d.getId() == id).
+                map(Department::getLocation).findFirst();
 
         // compare department location and product location
-        dataBase.getRequests().stream().filter(request -> request.getFrom().equals(location)).
+        dataBase.getRequests().stream().filter(request -> request.getFrom().equals(location.get())).
                 forEach(request -> products.add(request.getProduct()));
 
-        dataBase.getDelivered().stream().filter(request -> request.getTo().equals(location)).
+        dataBase.getDelivered().stream().filter(request -> request.getTo().equals(location.get())).
                 forEach(request -> products.add(request.getProduct()));
 
         return products;

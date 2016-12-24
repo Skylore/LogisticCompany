@@ -6,18 +6,13 @@ import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class TestBuilderController {
 
     private static GoogleMapsAPI googleMapsAPI;
     private static DataBase dataBase;
     private static BuilderController builder;
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void setUp(){
@@ -26,9 +21,8 @@ public class TestBuilderController {
         builder = new BuilderController(dataBase);
     }
 
-    @Test
+    @Test(expected =  IllegalAccessException.class)
     public void negativeCheckIn() throws IllegalAccessException {
-        exception.expect(IllegalAccessException.class);
         builder.checkIn("12345");
     }
 
@@ -43,7 +37,7 @@ public class TestBuilderController {
         builder.build(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "11"));
         builder.build(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "12"));
 
-        Assert.assertTrue(DataBase.getDepartments().size() == 7);
+        Assert.assertEquals(7, DataBase.getDepartments().size());
     }
 
 }

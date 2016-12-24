@@ -65,19 +65,11 @@ public class ClientController implements IClientController{
     @Override
     public String whereIsMyProduct(int id) {
 
-        for (Request o : dataBase.getRequests()) {
-            if (o.getId() == id) {
-                return "Your product is awaiting";
-            }
-        }
+        if (dataBase.getRequests().stream().filter(r -> r.getId() == id).count() == 0)
+            return "Your product delivered";
+        else
+            return "Your product is awaiting";
 
-        for (Request o : dataBase.getDelivered()) {
-            if (o.getId() == id) {
-                return "Your product delivered";
-            }
-        }
-
-        return "Your product is delivering";
     }
 
     @Override

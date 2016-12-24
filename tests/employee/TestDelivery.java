@@ -11,9 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by Влад on 19.12.2016.
- */
 public class TestDelivery {
 
     private static GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
