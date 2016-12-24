@@ -1,7 +1,7 @@
 package view.layouts;
 
 import controller.ClientController;
-import dao.ControllerFactory;
+import init.ControllerFactory;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

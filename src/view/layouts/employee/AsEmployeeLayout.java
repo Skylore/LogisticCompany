@@ -1,7 +1,7 @@
 package view.layouts.employee;
 
 import controller.*;
-import dao.ControllerFactory;
+import init.ControllerFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

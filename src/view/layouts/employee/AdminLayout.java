@@ -1,7 +1,7 @@
 package view.layouts.employee;
 
 import controller.AdminController;
-import dao.ControllerFactory;
+import init.ControllerFactory;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Insets;

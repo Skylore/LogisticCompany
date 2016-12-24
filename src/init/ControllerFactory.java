@@ -1,4 +1,4 @@
-package dao;
+package init;
 
 import controller.*;
 import database.Converter;

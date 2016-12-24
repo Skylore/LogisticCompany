@@ -2,7 +2,7 @@ package view.layouts.client;
 
 import controller.ClientController;
 import controller.SupportController;
-import dao.ControllerFactory;
+import init.ControllerFactory;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Insets;

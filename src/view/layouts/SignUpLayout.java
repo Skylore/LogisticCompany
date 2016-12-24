@@ -1,7 +1,7 @@
 package view.layouts;
 
 import controller.ClientController;
-import dao.ControllerFactory;
+import init.ControllerFactory;
 import database.Converter;
 import database.Logger;
 import exceptions.BookedLoginException;

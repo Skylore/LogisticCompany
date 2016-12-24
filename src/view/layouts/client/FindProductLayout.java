@@ -1,7 +1,6 @@
 package view.layouts.client;
 
 import controller.ClientController;
-import dao.ControllerFactory;
 import database.DataBase;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;

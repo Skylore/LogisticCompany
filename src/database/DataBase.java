@@ -10,7 +10,7 @@ import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 
-public class DataBase {
+public class DataBase implements Dao {
 
     private int id = 0;
     public static List<Department> departments = DepartmentList.getDepartments();

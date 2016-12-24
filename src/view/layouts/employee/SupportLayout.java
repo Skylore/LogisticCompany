@@ -1,7 +1,7 @@
 package view.layouts.employee;
 
 import controller.SupportController;
-import dao.ControllerFactory;
+import init.ControllerFactory;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Pos;
