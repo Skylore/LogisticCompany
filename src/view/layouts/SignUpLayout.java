@@ -1,6 +1,10 @@
 package view.layouts;
 
 import controller.ClientController;
+import dao.ControllerFactory;
+import database.Converter;
+import database.Logger;
+import exceptions.BookedLoginException;
 import gmailApi.SendMailSSL;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,14 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import utils.KeyFactory;
+
+import java.util.UUID;
 
 public class SignUpLayout {
 
     private ClientController clientController;
+    private ControllerFactory controllerFactory;
 
-    public SignUpLayout(ClientController clientController) {
+    public SignUpLayout(ClientController clientController, ControllerFactory controllerFactory) {
         this.clientController = clientController;
+        this.controllerFactory = controllerFactory;
     }
 
     public void getLayout(Stage window, Scene scene) {
@@ -40,41 +47,35 @@ public class SignUpLayout {
         Button signUpButton = new Button("Sign up");
         signUpButton.setOnAction((event) -> {
             if (!login.getText().equals("") && !email.getText().equals("") && pass.getText().equals(repPass.getText())) {
-                try {
-                    clientController.registration(email.getText(), login.getText(), pass.getText());
 
-                    String emailU = email.getText();
+                String emailU = email.getText();
 
-                    layout.getChildren().remove(logInLabel);
-                    layout.getChildren().remove(emailLabel);
-                    layout.getChildren().remove(passLabel);
-                    layout.getChildren().remove(repeatPassLabel);
-                    layout.getChildren().remove(login);
-                    layout.getChildren().remove(email);
-                    layout.getChildren().remove(pass);
-                    layout.getChildren().remove(repPass);
+                layout.getChildren().retainAll(signUpButton);
 
-                    final String VERIFY_CODE = new KeyFactory().generateKey(8);
-                    SendMailSSL.sendLetter(emailU, "Delivery company", "your verify code is  " +
-                            VERIFY_CODE);
+                final String VERIFY_CODE = UUID.randomUUID().toString();
+                SendMailSSL.sendLetter(emailU, "Delivery company", "your verify code is  " +
+                        VERIFY_CODE);
 
-                    TextField verifyInput = new TextField();
-                    verifyInput.setPromptText("Enter checking code");
-                    verifyInput.setMaxWidth(150);
-                    layout.getChildren().addAll(verifyInput);
+                TextField verifyInput = new TextField();
+                verifyInput.setPromptText("Enter checking code");
+                verifyInput.setMaxWidth(150);
+                layout.getChildren().addAll(verifyInput);
 
-                    signUpButton.setOnAction((event1 -> {
-                        if (verifyInput.getText().equals(VERIFY_CODE)) {
+                signUpButton.setOnAction((event1 -> {
+                    if (verifyInput.getText().equals(VERIFY_CODE)) {
 
-                            SendMailSSL.sendLetter(email.getText(), "Delivery company",
-                                    "Registration has been successfully passed\nyour login is : " + login.getText());
-                            window.setScene(scene);
+                        try {
+                            clientController.registration(email.getText(), login.getText(), pass.getText());
+                        } catch (BookedLoginException e) {
+                            e.printStackTrace();
                         }
-                    }));
+                        new Logger().write(Converter.toJson(controllerFactory.getDataBase()));
+                        SendMailSSL.sendLetter(email.getText(), "Delivery company",
+                                "Registration has been successfully passed\nyour login is : " + login.getText());
+                        window.setScene(scene);
+                    }
+                }));
 
-                } catch (Exception e) {
-                    AlertBox.display("Wrong input");
-                }
             } else {
                 AlertBox.display("Please fill in all boxes");
             }

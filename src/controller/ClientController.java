@@ -41,7 +41,7 @@ public class ClientController implements IClientController{
         }
         User user = dataBase.getUsers().get(login);
 
-        if (user.getPassword().equals(password)) {
+        if (user.getPassword().equals(SecurityUtils.hashMD5(password))) {
             this.inSystem = user;
             return;
         }

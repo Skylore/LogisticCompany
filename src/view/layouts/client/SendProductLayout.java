@@ -15,6 +15,8 @@ import model.Product;
 import view.layouts.AlertBox;
 import utils.KeyFactory;
 
+import java.util.UUID;
+
 public class SendProductLayout {
 
     private ClientController clientController;
@@ -76,7 +78,7 @@ public class SendProductLayout {
         KeyFactory keyFactory = new KeyFactory();
         submitButton.setOnAction((e) -> {
 
-            final String CHECKING_CODE = keyFactory.generateKey(8);
+            final String CHECKING_CODE = UUID.randomUUID().toString();
             GoogleMapsAPI googleMapsAPI = new GoogleMapsAPIImpl();
 
             try {

@@ -14,6 +14,8 @@ import utils.KeyFactory;
 import utils.SecurityUtils;
 import view.layouts.AlertBox;
 
+import java.util.UUID;
+
 public class PersonalCabinetLayout {
 
     public GridPane getLayout(ClientController clientController, Scene scene, Stage stage) {
@@ -28,13 +30,6 @@ public class PersonalCabinetLayout {
         Label login = new Label(user.getLogin());
         GridPane.setConstraints(loginLabel, 0, 0);
         GridPane.setConstraints(login, 1, 0);
-
-        String userPass = user.getPassword();
-        Label passwordLabel = new Label("Password   ");
-        Label pass = new Label("******");
-        pass.setOnMouseClicked((e) -> pass.setText(userPass));
-        GridPane.setConstraints(passwordLabel, 0, 1);
-        GridPane.setConstraints(pass, 1, 1);
 
         Label emailLabel = new Label("Email   ");
         Label email = new Label(user.getEmail());
@@ -77,7 +72,7 @@ public class PersonalCabinetLayout {
             changeEmail.setOnAction((e1) -> {
                 if (!emailInput.getText().equals("")) {
                     String mail = emailInput.getText();
-                    final String VERIFY = new KeyFactory().generateKey(8);
+                    final String VERIFY = UUID.randomUUID().toString();
 
                     SendMailSSL.sendLetter(user.getEmail(), "Delivery company",
                             "confirm that your new email is " + mail + "\nverify code is " + VERIFY);
@@ -113,8 +108,8 @@ public class PersonalCabinetLayout {
         GridPane.setConstraints(logOutButton, 0, 6);
         logOutButton.setOnAction((e) -> stage.setScene(scene));
 
-        cabinetLayout.getChildren().addAll(loginLabel, login, passwordLabel,
-                pass, emailLabel, email, changeEmail, changePassword, logOutButton);
+        cabinetLayout.getChildren().addAll(loginLabel, login,
+                emailLabel, email, changeEmail, changePassword, logOutButton);
         return cabinetLayout;
     }
 }

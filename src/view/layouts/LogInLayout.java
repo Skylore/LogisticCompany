@@ -69,7 +69,7 @@ public class LogInLayout extends Application {
         });
 
         SignUpLayout signUpLayout = new SignUpLayout((ClientController)
-                controllerFactory.getController("ClientController"));
+                controllerFactory.getController("ClientController"), controllerFactory);
 
         Button signUpButton = new Button("Sign up");
         signUpButton.setOnAction(event -> signUpLayout.getLayout(window, scene));
