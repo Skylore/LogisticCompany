@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import exceptions.BookedLoginException;
 import geolocation.controller.Location;
 import model.Product;
+import model.User;
 
 public interface IClientController {
 
@@ -20,4 +21,7 @@ public interface IClientController {
     void sentWorkRequest(@NotNull String name, @NotNull String email,
                          @NotNull String goal,@NotNull int salary);
 
+    void updateEmail(String newEmail, String scope);
+
+    void updatePass(String newPass, String scope);
 }

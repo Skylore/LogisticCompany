@@ -22,6 +22,7 @@ public class LogInLayout extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         ControllerFactory controllerFactory = new ControllerFactory();
+
         AsEmployeeLayout asEmployeeLayout = new AsEmployeeLayout(controllerFactory);
 
         Stage window = primaryStage;
@@ -58,8 +59,9 @@ public class LogInLayout extends Application {
                 } catch (Exception e1) {
                     e1.printStackTrace();
                     AlertBox.display("Wrong login or password");
-                    logInLabel.setText("");
-                    passLabel.setText("");
+                    logIn.setText("");
+                    pass.setText("");
+
                 }
             } else {
                 AlertBox.display("Please fill up all fields");

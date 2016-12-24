@@ -10,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -27,13 +26,7 @@ public class ClientView {
     public void getLayout(Stage window, Scene scene, ClientController clientController) {
 
         SupportController supportController = (SupportController) controllerFactory.getController("SupportController");
-
-        //top label
-        Label clientInfo = new Label("Signed in as "  + clientController.getInSystem().getLogin());
-        clientInfo.getStyleClass().add("label-info");
-        StackPane topLayout = new StackPane(clientInfo);
-        topLayout.setPadding(new Insets(10, 10, 10, 10));
-        topLayout.setAlignment(Pos.TOP_RIGHT);
+        PersonalCabinetLayout personalCabinetLayout = new PersonalCabinetLayout();
 
         TreeItem<String> root, client;
 
@@ -70,24 +63,20 @@ public class ClientView {
 
         //bottom menu
         Label supportLabel = new Label("Here you can ask any question");
-        TextField emailInput = new TextField();
-        emailInput.setPromptText("Email");
-        emailInput.setMaxWidth(200);
         TextField textInput = new TextField();
         textInput.setPromptText("Your question");
         textInput.setMinHeight(30);
         textInput.setMaxWidth(200);
         Button supportButton = new Button("Ask a question");
         supportButton.setOnAction((e) -> {
-            if (!emailInput.getText().equals("") && !textInput.getText().equals("")) {
-                supportController.ask(emailInput.getText(), textInput.getText());
+            if (!textInput.getText().equals("")) {
+                supportController.ask(clientController.getInSystem().getEmail(), textInput.getText());
                 textInput.setText("");
-                emailInput.setText("");
             }
         });
 
         VBox bottomMenu = new VBox();
-        bottomMenu.getChildren().addAll(supportLabel, emailInput, textInput, supportButton);
+        bottomMenu.getChildren().addAll(supportLabel, textInput, supportButton);
         bottomMenu.setPadding(new Insets(10, 10, 10, 10));
         bottomMenu.setSpacing(10);
         bottomMenu.setAlignment(Pos.BASELINE_LEFT);
@@ -96,6 +85,16 @@ public class ClientView {
         leftMenu.getChildren().addAll(tree);
         leftMenu.setSpacing(10);
         leftMenu.setMaxHeight(300);
+
+        //top label
+        Label clientInfo = new Label(clientController.getInSystem().getLogin());
+        clientInfo.getStyleClass().add("label-info");
+        StackPane topLayout = new StackPane(clientInfo);
+        topLayout.setPadding(new Insets(10, 10, 10, 10));
+        topLayout.setAlignment(Pos.TOP_RIGHT);
+
+        clientInfo.setOnMouseClicked((e) ->
+                layout.setCenter(personalCabinetLayout.getLayout(clientController, scene, window)));
 
         layout = new BorderPane();
         layout.setTop(topLayout);

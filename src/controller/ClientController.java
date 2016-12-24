@@ -98,6 +98,39 @@ public class ClientController implements IClientController{
         System.out.println("Please expect");
     }
 
+    @Override
+    public void updateEmail(String newEmail, String scope) {
+        if (!dataBase.getUsers().containsKey(scope)) {
+            throw new NoSuchElementException();
+        }
+
+        User user = dataBase.removeUser(scope);
+        user.setEmail(newEmail);
+
+        try {
+            dataBase.addUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updatePass(String newPass, String scope) {
+        if (!dataBase.getUsers().containsKey(scope)) {
+            throw new NoSuchElementException();
+        }
+
+        User user = dataBase.removeUser(scope);
+        user.setPassword(newPass);
+
+        try {
+            dataBase.addUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public User getInSystem() {
         return this.inSystem;
     }
