@@ -1,3 +1,5 @@
+package api;
+
 import geolocation.controller.GoogleMapsAPI;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;

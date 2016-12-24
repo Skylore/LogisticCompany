@@ -1,3 +1,5 @@
+package client;
+
 import com.google.gson.Gson;
 import controller.ClientController;
 import database.DataBase;
