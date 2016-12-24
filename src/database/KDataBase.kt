@@ -10,7 +10,6 @@ import java.util.*
 
 class KDataBase {
 
-    //private List<Department> departments = DepartmentList.getDepartments();
     val departments: List<Department> = ArrayList()
     private val requests = LinkedList<Request>()
     private val delivered = ArrayList<Request>()
