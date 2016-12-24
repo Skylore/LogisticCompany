@@ -22,7 +22,7 @@ _there are such functions_
 * Find out where your product
 * Sent request for a work
 </strong>
-<br>
+
 ###Send Product
 to send product you need to fill all fields on canvas and 
 input verify code which will has been sent on your email address, after 
