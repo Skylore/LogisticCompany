@@ -1,5 +1,7 @@
 package database;
 
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,9 +26,8 @@ public class Logger {
         try {
             return Files.readAllLines(Paths.get("dataBaseLog.txt")).stream().collect(Collectors.joining("\n"));
         } catch (IOException e) {
-            e.printStackTrace();
+            write(new Gson().toJson(new DataBase()));
+            return read();
         }
-
-        throw new EmptyStackException();
     }
 }
