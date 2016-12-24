@@ -13,9 +13,9 @@ public class TestGmailApi {
         SendMailSSL.sendLetter("shalamay.vlad44@gmail.com", "some tittle", "some text");
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void negativeTestGmail(){
-        exception.expect(NullPointerException.class);
+       // exception.expect(NullPointerException.class);
         SendMailSSL.sendLetter(null, null, null);
     }
 

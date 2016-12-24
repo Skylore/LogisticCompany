@@ -1,6 +1,8 @@
 package gmailApi;
 import com.sun.istack.internal.NotNull;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,10 +17,11 @@ public class SendMailSSL {
     public static void sendLetter(@NotNull String receiver, @NotNull String tittle, @NotNull String text) {
 
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        try (FileInputStream in = new FileInputStream("properties")){
+            props.load(in);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {

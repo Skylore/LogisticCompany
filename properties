@@ -1,0 +1,6 @@
+#---No Comment---
+#Sat Dec 24 12:26:15 EET 2016
+mail.smtp.starttls.enable=true
+mail.smtp.port=587
+mail.smtp.host=smtp.gmail.com
+mail.smtp.auth=true

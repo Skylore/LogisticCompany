@@ -11,6 +11,7 @@ import model.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import utils.SecurityUtils;
 
 public class TestUserController {
 
@@ -63,7 +64,7 @@ public class TestUserController {
 
         try {
             clientController.registration(email, login, pass);
-            Assert.assertEquals(new User(login, email, pass), dataBase.getUsers().get(login));
+            Assert.assertEquals(new User(login, email, SecurityUtils.hashMD5(pass)), dataBase.getUsers().get(login));
         } catch (BookedLoginException e) {
             e.printStackTrace();
         }
