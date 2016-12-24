@@ -1,6 +1,9 @@
 package view.layouts.employee;
 
 import controller.AdminController;
+import dao.ControllerFactory;
+import database.Converter;
+import database.Logger;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +16,7 @@ public class AdminLayout {
 
     private static TreeView<String> tree;
 
-    public static void getLayout(Stage window, Scene scene, AdminController admin) {
+    public static void getLayout(Stage window, Scene scene, AdminController admin, ControllerFactory controllerFactory) {
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -59,6 +62,8 @@ public class AdminLayout {
         mainLayout.setBottom(bottomMenu);
         Scene adminScene = new Scene(mainLayout, 760, 475);
         adminScene.getStylesheets().add("view/style.css");
+        window.setOnCloseRequest((e) ->
+                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
         window.setScene(adminScene);
 
     }

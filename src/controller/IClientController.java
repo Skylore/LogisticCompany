@@ -21,6 +21,7 @@ public interface IClientController {
     void sentWorkRequest(@NotNull String name, @NotNull String email,
                          @NotNull String goal,@NotNull int salary);
 
-    void updateInfo(User user, String scope) throws BookedLoginException;
+    void updateEmail(String newEmail, String scope);
 
+    void updatePass(String newPass, String scope);
 }

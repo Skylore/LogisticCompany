@@ -2,6 +2,15 @@ package view.layouts.employee;
 
 
 import controller.CourierController;
+import controller.SupportController;
+import dao.ControllerFactory;
+import database.Converter;
+import database.Logger;
+import geolocation.controller.GoogleMapsAPI;
+import geolocation.controller.GoogleMapsAPIImpl;
+import geolocation.controller.Location;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,7 +21,7 @@ import view.layouts.AlertBox;
 
 public class CourierLayout {
 
-    public static void getLayout(Stage window, Scene scene, CourierController courier) {
+    public static void getLayout(Stage window, Scene scene, CourierController courier, ControllerFactory controllerFactory) {
 
         VBox courierLayout = new VBox();
         courierLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -40,6 +49,8 @@ public class CourierLayout {
 
         Scene courierScene = new Scene(courierLayout, 760, 475);
         courierLayout.getStylesheets().add("view/style.css");
+        window.setOnCloseRequest((e) ->
+                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
         window.setScene(courierScene);
 
     }
