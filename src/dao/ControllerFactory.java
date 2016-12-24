@@ -10,7 +10,17 @@ import java.util.Map;
 
 public class ControllerFactory {
 
-    private DataBase dataBase = new DataBase();
+    private static DataBase dataBase = new DataBase();
+
+    private static Map<String, Object> map = new HashMap<>();
+
+    static {
+        map.put("AdminController", new AdminController(dataBase));
+        map.put("ClientController", new ClientController(dataBase));
+        map.put("BuilderController", new BuilderController(dataBase));
+        map.put("CourierController", new CourierController(dataBase));
+        map.put("SupportController", new SupportController(dataBase));
+    }
 
     {
         String fromJson = new Logger().read();
@@ -23,13 +33,6 @@ public class ControllerFactory {
 
 
     public Object getController(String key) {
-        Map<String, Object> map = new HashMap<>();
-
-        map.put("AdminController", new AdminController(dataBase));
-        map.put("ClientController", new ClientController(dataBase));
-        map.put("BuilderController", new BuilderController(dataBase));
-        map.put("CourierController", new CourierController(dataBase));
-        map.put("SupportController", new SupportController(dataBase));
 
         return map.get(key);
     }

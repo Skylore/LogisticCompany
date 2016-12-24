@@ -4,17 +4,15 @@ public class SupportRequest {
 
     private String email;
     private String question;
-    private int id;
 
-    public SupportRequest(String email, String question, int id) {
+    public SupportRequest(String email, String question) {
 
-        if (email == null || question == null || id < 0) {
+        if (email == null || question == null) {
             throw new NullPointerException();
         }
 
         this.email = email;
         this.question = question;
-        this.id = id;
     }
 
     public String getEmail() {
@@ -25,18 +23,6 @@ public class SupportRequest {
         return question;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "SupportRequest{" +
-                "email='" + email + '\'' +
-                ", question='" + question + '\'' +
-                ", id=" + id +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -45,17 +31,22 @@ public class SupportRequest {
 
         SupportRequest that = (SupportRequest) o;
 
-        if (id != that.id) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         return question != null ? question.equals(that.question) : that.question == null;
-
     }
 
     @Override
     public int hashCode() {
         int result = email != null ? email.hashCode() : 0;
         result = 31 * result + (question != null ? question.hashCode() : 0);
-        result = 31 * result + id;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SupportRequest{" +
+                "email='" + email + '\'' +
+                ", question='" + question + '\'' +
+                '}';
     }
 }

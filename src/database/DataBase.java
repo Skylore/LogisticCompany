@@ -18,7 +18,7 @@ public class DataBase {
     private Map<Integer, Request> requests = new HashMap<>();
     private Map<Integer, Request> delivered = new HashMap<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
-    private List<SupportRequest> supportRequests = new ArrayList<>();
+    private Map<Integer, SupportRequest> supportRequests = new HashMap<>();
     public Map<String, User> users = new HashMap<>();
 
     public void addUser(@NotNull User user) throws BookedLoginException {
@@ -37,12 +37,6 @@ public class DataBase {
         workRequests.add(request);
     }
 
-    public WorkRequest removeWorkRequest(WorkRequest workRequest) {
-
-        workRequests.remove(workRequest);
-        return workRequest;
-    }
-
     public int addRequest(String email, Product product, int price, Location from, Location to) {
 
         requests.put(id, new Request(email, product, price, from, to));
@@ -56,25 +50,21 @@ public class DataBase {
         return requests.remove(id.get());
     }
 
-    //todo remove by id and return removed request
+
     public Request removeDelivered(int id) {
         return delivered.remove(id);
 
     }
 
     public void addSupportRequest(@NotNull SupportRequest supportRequest) {
-        supportRequests.add(supportRequest);
+        supportRequests.put(id++, supportRequest);
     }
 
-    public SupportRequest removeSupportRequest(int id) {
+    public SupportRequest removeSupportRequest(SupportRequest supportRequest) {
 
-        for (int i = 0; i < supportRequests.size(); i++) {
-            if (supportRequests.get(i).getId() == id) {
-                return supportRequests.remove(i);
-            }
-        }
+        Optional<Integer> id = supportRequests.keySet().stream().filter(key -> supportRequests.get(key).equals(supportRequest)).findFirst();
+        return supportRequests.remove(id.get());
 
-        throw new NoSuchElementException();
     }
 
     private static class DepartmentList {
@@ -124,7 +114,7 @@ public class DataBase {
         return delivered;
     }
 
-    public List<SupportRequest> getSupportRequests() {
+    public Map<Integer, SupportRequest> getSupportRequests() {
         return supportRequests;
     }
 

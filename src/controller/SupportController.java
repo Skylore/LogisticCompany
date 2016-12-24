@@ -10,7 +10,6 @@ import model.SupportRequest;
 public class SupportController implements ISupport{
 
     private DataBase dataBase;
-    private static int id = 0;
     private static final String PASS = "supportPass";
 
     public SupportController(DataBase dataBase) {
@@ -25,16 +24,16 @@ public class SupportController implements ISupport{
     }
 
     @Override
-    public void ask(@NotNull String email, @NotNull String question) {
-        dataBase.addSupportRequest(new SupportRequest(email, question, id));
-        System.out.println("done");
-        id++;
+    public SupportRequest ask(@NotNull String email, @NotNull String question) {
+        SupportRequest request = new SupportRequest(email, question);
+        dataBase.addSupportRequest(request);
+        return request;
     }
 
     @Override
-    public void reply(int id, String text) {
+    public void reply(SupportRequest supportRequest, String text) {
 
-        SupportRequest sup = dataBase.removeSupportRequest(id);
+        SupportRequest sup = dataBase.removeSupportRequest(supportRequest);
         SendMailSSL.sendLetter(sup.getEmail(), "Delivery company", text);
     }
 
@@ -42,7 +41,7 @@ public class SupportController implements ISupport{
     public ObservableList<SupportRequest> showRequests() {
 
         ObservableList<SupportRequest> requests = FXCollections.observableArrayList();
-        dataBase.getSupportRequests().forEach(requests::add);
+        dataBase.getSupportRequests().values().forEach(requests::add);
 
         return requests;
     }

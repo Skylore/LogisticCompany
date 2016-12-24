@@ -13,10 +13,14 @@ import java.util.*;
 public class AdminController implements IAdminController{
 
     private DataBase dataBase;
-
+    private Map<String, String> passwords = new HashMap<>();
     private static final String ADMIN_PASSWORD = "adminPass";
-    private static final String BUILDER_PASSWORD = "builderPass";
-    private static final String COURIER_PASSWORD = "courierPass";
+    {
+        passwords.put("admin", "adminPass");
+        passwords.put("builder", "builderPass");
+        passwords.put("courier", "courierPass");
+        passwords.put("support", "supportPass");
+    }
 
     public AdminController(DataBase dataBase) {
         this.dataBase = dataBase;
@@ -35,18 +39,7 @@ public class AdminController implements IAdminController{
     public void confirmWorkRequest(WorkRequest workRequest) {
 
             dataBase.getWorkRequests().remove(workRequest);
-            String pass;
-
-            if (workRequest.getGoal().contains("admin")) {
-                pass = ADMIN_PASSWORD;
-            } else if (workRequest.getGoal().contains("builder")) {
-                pass = BUILDER_PASSWORD;
-            } else if (workRequest.getGoal().contains("courier")) {
-                pass = COURIER_PASSWORD;
-            } else {
-                System.err.println("Incorrect goal");
-                return;
-            }
+            String pass = passwords.get(workRequest.getGoal());
 
             SendMailSSL.sendLetter(workRequest.getEmail(), "Delivery administration", "our congratulations, "
                     + workRequest.getName() + " you have been recruited\nyour password - " + pass);

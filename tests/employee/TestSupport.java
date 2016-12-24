@@ -15,17 +15,18 @@ public class TestSupport {
     public void setUp(){
         dataBase = new DataBase();
         supportController = new SupportController(dataBase);
-        supportController.ask("shalamay.vlad44@gmail.com", "what is this?");
     }
 
     @Test
     public void testReply(){
-        supportController.reply(0, "ANSWER");
+        supportController.reply(supportController.ask("shalamay.vlad44@gmail.com", "what is this?"),
+                "ANSWER");
         Assert.assertEquals(0, dataBase.getSupportRequests().size());
     }
 
     @Test
     public void testShowRequest(){
-        Assert.assertEquals(1, supportController.showRequests().get(0).getId());
+        supportController.ask("shalamay.vlad44@gmail.com", "what is this?");
+        Assert.assertEquals("what is this?", supportController.showRequests().get(0).getQuestion());
     }
 }

@@ -6,9 +6,9 @@ import model.SupportRequest;
 
 public interface ISupport extends IEmployee {
 
-    void ask(@NotNull String email, @NotNull String question);
+    SupportRequest ask(@NotNull String email, @NotNull String question);
 
-    void reply(int id, String text);
+    void reply(SupportRequest supportRequest, String text);
 
     ObservableList<SupportRequest> showRequests();
 }

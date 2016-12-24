@@ -42,7 +42,7 @@ public class SupportLayout {
         //button
         Button replyButton = new Button("Reply");
         replyButton.setOnAction(e -> {
-            support.reply(table.getSelectionModel().getSelectedItem().getId(), answer.getText());
+            support.reply(table.getSelectionModel().getSelectedItem(), answer.getText());
             answer.setText("");
             table.setItems(support.showRequests());
         });
