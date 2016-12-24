@@ -9,7 +9,7 @@ connect all libraries in package libs. To do that follow next steps: <br>
 6) choose all packages in folder libs <br>
 # Manual 
 to launch this application run class [launcher](https://github.com/Skylore/LogisticCompany/blob/master/src/run/Launcher.java)
-* if while running app throws exceptions, look first paragraph
+* if while running app throws exceptions, look first [paragraph](https://github.com/Skylore/LogisticCompany#how-to-launch-this-application)
 
 ####about using
 firstly, you should to sign up. To do that, press registration button and fill 
