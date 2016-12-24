@@ -22,22 +22,22 @@ _there are such functions_
 * Find out where your product
 * Sent request for a work
 </strong>
-<br><br><br>
+
 ###Send Product
 to send product you need to fill all fields on canvas and 
 input verify code which will has been sent on your email address, after 
 successfully confirmation, order will has been added into queue and you have to 
 wait for courier's delivery
-<br>
+
 ###Get product
 to get product, you need to input id of product that has been assigned
 on the stage of sending. There will has been appeared
 address by that you could to get product
-<br>
+
 ###Find out where my product
 to find your product, you need to input product's id. 
 After that we let you know, stage of delivering yours product.
-<br>
+
 ###Send request for a work
 to send work request you need to get us all of your data
 if you will pass interview, admin will give you access to your
