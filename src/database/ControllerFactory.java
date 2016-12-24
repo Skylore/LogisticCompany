@@ -1,9 +1,6 @@
-package dao;
+package database;
 
 import controller.*;
-import database.Converter;
-import database.DataBase;
-import database.Logger;
 
 import java.util.HashMap;
 import java.util.Map;

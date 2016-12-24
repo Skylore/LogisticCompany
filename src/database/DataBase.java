@@ -9,15 +9,9 @@ import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 
-public class DataBase {
+public class DataBase implements Dao {
 
     public static List<Department> departments = DepartmentList.getDepartments();
-
-    private List<Request> requests = new LinkedList<>();
-    private List<Request> delivered = new ArrayList<>();
-    private List<WorkRequest> workRequests = new ArrayList<>();
-    private List<SupportRequest> supportRequests = new ArrayList<>();
-    public Map<String, User> users = new HashMap<>();
 
     public void addUser(@NotNull User user) throws BookedLoginException{
         if (users.containsKey(user.getLogin())) {
