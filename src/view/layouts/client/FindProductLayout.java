@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import view.layouts.AlertBox;
 
-public class FindProductLayout  {
+public class FindProductLayout {
 
     ClientController clientController;
     DataBase dataBase;
@@ -20,7 +20,7 @@ public class FindProductLayout  {
         this.dataBase = dataBase;
     }
 
-    public GridPane getLayout(){
+    public GridPane getLayout() {
         GridPane findProduct = new GridPane();
         findProduct.setPadding(new Insets(10, 10, 10, 10));
         findProduct.setVgap(8);
@@ -40,11 +40,9 @@ public class FindProductLayout  {
 
             try {
                 if (!idInput.getText().equals("")) {
-                    if (dataBase.getRequests().containsKey(Integer.valueOf(idInput.getText()))) {
-                        AlertBox.display("Incorrect input");
-                    } else {
-                        locationLabel.setText(clientController.whereIsMyProduct(Integer.parseInt(idInput.getText())));
-                    }
+
+                    locationLabel.setText(clientController.whereIsMyProduct(Integer.parseInt(idInput.getText())));
+
                 } else {
                     AlertBox.display("Please input id");
                 }

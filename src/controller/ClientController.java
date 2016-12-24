@@ -64,10 +64,11 @@ public class ClientController implements IClientController{
 
     @Override
     public String whereIsMyProduct(int id) {
-        if (!dataBase.getRequests().containsKey(id))
-            return "Your product delivered";
-        else
+        if (dataBase.getRequests().containsKey(id))
             return "Your product is awaiting";
+        if (dataBase.getDelivered().containsKey(id))
+            return "Your product is delivered";
+        return "id does not exist";
     }
 
     @Override

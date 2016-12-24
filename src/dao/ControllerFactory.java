@@ -13,12 +13,14 @@ public class ControllerFactory {
     private DataBase dataBase = new DataBase();
 
     {
-        try {
-            dataBase = Converter.fromJson(new Logger().read(), DataBase.class);
-        } catch (Exception e) {
-            System.out.println("Log created");
+        String fromJson = new Logger().read();
+        if (fromJson.isEmpty()) {
+            dataBase = new DataBase();
+        } else {
+            dataBase = Converter.fromJson(fromJson, DataBase.class);
         }
     }
+
 
     public Object getController(String key) {
         Map<String, Object> map = new HashMap<>();

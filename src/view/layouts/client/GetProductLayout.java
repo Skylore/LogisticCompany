@@ -39,10 +39,8 @@ public class GetProductLayout {
         Button button = new Button("Get product");
         button.setOnAction(e -> {
             try {
-                if (!dataBase.getRequests().containsKey(Integer.valueOf(idInput.getText()))) {
-                    AlertBox.display("Incorrect id input");
-                } else if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
-                        equals("Your product delivered")) {
+                if (clientController.whereIsMyProduct(Integer.valueOf(idInput.getText())).
+                        equals("Your product is delivered")) {
 
                     Product product = clientController.getProduct(Integer.valueOf(idInput.getText()));
 
