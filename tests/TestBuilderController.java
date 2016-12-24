@@ -41,7 +41,7 @@ public class TestBuilderController {
         builder.build(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "11"));
         builder.build(googleMapsAPI.findLocation("Украйна", "Київ", "Тампере", "12"));
 
-        Assert.assertTrue(DataBase.getDepartments().size() == 7);
+        Assert.assertTrue(dataBase.getDepartments().size() == 2);
     }
 
 }

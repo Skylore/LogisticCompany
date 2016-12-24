@@ -23,7 +23,6 @@ public class LogInLayout extends Application {
 
         ControllerFactory controllerFactory = new ControllerFactory();
 
-        ClientView clientView = new ClientView(controllerFactory);
         AsEmployeeLayout asEmployeeLayout = new AsEmployeeLayout(controllerFactory);
 
         Stage window = primaryStage;
@@ -56,12 +55,13 @@ public class LogInLayout extends Application {
             if (!logIn.getText().equals("") && !pass.getText().equals("")) {
                 try {
                     clientController.logIn(logIn.getText(), pass.getText());
-                    clientView.getLayout(window, scene, clientController);
+                    new ClientView(controllerFactory).getLayout(window, scene, clientController);
                 } catch (Exception e1) {
                     e1.printStackTrace();
-
+                    AlertBox.display("Wrong login or password");
                     logIn.setText("");
                     pass.setText("");
+
                 }
             } else {
                 AlertBox.display("Please fill up all fields");

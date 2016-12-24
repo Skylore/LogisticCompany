@@ -66,7 +66,7 @@ public class AdminController implements IAdminController{
         ObservableList<Product> products = FXCollections.observableArrayList();
 
         // search department location
-        for (Department department : DataBase.getDepartments()) {
+        for (Department department : dataBase.getDepartments()) {
             if (department.getId() == id){
                 departmentLocation = department.getLocation();
                 break;
