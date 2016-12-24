@@ -48,8 +48,7 @@ public class PersonalCabinetLayout {
             changePassword.setOnAction((e1) -> {
                 if (!passInput.getText().equals("")) {
                     try {
-                        clientController.updateInfo(new User(user.getLogin(), user.getEmail(),
-                                SecurityUtils.hashMD5(passInput.getText())), user.getLogin());
+                        clientController.updatePass(SecurityUtils.hashMD5(passInput.getText()), user.getLogin());
                         cabinetLayout.getChildren().remove(passInput);
                     } catch (Exception e2) {
                         AlertBox.display("Invalid input");
@@ -84,8 +83,7 @@ public class PersonalCabinetLayout {
                     changeEmail.setOnAction((e2) -> {
                         if (emailInput.getText().equals(VERIFY)) {
                             try {
-                                clientController.updateInfo(new User(user.getLogin(), mail, user.getPassword()),
-                                        user.getLogin());
+                                clientController.updateEmail(emailInput.getText(), user.getLogin());
                                 email.setText(mail);
                                 cabinetLayout.getChildren().remove(emailInput);
 

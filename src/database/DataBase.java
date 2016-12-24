@@ -29,8 +29,8 @@ public class DataBase {
         users.put(user.getLogin(), user);
     }
 
-    public void removeUser(@NotNull String password) {
-        User user = users.remove(password);
+    public User removeUser(@NotNull String password) {
+        return users.remove(password);
     }
 
     public void addWorkRequest(@NotNull WorkRequest request) {
