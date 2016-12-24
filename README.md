@@ -1,12 +1,12 @@
 #### how to launch this application:
 to successfully using this application, you need to 
-connect all libraries in package libs. To do that follow next steps: 
-1) File
-2) ProjectStructure
-3) libraries
-4) press + button 
-5) Java 
-6) choose all packages in folder libs
+connect all libraries in package libs. To do that follow next steps: <br>
+1) File <br>
+2) ProjectStructure <br>
+3) libraries <br>
+4) press + button <br>
+5) Java <br>
+6) choose all packages in folder libs <br>
 # Manual 
 to launch this application run class [launcher](https://github.com/Skylore/LogisticCompany/blob/master/src/run/Launcher.java)
 * if while running app throws exceptions, look first paragraph
