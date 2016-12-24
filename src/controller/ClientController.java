@@ -11,6 +11,7 @@ import model.Product;
 import model.Request;
 import model.User;
 import model.WorkRequest;
+import utils.SecurityUtils;
 
 import java.util.NoSuchElementException;
 
@@ -30,7 +31,7 @@ public class ClientController implements IClientController{
 
     @Override
     public void registration(String email, String login, String password) throws BookedLoginException {
-        dataBase.addUser(new User(login, email, password));
+        dataBase.addUser(new User(login, email, SecurityUtils.hashMD5(password)));
     }
 
     @Override

@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.User;
 import utils.KeyFactory;
+import utils.SecurityUtils;
 import view.layouts.AlertBox;
 
 public class PersonalCabinetLayout {
@@ -53,7 +54,7 @@ public class PersonalCabinetLayout {
                 if (!passInput.getText().equals("")) {
                     try {
                         clientController.updateInfo(new User(user.getLogin(), user.getEmail(),
-                                passInput.getText()), user.getLogin());
+                                SecurityUtils.hashMD5(passInput.getText())), user.getLogin());
                         cabinetLayout.getChildren().remove(passInput);
                     } catch (Exception e2) {
                         AlertBox.display("Invalid input");

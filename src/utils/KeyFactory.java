@@ -2,6 +2,7 @@ package utils;
 
 public class KeyFactory {
 
+
     public String generateKey(int size) {
         char[] mas = new char[size];
 

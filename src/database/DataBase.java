@@ -19,7 +19,7 @@ public class DataBase {
     private List<SupportRequest> supportRequests = new ArrayList<>();
     public Map<String, User> users = new HashMap<>();
 
-    public void addUser(@NotNull User user) throws BookedLoginException{
+    public void addUser(@NotNull User user) throws BookedLoginException {
         if (users.containsKey(user.getLogin())) {
             throw new BookedLoginException("Please choose another login");
         }
@@ -28,11 +28,7 @@ public class DataBase {
     }
 
     public void removeUser(@NotNull String password) {
-        try {
-            users.remove(password);
-        } catch (Exception e) {
-            throw new NoSuchElementException();
-        }
+        User user = users.remove(password);
     }
 
     public void addWorkRequest(@NotNull WorkRequest request) {
@@ -69,16 +65,14 @@ public class DataBase {
     public Request removeDelivered(int id) {
         for (Request request : delivered) {
             if (request.getId() == id) {
-                try {
-                    delivered.remove(id);
-                    return request;
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
+
+                delivered.remove(id);
+                return request;
+
             }
         }
+        return null;
 
-        throw new IndexOutOfBoundsException();
     }
 
     public void addSupportRequest(@NotNull SupportRequest supportRequest) {
