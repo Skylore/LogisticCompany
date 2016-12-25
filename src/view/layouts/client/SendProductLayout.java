@@ -13,16 +13,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import model.Product;
 import view.layouts.AlertBox;
-import utils.KeyFactory;
 
 import java.util.UUID;
 
-public class SendProductLayout {
+class SendProductLayout {
 
     private ClientController clientController;
     private DataBase dataBase;
 
-    public SendProductLayout(ClientController clientController, DataBase dataBase) {
+    SendProductLayout(ClientController clientController, DataBase dataBase) {
         this.clientController = clientController;
         this.dataBase = dataBase;
     }
@@ -77,7 +76,6 @@ public class SendProductLayout {
         GridPane.setConstraints(submit, 1, 7);
         Button submitButton = new Button("submit");
 
-        KeyFactory keyFactory = new KeyFactory();
         submitButton.setOnAction((e) -> {
 
             final String CHECKING_CODE = UUID.randomUUID().toString();

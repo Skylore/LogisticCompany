@@ -2,7 +2,7 @@ package view.layouts.client;
 
 import controller.ClientController;
 import controller.SupportController;
-import init.ControllerFactory;
+import database.DataBase;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Insets;
@@ -17,15 +17,12 @@ import javafx.stage.Stage;
 public class ClientView {
 
     private static BorderPane layout;
-    private ControllerFactory controllerFactory;
-
-    public ClientView(ControllerFactory controllerFactory) {
-        this.controllerFactory = controllerFactory;
-    }
 
     public void getLayout(Stage window, Scene scene, ClientController clientController) {
 
-        SupportController supportController = (SupportController) controllerFactory.getController("SupportController");
+        DataBase dataBase = DataBase.getInstance();
+
+        SupportController supportController = new SupportController(dataBase);
         PersonalCabinetLayout personalCabinetLayout = new PersonalCabinetLayout();
 
         TreeItem<String> root, client;
@@ -41,10 +38,10 @@ public class ClientView {
         makeBrunch("Send request for work", client);
         makeBrunch("Find out where your product", client);
 
-        SendProductLayout sendProductLayout = new SendProductLayout(clientController, controllerFactory.getDataBase());
-        GetProductLayout getProductLayout = new GetProductLayout(clientController, controllerFactory.getDataBase());
+        SendProductLayout sendProductLayout = new SendProductLayout(clientController, dataBase);
+        GetProductLayout getProductLayout = new GetProductLayout(clientController);
         WorkRequestLayout workRequestLayout = new WorkRequestLayout(clientController);
-        FindProductLayout findProductLayout = new FindProductLayout(clientController, controllerFactory.getDataBase());
+        FindProductLayout findProductLayout = new FindProductLayout(clientController);
 
         TreeView<String> tree = new TreeView<>(root);
         tree.setShowRoot(false);
@@ -104,7 +101,7 @@ public class ClientView {
         userScene.getStylesheets().add("view/style.css");
         window.setScene(userScene);
         window.setOnCloseRequest((e) ->
-                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
+                new Logger().write(Converter.toJson(DataBase.getInstance())));
 
     }
 

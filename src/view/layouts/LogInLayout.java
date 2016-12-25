@@ -1,7 +1,7 @@
 package view.layouts;
 
 import controller.ClientController;
-import init.ControllerFactory;
+import database.DataBase;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,24 +16,23 @@ import view.layouts.employee.AsEmployeeLayout;
 
 public class LogInLayout extends Application {
 
-    Scene scene;
+    private Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        ControllerFactory controllerFactory = new ControllerFactory();
+        DataBase dataBase = DataBase.getInstance();
 
-        AsEmployeeLayout asEmployeeLayout = new AsEmployeeLayout(controllerFactory);
+        AsEmployeeLayout asEmployeeLayout = new AsEmployeeLayout();
 
-        Stage window = primaryStage;
-        window.setTitle("Logistic Company");
+        primaryStage.setTitle("Logistic Company");
 
         //top menu
         StackPane topMenu = new StackPane();
         topMenu.setAlignment(Pos.TOP_RIGHT);
         topMenu.setPadding(new Insets(15, 15, 15, 15));
         Button employee = new Button("Employee");
-        employee.setOnAction(event -> asEmployeeLayout.getLayout(window, scene));
+        employee.setOnAction(event -> asEmployeeLayout.getLayout(primaryStage, scene));
         topMenu.getChildren().addAll(employee);
 
         //center menu
@@ -41,8 +40,7 @@ public class LogInLayout extends Application {
         centerMenu.setSpacing(10);
         centerMenu.setAlignment(Pos.CENTER);
 
-        ClientController clientController = (ClientController)
-                controllerFactory.getController("ClientController");
+        ClientController clientController = new ClientController(dataBase);
 
         Label logInLabel = new Label("Your login: ");
         Label passLabel = new Label("Your pass: ");
@@ -55,7 +53,7 @@ public class LogInLayout extends Application {
             if (!logIn.getText().equals("") && !pass.getText().equals("")) {
                 try {
                     clientController.logIn(logIn.getText(), pass.getText());
-                    new ClientView(controllerFactory).getLayout(window, scene, clientController);
+                    new ClientView().getLayout(primaryStage, scene, clientController);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                     AlertBox.display("Wrong login or password");
@@ -68,11 +66,10 @@ public class LogInLayout extends Application {
             }
         });
 
-        SignUpLayout signUpLayout = new SignUpLayout((ClientController)
-                controllerFactory.getController("ClientController"), controllerFactory);
+        SignUpLayout signUpLayout = new SignUpLayout(clientController);
 
         Button signUpButton = new Button("Sign up");
-        signUpButton.setOnAction(event -> signUpLayout.getLayout(window, scene));
+        signUpButton.setOnAction(event -> signUpLayout.getLayout(primaryStage, scene));
 
         centerMenu.getChildren().addAll(logInLabel, logIn, passLabel, pass, logInButton, signUpButton);
 
@@ -81,7 +78,7 @@ public class LogInLayout extends Application {
         layout.setCenter(centerMenu);
         scene = new Scene(layout, 760, 475);
         scene.getStylesheets().add("view/style.css");
-        window.setScene(scene);
-        window.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

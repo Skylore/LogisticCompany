@@ -1,7 +1,7 @@
 package view.layouts;
 
 import controller.ClientController;
-import init.ControllerFactory;
+import database.DataBase;
 import database.Converter;
 import database.Logger;
 import exceptions.BookedLoginException;
@@ -19,11 +19,9 @@ import java.util.UUID;
 public class SignUpLayout {
 
     private ClientController clientController;
-    private ControllerFactory controllerFactory;
 
-    public SignUpLayout(ClientController clientController, ControllerFactory controllerFactory) {
+    public SignUpLayout(ClientController clientController) {
         this.clientController = clientController;
-        this.controllerFactory = controllerFactory;
     }
 
     public void getLayout(Stage window, Scene scene) {
@@ -69,7 +67,7 @@ public class SignUpLayout {
                         } catch (BookedLoginException e) {
                             e.printStackTrace();
                         }
-                        new Logger().write(Converter.toJson(controllerFactory.getDataBase()));
+                        new Logger().write(Converter.toJson(DataBase.getInstance()));
                         SendMailSSL.sendLetter(email.getText(), "Delivery company",
                                 "Registration has been successfully passed\nyour login is : " + login.getText());
                         window.setScene(scene);

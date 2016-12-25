@@ -13,10 +13,7 @@ import javafx.scene.layout.VBox;
 import model.Product;
 import model.WorkRequest;
 
-/**
- * Created by Влад on 14.12.2016.
- */
-public class ShowWorkRequestLayout {
+class ShowWorkRequestLayout {
 
     private static TableView<WorkRequest> table;
 

@@ -12,6 +12,24 @@ import java.util.*;
 
 public class DataBase implements Dao {
 
+    private static DataBase instance;
+
+    public DataBase() {
+    }
+
+    public static DataBase getInstance() {
+        return instance;
+    }
+
+    static {
+        String fromJson = new Logger().read();
+        if (fromJson.isEmpty()) {
+            instance = new DataBase();
+        } else {
+            instance = Converter.fromJson(fromJson, DataBase.class);
+        }
+    }
+
     private int id = 0;
     public static List<Department> departments = DepartmentList.getDepartments();
 
