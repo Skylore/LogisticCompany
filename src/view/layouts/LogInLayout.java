@@ -55,7 +55,6 @@ public class LogInLayout extends Application {
                     clientController.logIn(logIn.getText(), pass.getText());
                     new ClientView().getLayout(primaryStage, scene, clientController);
                 } catch (Exception e1) {
-                    e1.printStackTrace();
                     AlertBox.display("Wrong login or password");
                     logIn.setText("");
                     pass.setText("");

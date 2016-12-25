@@ -50,7 +50,7 @@ public class SignUpLayout {
 
                 layout.getChildren().retainAll(signUpButton);
 
-                final String VERIFY_CODE = UUID.randomUUID().toString();
+                final String VERIFY_CODE = UUID.randomUUID().toString().substring(0, 8);
                 SendMailSSL.sendLetter(emailU, "Delivery company", "your verify code is  " +
                         VERIFY_CODE);
 
