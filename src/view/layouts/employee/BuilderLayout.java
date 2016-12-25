@@ -1,8 +1,8 @@
 package view.layouts.employee;
 
 import controller.BuilderController;
-import init.ControllerFactory;
 import database.Converter;
+import database.DataBase;
 import database.Logger;
 import geolocation.controller.GoogleMapsAPIImpl;
 import geolocation.controller.Location;
@@ -16,9 +16,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import view.layouts.AlertBox;
 
-public class BuilderLayout {
+class BuilderLayout {
 
-    public static void getLayout(Stage window, Scene scene, BuilderController builder, ControllerFactory controllerFactory) {
+    static void getLayout(Stage window, Scene scene, BuilderController builder) {
 
         GridPane builderLayout = new GridPane();
         builderLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -61,9 +61,7 @@ public class BuilderLayout {
         GridPane.setConstraints(buildButton, 0, 4);
 
         Button checkOutButton = new Button("Log out");
-        checkOutButton.setOnAction(e -> {
-            window.setScene(scene);
-        });
+        checkOutButton.setOnAction(e -> window.setScene(scene));
         GridPane.setConstraints(checkOutButton, 0, 5);
 
         builderLayout.getChildren().addAll(countryLabel, countryInput, cityLabel, cityInput,
@@ -73,7 +71,7 @@ public class BuilderLayout {
         Scene builderScene = new Scene(builderLayout, 760, 475);
         builderLayout.getStylesheets().add("view/style.css");
         window.setOnCloseRequest((e) ->
-                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
+                new Logger().write(Converter.toJson(DataBase.getInstance())));
         window.setScene(builderScene);
 
     }

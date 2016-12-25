@@ -2,7 +2,7 @@ package view.layouts.employee;
 
 
 import controller.CourierController;
-import init.ControllerFactory;
+import database.DataBase;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Insets;
@@ -15,7 +15,7 @@ import view.layouts.AlertBox;
 
 public class CourierLayout {
 
-    public static void getLayout(Stage window, Scene scene, CourierController courier, ControllerFactory controllerFactory) {
+    public static void getLayout(Stage window, Scene scene, CourierController courier) {
 
         VBox courierLayout = new VBox();
         courierLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -44,7 +44,7 @@ public class CourierLayout {
         Scene courierScene = new Scene(courierLayout, 760, 475);
         courierLayout.getStylesheets().add("view/style.css");
         window.setOnCloseRequest((e) ->
-                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
+                new Logger().write(Converter.toJson(DataBase.getInstance())));
         window.setScene(courierScene);
 
     }

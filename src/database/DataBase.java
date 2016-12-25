@@ -12,14 +12,30 @@ import java.util.*;
 
 public class DataBase implements Dao {
 
+    private static DataBase instance;
+
+    public DataBase() {
+    }
+
+    public static DataBase getInstance() {
+        String fromJson = new Logger().read();
+        if (fromJson.isEmpty()) {
+            instance = new DataBase();
+        } else {
+            instance = Converter.fromJson(fromJson, DataBase.class);
+        }
+
+        return instance;
+    }
+
     private int id = 0;
-    public static List<Department> departments = DepartmentList.getDepartments();
+    private static List<Department> departments = DepartmentList.getDepartments();
 
     private Map<Integer, Request> requests = new HashMap<>();
     private Map<Integer, Request> delivered = new HashMap<>();
     private List<WorkRequest> workRequests = new ArrayList<>();
     private Map<Integer, SupportRequest> supportRequests = new HashMap<>();
-    public Map<String, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
 
     public void addUser(@NotNull User user) throws BookedLoginException {
         if (users.containsKey(user.getLogin())) {

@@ -1,7 +1,7 @@
 package view.layouts.employee;
 
 import controller.SupportController;
-import init.ControllerFactory;
+import database.DataBase;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Pos;
@@ -15,13 +15,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.SupportRequest;
 
-/**
- * Created by Влад on 15.12.2016.
- */
-public class SupportLayout {
+class SupportLayout {
     private static TableView<SupportRequest> table;
 
-    public static void getLayout(Stage window, Scene scene, SupportController support, ControllerFactory controllerFactory){
+    public static void getLayout(Stage window, Scene scene, SupportController support){
 
         //column
         TableColumn<SupportRequest, String> emailColumn = new TableColumn<>("Email");
@@ -52,9 +49,7 @@ public class SupportLayout {
 
         //check out
         Button checkOutButton = new Button("Log out");
-        checkOutButton.setOnAction(e -> {
-            window.setScene(scene);
-        });
+        checkOutButton.setOnAction(e ->  window.setScene(scene));
 
 
         VBox layout = new VBox();
@@ -65,7 +60,7 @@ public class SupportLayout {
         Scene supportScene = new Scene(layout, 760, 475);
         supportScene.getStylesheets().add("view/style.css");
         window.setOnCloseRequest((e) ->
-                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
+                new Logger().write(Converter.toJson(DataBase.getInstance())));
         window.setScene(supportScene);
     }
 }

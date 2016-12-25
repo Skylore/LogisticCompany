@@ -1,7 +1,7 @@
 package view.layouts.employee;
 
 import controller.AdminController;
-import init.ControllerFactory;
+import database.DataBase;
 import database.Converter;
 import database.Logger;
 import javafx.geometry.Insets;
@@ -12,11 +12,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class AdminLayout {
+class AdminLayout {
 
-    private static TreeView<String> tree;
-
-    public static void getLayout(Stage window, Scene scene, AdminController admin, ControllerFactory controllerFactory) {
+    public static void getLayout(Stage window, Scene scene, AdminController admin) {
+        TreeView<String> tree;
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPadding(new Insets(10, 10, 10, 10));
@@ -56,14 +55,12 @@ public class AdminLayout {
         StackPane bottomMenu = new StackPane();
         bottomMenu.getChildren().addAll(checkOutButton);
         bottomMenu.setAlignment(Pos.BOTTOM_RIGHT);
-        checkOutButton.setOnAction(e -> {
-            window.setScene(scene);
-        });
+        checkOutButton.setOnAction(e -> window.setScene(scene));
         mainLayout.setBottom(bottomMenu);
         Scene adminScene = new Scene(mainLayout, 760, 475);
         adminScene.getStylesheets().add("view/style.css");
         window.setOnCloseRequest((e) ->
-                new Logger().write(Converter.toJson(controllerFactory.getDataBase())));
+                new Logger().write(Converter.toJson(DataBase.getInstance())));
         window.setScene(adminScene);
 
     }

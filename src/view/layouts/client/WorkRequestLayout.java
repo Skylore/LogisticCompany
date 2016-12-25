@@ -9,11 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import view.layouts.AlertBox;
 
-public class WorkRequestLayout {
+class WorkRequestLayout {
 
     private ClientController clientController;
 
-    public WorkRequestLayout(ClientController clientController) {
+    WorkRequestLayout(ClientController clientController) {
         this.clientController = clientController;
     }
 

@@ -15,10 +15,7 @@ import model.Product;
 import model.WorkRequest;
 import view.layouts.AlertBox;
 
-/**
- * Created by Влад on 14.12.2016.
- */
-public class ShowProductLayout {
+class ShowProductLayout {
     private static TableView<Product> table;
 
     public static VBox getLayout(AdminController admin) {

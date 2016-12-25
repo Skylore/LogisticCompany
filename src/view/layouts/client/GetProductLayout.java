@@ -1,7 +1,6 @@
 package view.layouts.client;
 
 import controller.ClientController;
-import database.DataBase;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,15 +9,12 @@ import javafx.scene.layout.GridPane;
 import model.Product;
 import view.layouts.AlertBox;
 
-public class GetProductLayout {
+class GetProductLayout {
 
     private ClientController clientController;
-    private DataBase dataBase;
 
-
-    public GetProductLayout(ClientController clientController, DataBase dataBase) {
+    GetProductLayout(ClientController clientController) {
         this.clientController = clientController;
-        this.dataBase = dataBase;
     }
 
     public GridPane getLayout() {

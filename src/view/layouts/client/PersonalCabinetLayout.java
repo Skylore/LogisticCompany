@@ -10,13 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.User;
-import utils.KeyFactory;
 import utils.SecurityUtils;
 import view.layouts.AlertBox;
 
 import java.util.UUID;
 
-public class PersonalCabinetLayout {
+class PersonalCabinetLayout {
 
     public GridPane getLayout(ClientController clientController, Scene scene, Stage stage) {
         GridPane cabinetLayout = new GridPane();
