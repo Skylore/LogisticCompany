@@ -17,14 +17,16 @@ public class DataBase implements Dao {
     public DataBase() {
     }
 
-    public static DataBase getInstance() {
+    static {
         String fromJson = new Logger().read();
         if (fromJson.isEmpty()) {
             instance = new DataBase();
         } else {
             instance = Converter.fromJson(fromJson, DataBase.class);
         }
+    }
 
+    public static DataBase getInstance() {
         return instance;
     }
 
