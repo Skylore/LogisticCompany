@@ -42,22 +42,3 @@ After that we let you know, stage of delivering yours product.
 to send work request you need to get us all of your data
 if you will pass interview, admin will give you access to your
 own cabinet.
-
-####About administrating
-
-_there are 4 employee roles_
-* Admin 
-> take staff <br>
-> watch all requests
-* Support
-> reply for any user's question
-* Builder
-> build new departments
-* Courier
-> deliver products
-##<br>
-to entry as employee you need these passwords
-* Admin - adminPass
-* Support - supportPass
-* Builder - builderPass
-* Courier - courierPass
